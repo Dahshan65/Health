@@ -46,6 +46,7 @@ ul{margin:6px 0;padding-inline-start:20px}
 .disc{font-size:12px;color:var(--mute);margin-top:14px}
 .rhead{display:none}
 .small{padding:5px 10px;font-size:12px;border-radius:8px}
+.credit{text-align:center;padding:18px 12px 26px;color:var(--main2);font-size:14px;font-weight:700}
 @media print{
  body{background:#fff}
  header,#formCard,#historyCard,.btns,.noprint{display:none!important}
@@ -115,10 +116,11 @@ ul{margin:6px 0;padding-inline-start:20px}
   <div id="history"></div>
  </section>
 </main>
+<footer class="credit" data-i18n="credit">إعداد وبرمجة: وائل دهشان</footer>
 
 <script>
 const T={
-ar:{title:"صحتي",sub:"احسب صحتك واحصل على تقرير ونظام غذائي ورياضي",f_title:"بياناتك",name:"الاسم (اختياري)",sex:"الجنس",male:"ذكر",female:"أنثى",age:"العمر (سنة)",height:"الطول (سم)",weight:"الوزن (كغ)",neck:"محيط الرقبة (سم)",chest:"محيط الصدر (سم)",waist:"محيط الخصر عند السرّة (سم)",hip:"محيط الورك (سم)",thigh:"محيط الفخذ (سم)",arm:"محيط الذراع - العضد (سم)",fore:"محيط الساعد (سم)",activity:"مستوى النشاط",act1:"قليل الحركة",act2:"نشاط خفيف (1-3 أيام/أسبوع)",act3:"نشاط متوسط (3-5 أيام)",act4:"نشاط عالٍ (6-7 أيام)",goal:"هدفك",g_lose:"إنقاص الوزن",g_maintain:"تثبيت الوزن",g_gain:"زيادة الوزن / بناء العضل",g_health:"صحة سليمة للجسم (متوازن)",
+ar:{credit:"إعداد وبرمجة: وائل دهشان",title:"صحتي",sub:"احسب صحتك واحصل على تقرير ونظام غذائي ورياضي",f_title:"بياناتك",name:"الاسم (اختياري)",sex:"الجنس",male:"ذكر",female:"أنثى",age:"العمر (سنة)",height:"الطول (سم)",weight:"الوزن (كغ)",neck:"محيط الرقبة (سم)",chest:"محيط الصدر (سم)",waist:"محيط الخصر عند السرّة (سم)",hip:"محيط الورك (سم)",thigh:"محيط الفخذ (سم)",arm:"محيط الذراع - العضد (سم)",fore:"محيط الساعد (سم)",activity:"مستوى النشاط",act1:"قليل الحركة",act2:"نشاط خفيف (1-3 أيام/أسبوع)",act3:"نشاط متوسط (3-5 أيام)",act4:"نشاط عالٍ (6-7 أيام)",goal:"هدفك",g_lose:"إنقاص الوزن",g_maintain:"تثبيت الوزن",g_gain:"زيادة الوزن / بناء العضل",g_health:"صحة سليمة للجسم (متوازن)",
 hn_normal:"وزنك ضمن الطبيعي، فالخطة لتثبيت صحتك: سعرات الحفاظ مع غذاء متوازن ونشاط منتظم.",hn_under:"وزنك أقل من الطبيعي، فرفعنا السعرات قليلًا للوصول التدريجي إلى وزن صحي.",hn_over:"وزنك أعلى من الطبيعي، فخفّضنا السعرات قليلًا (حوالي 300) لنزول تدريجي وآمن.",
 hint:"الحقول الأساسية: الجنس والعمر والطول والوزن. باقي المقاسات اختيارية لكنها ترفع دقة التقرير (الخصر والرقبة لتقدير نسبة الدهون، والورك للنساء).",calc:"احسب وأعطني التقرير",reset:"مسح الحقول",save:"حفظ في السجل",pdf:"تصدير PDF",pdfhint:"عند ظهور نافذة الطباعة اختر «حفظ بصيغة PDF» (Save as PDF).",h_title:"سجل القياسات",
 e_req:"أدخل الجنس والعمر والطول والوزن بشكل صحيح.",e_age:"هذا التطبيق مخصص للبالغين (18 سنة فأكثر).",e_range:"تحقق من القيم المدخلة: الطول بين 120 و230 سم، والوزن بين 30 و300 كغ.",
@@ -150,7 +152,7 @@ health:["مشي سريع 30-40 دقيقة","تمارين قوة لكل الجس�
 lose:["مشي سريع 40 دقيقة","تمارين قوة لكل الجسم 40 دقيقة (سكوات، ضغط، تجديف، بلانك)","كارديو خفيف 30 دقيقة (دراجة أو سباحة)","تمارين قوة لكل الجسم 40 دقيقة","مشي/جري متناوب 25 دقيقة + تمدد","مشي طويل أو رحلة مشي 60 دقيقة","راحة + تمدد خفيف 10 دقائق"],
 maintain:["مشي سريع 30-40 دقيقة","تمارين قوة للجزء العلوي 40 دقيقة","كارديو متوسط 30 دقيقة","تمارين قوة للجزء السفلي والبطن 40 دقيقة","رياضة تحبها 45 دقيقة (كرة، سباحة، دراجة)","مشي خفيف + تمدد","راحة"],
 gain:["قوة: صدر وأكتاف وترايسبس 45-60 دقيقة","قوة: أرجل (سكوات، طعنات) 45-60 دقيقة","راحة أو مشي خفيف 20 دقيقة","قوة: ظهر وبايسبس 45-60 دقيقة","قوة: أرجل وبطن 45 دقيقة","قوة لكل الجسم خفيفة + تمدد","راحة تامة"]}},
-en:{title:"My Health",sub:"Calculate your health and get a report with diet and workout plans",f_title:"Your data",name:"Name (optional)",sex:"Sex",male:"Male",female:"Female",age:"Age (years)",height:"Height (cm)",weight:"Weight (kg)",neck:"Neck circumference (cm)",chest:"Chest circumference (cm)",waist:"Waist at navel (cm)",hip:"Hip circumference (cm)",thigh:"Thigh circumference (cm)",arm:"Upper arm circumference (cm)",fore:"Forearm circumference (cm)",activity:"Activity level",act1:"Sedentary",act2:"Light (1-3 days/week)",act3:"Moderate (3-5 days)",act4:"High (6-7 days)",goal:"Your goal",g_lose:"Lose weight",g_maintain:"Maintain weight",g_gain:"Gain weight / build muscle",g_health:"Overall healthy body (balanced)",
+en:{credit:"Prepared & programmed by: Wael Dahshan",title:"My Health",sub:"Calculate your health and get a report with diet and workout plans",f_title:"Your data",name:"Name (optional)",sex:"Sex",male:"Male",female:"Female",age:"Age (years)",height:"Height (cm)",weight:"Weight (kg)",neck:"Neck circumference (cm)",chest:"Chest circumference (cm)",waist:"Waist at navel (cm)",hip:"Hip circumference (cm)",thigh:"Thigh circumference (cm)",arm:"Upper arm circumference (cm)",fore:"Forearm circumference (cm)",activity:"Activity level",act1:"Sedentary",act2:"Light (1-3 days/week)",act3:"Moderate (3-5 days)",act4:"High (6-7 days)",goal:"Your goal",g_lose:"Lose weight",g_maintain:"Maintain weight",g_gain:"Gain weight / build muscle",g_health:"Overall healthy body (balanced)",
 hn_normal:"Your weight is in the normal range, so the plan keeps you healthy: maintenance calories, balanced food and regular activity.",hn_under:"You are underweight, so calories were raised slightly for a gradual move to a healthy weight.",hn_over:"You are above the normal range, so calories were lowered slightly (about 300) for a gradual, safe decrease.",
 hint:"Required: sex, age, height and weight. Other measurements are optional but improve accuracy (waist and neck for body fat, hip for women).",calc:"Calculate & get report",reset:"Clear fields",save:"Save to history",pdf:"Export PDF",pdfhint:"In the print window choose “Save as PDF”.",h_title:"Measurement history",
 e_req:"Please enter sex, age, height and weight correctly.",e_age:"This app is for adults (18 years and older).",e_range:"Check your values: height 120-230 cm, weight 30-300 kg.",
