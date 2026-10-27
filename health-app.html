@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>صحتي | My Health</title>
+<style>
+:root{--bg:#f2f6f4;--card:#fff;--ink:#1d2b27;--mute:#64756f;--main:#0f7b6c;--main2:#0a5c51;--good:#1e9e57;--warn:#e29a12;--bad:#d64545;--line:#dde7e3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tajawal,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.7}
+header{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;padding:18px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+header h1{margin:0;font-size:22px}
+header p{margin:2px 0 0;font-size:13px;opacity:.9}
+.langbtn{background:#fff;color:var(--main2);border:0;border-radius:20px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:14px}
+main{max-width:900px;margin:0 auto;padding:14px}
+.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card h2{margin:0 0 12px;font-size:18px;color:var(--main2)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+label{display:block;font-size:13px;color:var(--mute);margin-bottom:3px}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:#fafcfb;font-family:inherit;color:var(--ink)}
+input:focus,select:focus{outline:2px solid var(--main);border-color:var(--main)}
+.hint{font-size:12px;color:var(--mute);margin:8px 0 0}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+button.b{background:var(--main);color:#fff;border:0;border-radius:12px;padding:12px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+button.b.sec{background:#e6f1ee;color:var(--main2)}
+button.b.red{background:#fbe9e9;color:var(--bad)}
+.err{background:#fdecec;color:var(--bad);padding:10px;border-radius:10px;margin-top:10px;display:none;font-size:14px}
+.score{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.ring{width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+.ring::before{content:"";position:absolute;inset:11px;background:#fff;border-radius:50%}
+.ring span{position:relative;font-size:30px;font-weight:800}
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+@media(min-width:640px){.metrics{grid-template-columns:repeat(3,1fr)}}
+.m{border:1px solid var(--line);border-radius:12px;padding:10px;border-inline-start:5px solid var(--line)}
+.m.good{border-inline-start-color:var(--good)}.m.warn{border-inline-start-color:var(--warn)}.m.bad{border-inline-start-color:var(--bad)}
+.m .l{font-size:12px;color:var(--mute)}.m .v{font-size:20px;font-weight:800}.m .n{font-size:12px;color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px;border-bottom:1px solid var(--line);text-align:start}
+th{color:var(--mute);font-weight:600;font-size:12px}
+.meal{padding:8px 0;border-bottom:1px dashed var(--line)}
+.meal:last-child{border:0}
+.tag{display:inline-block;background:#e6f1ee;color:var(--main2);border-radius:8px;padding:1px 8px;font-size:12px;font-weight:700}
+ul{margin:6px 0;padding-inline-start:20px}
+.warnbox{background:#fff6e0;border:1px solid #f1d58a;border-radius:12px;padding:10px;margin:10px 0;font-size:14px}
+.disc{font-size:12px;color:var(--mute);margin-top:14px}
+.rhead{display:none}
+.small{padding:5px 10px;font-size:12px;border-radius:8px}
+@media print{
+ body{background:#fff}
+ header,#formCard,#historyCard,.btns,.noprint{display:none!important}
+ .rhead{display:block;text-align:center;margin-bottom:10px}
+ .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+ main{padding:0}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header>
+ <div><h1 data-i18n="title">صحتي</h1><p data-i18n="sub">احسب صحتك واحصل على تقرير ونظام غذائي ورياضي</p></div>
+ <button class="langbtn" id="langBtn" onclick="toggleLang()">English</button>
+</header>
+<main>
+ <section class="card" id="formCard">
+  <h2 data-i18n="f_title">بياناتك</h2>
+  <div class="grid">
+   <div><label data-i18n="name">الاسم (اختياري)</label><input id="name" type="text"></div>
+   <div><label data-i18n="sex">الجنس</label><select id="sex"><option value="m" data-i18n="male">ذكر</option><option value="f" data-i18n="female">أنثى</option></select></div>
+   <div><label data-i18n="age">العمر (سنة)</label><input id="age" type="number" inputmode="decimal" min="18" max="100"></div>
+   <div><label data-i18n="height">الطول (سم)</label><input id="height" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="weight">الوزن (كغ)</label><input id="weight" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="neck">محيط الرقبة (سم)</label><input id="neck" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="chest">محيط الصدر (سم)</label><input id="chest" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="waist">محيط الخصر عند السرّة (سم)</label><input id="waist" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="hip">محيط الورك (سم)</label><input id="hip" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="thigh">محيط الفخذ (سم)</label><input id="thigh" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="arm">محيط الذراع - العضد (سم)</label><input id="arm" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="fore">محيط الساعد (سم)</label><input id="fore" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="activity">مستوى النشاط</label>
+    <select id="activity">
+     <option value="1.2" data-i18n="act1">قليل الحركة</option>
+     <option value="1.375" data-i18n="act2" selected>نشاط خفيف (1-3 أيام/أسبوع)</option>
+     <option value="1.55" data-i18n="act3">نشاط متوسط (3-5 أيام)</option>
+     <option value="1.725" data-i18n="act4">نشاط عالٍ (6-7 أيام)</option>
+    </select></div>
+   <div><label data-i18n="goal">هدفك</label>
+    <select id="goal">
+     <option value="health" data-i18n="g_health" selected>صحة سليمة للجسم (متوازن)</option>
+     <option value="lose" data-i18n="g_lose">إنقاص الوزن</option>
+     <option value="maintain" data-i18n="g_maintain">تثبيت الوزن</option>
+     <option value="gain" data-i18n="g_gain">زيادة الوزن / بناء العضل</option>
+    </select></div>
+  </div>
+  <p class="hint" data-i18n="hint">الحقول الأساسية: الجنس والعمر والطول والوزن. باقي المقاسات اختيارية لكنها ترفع دقة التقرير (الخصر والرقبة لتقدير نسبة الدهون، والورك للنساء).</p>
+  <div class="err" id="err"></div>
+  <div class="btns">
+   <button class="b" onclick="run()" data-i18n="calc">احسب وأعطني التقرير</button>
+   <button class="b sec" onclick="resetForm()" data-i18n="reset">مسح الحقول</button>
+  </div>
+ </section>
+
+ <div id="reportWrap" style="display:none">
+  <div class="rhead"><h1 data-i18n="title">صحتي</h1></div>
+  <div id="report"></div>
+  <div class="btns noprint">
+   <button class="b" onclick="saveRec()" data-i18n="save">حفظ في السجل</button>
+   <button class="b sec" onclick="doPdf()" data-i18n="pdf">تصدير PDF</button>
+  </div>
+  <p class="hint noprint" data-i18n="pdfhint">عند ظهور نافذة الطباعة اختر «حفظ بصيغة PDF» (Save as PDF).</p>
+ </div>
+
+ <section class="card" id="historyCard" style="margin-top:14px">
+  <h2 data-i18n="h_title">سجل القياسات</h2>
+  <div id="history"></div>
+ </section>
+</main>
+
+<script>
+const T={
+ar:{title:"صحتي",sub:"احسب صحتك واحصل على تقرير ونظام غذائي ورياضي",f_title:"بياناتك",name:"الاسم (اختياري)",sex:"الجنس",male:"ذكر",female:"أنثى",age:"العمر (سنة)",height:"الطول (سم)",weight:"الوزن (كغ)",neck:"محيط الرقبة (سم)",chest:"محيط الصدر (سم)",waist:"محيط الخصر عند السرّة (سم)",hip:"محيط الورك (سم)",thigh:"محيط الفخذ (سم)",arm:"محيط الذراع - العضد (سم)",fore:"محيط الساعد (سم)",activity:"مستوى النشاط",act1:"قليل الحركة",act2:"نشاط خفيف (1-3 أيام/أسبوع)",act3:"نشاط متوسط (3-5 أيام)",act4:"نشاط عالٍ (6-7 أيام)",goal:"هدفك",g_lose:"إنقاص الوزن",g_maintain:"تثبيت الوزن",g_gain:"زيادة الوزن / بناء العضل",g_health:"صحة سليمة للجسم (متوازن)",
+hn_normal:"وزنك ضمن الطبيعي، فالخطة لتثبيت صحتك: سعرات الحفاظ مع غذاء متوازن ونشاط منتظم.",hn_under:"وزنك أقل من الطبيعي، فرفعنا السعرات قليلًا للوصول التدريجي إلى وزن صحي.",hn_over:"وزنك أعلى من الطبيعي، فخفّضنا السعرات قليلًا (حوالي 300) لنزول تدريجي وآمن.",
+hint:"الحقول الأساسية: الجنس والعمر والطول والوزن. باقي المقاسات اختيارية لكنها ترفع دقة التقرير (الخصر والرقبة لتقدير نسبة الدهون، والورك للنساء).",calc:"احسب وأعطني التقرير",reset:"مسح الحقول",save:"حفظ في السجل",pdf:"تصدير PDF",pdfhint:"عند ظهور نافذة الطباعة اختر «حفظ بصيغة PDF» (Save as PDF).",h_title:"سجل القياسات",
+e_req:"أدخل الجنس والعمر والطول والوزن بشكل صحيح.",e_age:"هذا التطبيق مخصص للبالغين (18 سنة فأكثر).",e_range:"تحقق من القيم المدخلة: الطول بين 120 و230 سم، والوزن بين 30 و300 كغ.",
+rep_title:"تقرير الصحة",date:"التاريخ",score:"مؤشر الصحة العام",s_exc:"ممتاز",s_good:"جيد",s_mid:"يحتاج تحسينًا",s_low:"يحتاج اهتمامًا",
+m_bmi:"مؤشر كتلة الجسم BMI",m_whtr:"الخصر / الطول",m_whr:"الخصر / الورك",m_bf:"نسبة الدهون التقديرية",m_bmr:"الحرق الأساسي BMR",m_tdee:"السعرات اليومية للحفاظ",m_ideal:"الوزن الصحي",m_water:"الماء يوميًا",m_cw:"الصدر / الخصر",kcal:"سعرة",l:"لتر",kg:"كغ",
+bmi_under:"وزن أقل من الطبيعي",bmi_normal:"وزن طبيعي",bmi_over:"وزن زائد",bmi_ob1:"سمنة درجة أولى",bmi_ob2:"سمنة مرتفعة",
+whtr_good:"ممتاز (أقل من 0.5)",whtr_warn:"زيادة دهون بطنية",whtr_bad:"خطر مرتفع للدهون الحشوية",
+whr_good:"نسبة جيدة",whr_warn:"نسبة متوسطة",whr_bad:"نسبة مرتفعة",
+bf_low:"أقل من المعتاد",bf_healthy:"ضمن المعدل الصحي",bf_high:"أعلى من المعدل",bf_veryhigh:"مرتفعة جدًا",
+m_meas:"قياسات الجسم",chestwaist_note:"نسبة الصدر للخصر (معلومة للمتابعة)",
+sec_find:"قراءة النتائج",sec_diet:"النظام الغذائي المقترح",sec_ex:"البرنامج الرياضي الأسبوعي",sec_tips:"نصائح عامة",
+target:"هدفك اليومي",protein:"بروتين",carbs:"كربوهيدرات",fat:"دهون",g:"غ",
+mb:"الفطور",ml:"الغداء",md:"العشاء",ms:"وجبات خفيفة",
+w_underlose:"وزنك أقل من الطبيعي، لذلك عدّلنا الخطة إلى زيادة تدريجية بدل الإنقاص.",
+w_doctor:"بعض قيمك خارج المعدل بشكل كبير أو العمر متقدم؛ يُفضّل استشارة الطبيب قبل البدء بنظام غذائي أو رياضي مكثف.",
+w_nobf:"لإظهار نسبة الدهون أضف محيط الرقبة والخصر (وللنساء الورك أيضًا).",
+disc:"هذا التقرير تقديري وتثقيفي ولا يغني عن الاستشارة الطبية أو استشارة أخصائي تغذية. المؤشرات (مثل BMI) لها حدود ولا تميّز بين العضل والدهون.",
+tip1:"اشرب الماء على مدار اليوم ولا تنتظر العطش.",tip2:"نم من 7 إلى 9 ساعات؛ قلة النوم تضعف الحرق وتزيد الشهية.",tip3:"قِس نفسك كل 2-4 أسابيع وبنفس الطريقة والوقت لمتابعة التقدم.",tip4:"قلّل السكريات والمشروبات الغازية والمقليات، وزد الخضار والألياف.",tip5:"التغيّر الآمن للوزن حوالي 0.25-0.75 كغ في الأسبوع.",
+h_empty:"لا توجد قياسات محفوظة بعد.",h_date:"التاريخ",h_w:"الوزن",h_s:"الصحة",h_view:"عرض",h_del:"حذف",h_clear:"مسح السجل كله",h_conf:"هل تريد حذف السجل كله؟",h_saved:"تم الحفظ في السجل ✓",h_chg:"التغيّر عن القياس السابق",
+days:["اليوم 1","اليوم 2","اليوم 3","اليوم 4","اليوم 5","اليوم 6","اليوم 7"],
+ex_low:"ملاحظة: اختر تمارين منخفضة الأثر على المفاصل (مشي، سباحة، دراجة) وارفع الشدة تدريجيًا.",ex_old:"ملاحظة: أضف تمارين توازن ومرونة وابدأ بشدة خفيفة.",
+meals:{
+health:{b:"شوفان بالحليب مع فاكهة ومكسرات، أو بيض + خبز أسمر + خضار",l:"سمك أو دجاج أو لحم (150 غ) + سلطة كبيرة + أرز أو برغل (½-¾ كوب) + خضار. اجعل البقوليات (عدس، حمص) والسمك جزءًا من الأسبوع",d:"زبادي أو لبن + بيض أو جبنة + خضار، أو شوربة خضار مع خبز أسمر",s:"فاكهة طازجة + حفنة مكسرات غير مملحة، مع الإكثار من الماء"},
+lose:{b:"بيض مسلوق أو عجّة (2) + خبز أسمر (شريحة) + خيار وطماطم + شاي/قهوة بدون سكر",l:"صدر دجاج أو سمك مشوي (150 غ) + سلطة كبيرة + أرز أو برغل (½ كوب) + خضار مطبوخة",d:"زبادي/لبن + تونة أو جبنة قريش + خضار، أو شوربة عدس مع سلطة",s:"فاكهة + حفنة لوز صغيرة، أو جزر وخيار مع حمّص (ملعقتان)"},
+maintain:{b:"فول أو بيض + خبز أسمر + خضار + كوب حليب أو لبن",l:"لحم أو دجاج أو سمك (150-180 غ) + أرز أو برغل (¾ كوب) + سلطة + خضار",d:"ساندويش خبز أسمر بالدجاج أو البيض + سلطة، أو شوربة وسلطة وجبنة",s:"فاكهة + مكسرات (حفنة) أو زبادي"},
+gain:{b:"بيض (3) + خبز أسمر (2) + جبنة + حليب كامل الدسم + تمر أو موز",l:"لحم أو دجاج (200 غ) + أرز (1-1.5 كوب) + خضار + سلطة بزيت زيتون",d:"سمك أو دجاج + بطاطا أو معكرونة سمراء + سلطة + لبن",s:"شيك حليب وموز وزبدة فول سوداني، حفنة مكسرات، تمر، زبادي"}},
+plans:{
+health:["مشي سريع 30-40 دقيقة","تمارين قوة لكل الجسم 30-40 دقيقة","كارديو متوسط 30 دقيقة (دراجة أو سباحة)","راحة نشطة: مشي خفيف + تمدد 15 دقيقة","تمارين قوة لكل الجسم 30-40 دقيقة","نشاط تحبه 45 دقيقة (مشي في الطبيعة، كرة، سباحة)","راحة وتمدد خفيف"],
+lose:["مشي سريع 40 دقيقة","تمارين قوة لكل الجسم 40 دقيقة (سكوات، ضغط، تجديف، بلانك)","كارديو خفيف 30 دقيقة (دراجة أو سباحة)","تمارين قوة لكل الجسم 40 دقيقة","مشي/جري متناوب 25 دقيقة + تمدد","مشي طويل أو رحلة مشي 60 دقيقة","راحة + تمدد خفيف 10 دقائق"],
+maintain:["مشي سريع 30-40 دقيقة","تمارين قوة للجزء العلوي 40 دقيقة","كارديو متوسط 30 دقيقة","تمارين قوة للجزء السفلي والبطن 40 دقيقة","رياضة تحبها 45 دقيقة (كرة، سباحة، دراجة)","مشي خفيف + تمدد","راحة"],
+gain:["قوة: صدر وأكتاف وترايسبس 45-60 دقيقة","قوة: أرجل (سكوات، طعنات) 45-60 دقيقة","راحة أو مشي خفيف 20 دقيقة","قوة: ظهر وبايسبس 45-60 دقيقة","قوة: أرجل وبطن 45 دقيقة","قوة لكل الجسم خفيفة + تمدد","راحة تامة"]}},
+en:{title:"My Health",sub:"Calculate your health and get a report with diet and workout plans",f_title:"Your data",name:"Name (optional)",sex:"Sex",male:"Male",female:"Female",age:"Age (years)",height:"Height (cm)",weight:"Weight (kg)",neck:"Neck circumference (cm)",chest:"Chest circumference (cm)",waist:"Waist at navel (cm)",hip:"Hip circumference (cm)",thigh:"Thigh circumference (cm)",arm:"Upper arm circumference (cm)",fore:"Forearm circumference (cm)",activity:"Activity level",act1:"Sedentary",act2:"Light (1-3 days/week)",act3:"Moderate (3-5 days)",act4:"High (6-7 days)",goal:"Your goal",g_lose:"Lose weight",g_maintain:"Maintain weight",g_gain:"Gain weight / build muscle",g_health:"Overall healthy body (balanced)",
+hn_normal:"Your weight is in the normal range, so the plan keeps you healthy: maintenance calories, balanced food and regular activity.",hn_under:"You are underweight, so calories were raised slightly for a gradual move to a healthy weight.",hn_over:"You are above the normal range, so calories were lowered slightly (about 300) for a gradual, safe decrease.",
+hint:"Required: sex, age, height and weight. Other measurements are optional but improve accuracy (waist and neck for body fat, hip for women).",calc:"Calculate & get report",reset:"Clear fields",save:"Save to history",pdf:"Export PDF",pdfhint:"In the print window choose “Save as PDF”.",h_title:"Measurement history",
+e_req:"Please enter sex, age, height and weight correctly.",e_age:"This app is for adults (18 years and older).",e_range:"Check your values: height 120-230 cm, weight 30-300 kg.",
+rep_title:"Health Report",date:"Date",score:"Overall health score",s_exc:"Excellent",s_good:"Good",s_mid:"Needs improvement",s_low:"Needs attention",
+m_bmi:"Body Mass Index (BMI)",m_whtr:"Waist / Height",m_whr:"Waist / Hip",m_bf:"Estimated body fat",m_bmr:"Basal metabolic rate",m_tdee:"Daily calories to maintain",m_ideal:"Healthy weight range",m_water:"Water per day",m_cw:"Chest / Waist",kcal:"kcal",l:"L",kg:"kg",
+bmi_under:"Underweight",bmi_normal:"Normal weight",bmi_over:"Overweight",bmi_ob1:"Obesity class I",bmi_ob2:"High obesity",
+whtr_good:"Excellent (under 0.5)",whtr_warn:"Extra belly fat",whtr_bad:"High visceral fat risk",
+whr_good:"Good ratio",whr_warn:"Moderate ratio",whr_bad:"High ratio",
+bf_low:"Below usual range",bf_healthy:"Within healthy range",bf_high:"Above range",bf_veryhigh:"Very high",
+m_meas:"Body measurements",chestwaist_note:"Chest to waist ratio (for tracking)",
+sec_find:"Results explained",sec_diet:"Suggested diet plan",sec_ex:"Weekly workout plan",sec_tips:"General tips",
+target:"Your daily target",protein:"Protein",carbs:"Carbs",fat:"Fat",g:"g",
+mb:"Breakfast",ml:"Lunch",md:"Dinner",ms:"Snacks",
+w_underlose:"You are underweight, so the plan was changed to gradual weight gain instead of loss.",
+w_doctor:"Some values are well outside the usual range or age is advanced; please consult a doctor before starting an intensive diet or workout plan.",
+w_nobf:"To see body fat, add neck and waist (and hip for women).",
+disc:"This report is an estimate for education only and does not replace medical advice or a dietitian. Indicators such as BMI have limits and do not separate muscle from fat.",
+tip1:"Drink water through the day; don't wait for thirst.",tip2:"Sleep 7-9 hours; poor sleep slows metabolism and raises appetite.",tip3:"Re-measure every 2-4 weeks, same way and time, to track progress.",tip4:"Cut sugary drinks, sweets and fried foods; add vegetables and fiber.",tip5:"A safe rate of weight change is about 0.25-0.75 kg per week.",
+h_empty:"No saved measurements yet.",h_date:"Date",h_w:"Weight",h_s:"Health",h_view:"View",h_del:"Delete",h_clear:"Clear all history",h_conf:"Delete the entire history?",h_saved:"Saved to history ✓",h_chg:"Change since previous entry",
+days:["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
+ex_low:"Note: choose low-impact exercise (walking, swimming, cycling) and increase intensity gradually.",ex_old:"Note: add balance and flexibility work and start at light intensity.",
+meals:{
+health:{b:"Oatmeal with milk, fruit and nuts, or eggs + whole-grain bread + vegetables",l:"Fish, chicken or meat (150 g) + large salad + ½-¾ cup rice or bulgur + vegetables. Include legumes (lentils, chickpeas) and fish during the week",d:"Yogurt + eggs or cheese + vegetables, or vegetable soup with whole-grain bread",s:"Fresh fruit + handful of unsalted nuts, and plenty of water"},
+lose:{b:"2 boiled eggs or omelette + 1 slice whole-grain bread + cucumber & tomato + unsweetened tea/coffee",l:"Grilled chicken or fish (150 g) + large salad + ½ cup rice or bulgur + cooked vegetables",d:"Yogurt + tuna or cottage cheese + vegetables, or lentil soup with salad",s:"Fruit + small handful of almonds, or carrots & cucumber with 2 tbsp hummus"},
+maintain:{b:"Fava beans or eggs + whole-grain bread + vegetables + a glass of milk or yogurt",l:"Meat, chicken or fish (150-180 g) + ¾ cup rice or bulgur + salad + vegetables",d:"Whole-grain sandwich with chicken or egg + salad, or soup, salad and cheese",s:"Fruit + handful of nuts, or yogurt"},
+gain:{b:"3 eggs + 2 slices whole-grain bread + cheese + whole milk + dates or banana",l:"Meat or chicken (200 g) + 1-1.5 cups rice + vegetables + salad with olive oil",d:"Fish or chicken + potato or whole-wheat pasta + salad + yogurt",s:"Milk-banana-peanut-butter shake, handful of nuts, dates, yogurt"}},
+plans:{
+health:["Brisk walk 30-40 min","Full-body strength 30-40 min","Moderate cardio 30 min (cycling or swimming)","Active rest: easy walk + stretching 15 min","Full-body strength 30-40 min","An activity you enjoy 45 min (nature walk, football, swimming)","Rest + light stretching"],
+lose:["Brisk walk 40 min","Full-body strength 40 min (squats, push-ups, rows, plank)","Light cardio 30 min (cycling or swimming)","Full-body strength 40 min","Walk/jog intervals 25 min + stretching","Long walk or hike 60 min","Rest + light stretching 10 min"],
+maintain:["Brisk walk 30-40 min","Upper-body strength 40 min","Moderate cardio 30 min","Lower-body & core strength 40 min","A sport you enjoy 45 min (football, swimming, cycling)","Easy walk + stretching","Rest"],
+gain:["Strength: chest, shoulders, triceps 45-60 min","Strength: legs (squats, lunges) 45-60 min","Rest or easy walk 20 min","Strength: back & biceps 45-60 min","Strength: legs & abs 45 min","Light full-body strength + stretching","Full rest"]}}
+};
+
+let lang=localStorage.getItem('bh_lang')||'ar';
+let last=null;
+const $=id=>document.getElementById(id);
+const t=k=>T[lang][k]!==undefined?T[lang][k]:k;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=id=>{const v=parseFloat($(id).value);return isNaN(v)?null:v};
+const r1=x=>Math.round(x*10)/10;
+
+function applyLang(){
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+ document.title=t('title');
+ document.querySelectorAll('[data-i18n]').forEach(e=>{e.textContent=t(e.getAttribute('data-i18n'))});
+ $('langBtn').textContent=lang==='ar'?'English':'العربية';
+ if(last)render();
+ renderHistory();
+}
+function toggleLang(){lang=lang==='ar'?'en':'ar';localStorage.setItem('bh_lang',lang);applyLang()}
+
+function readForm(){
+ return {name:$('name').value.trim(),sex:$('sex').value,age:num('age'),height:num('height'),weight:num('weight'),
+ neck:num('neck'),chest:num('chest'),waist:num('waist'),hip:num('hip'),thigh:num('thigh'),arm:num('arm'),fore:num('fore'),
+ act:parseFloat($('activity').value),goal:$('goal').value};
+}
+function fillForm(d){
+ $('name').value=d.name||'';$('sex').value=d.sex;
+ ['age','height','weight','neck','chest','waist','hip','thigh','arm','fore'].forEach(k=>$(k).value=d[k]==null?'':d[k]);
+ $('activity').value=String(d.act);$('goal').value=d.goal;
+}
+function resetForm(){
+ ['name','age','height','weight','neck','chest','waist','hip','thigh','arm','fore'].forEach(k=>$(k).value='');
+ $('err').style.display='none';
+}
+function showErr(k){const e=$('err');e.textContent=t(k);e.style.display='block'}
+
+function calc(d){
+ const H=d.height/100,r={};
+ r.bmi=d.weight/(H*H);
+ r.bmiCat=r.bmi<18.5?'under':r.bmi<25?'normal':r.bmi<30?'over':r.bmi<35?'ob1':'ob2';
+ r.whtr=d.waist?d.waist/d.height:null;
+ r.whr=(d.waist&&d.hip)?d.waist/d.hip:null;
+ r.cw=(d.chest&&d.waist)?d.chest/d.waist:null;
+ r.bf=null;
+ try{
+  if(d.neck&&d.waist){
+   if(d.sex==='m'&&d.waist>d.neck)r.bf=495/(1.0324-0.19077*Math.log10(d.waist-d.neck)+0.15456*Math.log10(d.height))-450;
+   else if(d.sex==='f'&&d.hip&&(d.waist+d.hip)>d.neck)r.bf=495/(1.29579-0.35004*Math.log10(d.waist+d.hip-d.neck)+0.22100*Math.log10(d.height))-450;
+  }
+ }catch(e){}
+ if(r.bf!==null){if(!isFinite(r.bf)||r.bf<2||r.bf>60)r.bf=null}
+ if(r.bf!==null){
+  const m=d.sex==='m';
+  r.bfCat=m?(r.bf<6?'low':r.bf<=24?'healthy':r.bf<=30?'high':'veryhigh'):(r.bf<14?'low':r.bf<=31?'healthy':r.bf<=37?'high':'veryhigh');
+ }
+ r.bmr=10*d.weight+6.25*d.height-5*d.age+(d.sex==='m'?5:-161);
+ r.tdee=r.bmr*d.act;
+ r.idealMin=18.5*H*H;r.idealMax=24.9*H*H;
+ r.water=d.weight*0.033;
+ // statuses
+ r.bmiSt=r.bmiCat==='normal'?'good':(r.bmiCat==='ob1'||r.bmiCat==='ob2')?'bad':'warn';
+ if(r.whtr!==null){r.whtrCat=r.whtr<0.5?'good':r.whtr<0.6?'warn':'bad'}
+ if(r.whr!==null){
+  const m=d.sex==='m';
+  r.whrCat=m?(r.whr<0.9?'good':r.whr<1?'warn':'bad'):(r.whr<0.85?'good':r.whr<0.9?'warn':'bad');
+ }
+ if(r.bf!==null){r.bfSt=r.bfCat==='healthy'?'good':r.bfCat==='veryhigh'?'bad':'warn'}
+ // score
+ const sc=[];
+ sc.push({good:100,warn:70,bad:35}[r.bmiSt]);
+ if(r.bmi>=35||r.bmi<17)sc[0]=30;
+ if(r.whtrCat)sc.push({good:100,warn:65,bad:30}[r.whtrCat]);
+ if(r.whrCat)sc.push({good:100,warn:65,bad:35}[r.whrCat]);
+ if(r.bfSt)sc.push({good:100,warn:65,bad:30}[r.bfSt]);
+ r.score=Math.round(sc.reduce((a,b)=>a+b,0)/sc.length);
+ r.doctor=(r.bmi>=35||r.bmi<17||d.age>=60||r.bfCat==='veryhigh'||r.whtr>=0.6);
+ // plan
+ let goal=d.goal;r.goalNote=false;r.healthNote=false;
+ if(r.bmi<18.5&&goal==='lose'){goal='gain';r.goalNote=true}
+ r.goal=goal;
+ let k=goal==='lose'?r.tdee-500:goal==='gain'?r.tdee+300:r.tdee;
+ if(goal==='health'){r.healthNote=true;k=r.bmi<18.5?r.tdee+250:r.bmi>=25?r.tdee-300:r.tdee}
+ k=Math.max(k,d.sex==='f'?1200:1500);
+ r.kcal=Math.round(k/10)*10;
+ const pk={lose:1.6,gain:1.8,maintain:1.2,health:1.3}[goal];
+ r.protein=Math.round(Math.min(d.weight,100)*pk);
+ r.fat=Math.round(r.kcal*0.27/9);
+ r.carbs=Math.max(0,Math.round((r.kcal-r.protein*4-r.fat*9)/4));
+ return r;
+}
+
+function run(){
+ $('err').style.display='none';
+ const d=readForm();
+ if(!d.age||!d.height||!d.weight){showErr('e_req');return}
+ if(d.age<18){showErr('e_age');return}
+ if(d.height<120||d.height>230||d.weight<30||d.weight>300||d.age>100){showErr('e_range');return}
+ last={d:d,r:calc(d),date:new Date().toISOString()};
+ render();
+ $('reportWrap').style.display='block';
+ setTimeout(()=>$('reportWrap').scrollIntoView({behavior:'smooth'}),50);
+}
+
+function scoreInfo(s){
+ if(s>=80)return {c:'var(--good)',l:t('s_exc')};
+ if(s>=60)return {c:'#7bb333',l:t('s_good')};
+ if(s>=40)return {c:'var(--warn)',l:t('s_mid')};
+ return {c:'var(--bad)',l:t('s_low')};
+}
+function metric(label,val,note,st){
+ return '<div class="m '+(st||'')+'"><div class="l">'+esc(label)+'</div><div class="v">'+val+'</div><div class="n">'+(note||'')+'</div></div>';
+}
+function dateStr(iso){
+ try{return new Date(iso).toLocaleDateString(lang==='ar'?'ar-JO':'en-GB')}catch(e){return iso.slice(0,10)}
+}
+
+function render(){
+ if(!last)return;
+ const d=last.d,r=last.r,si=scoreInfo(r.score);
+ let h='';
+ h+='<section class="card"><h2>'+t('rep_title')+(d.name?' — '+esc(d.name):'')+'</h2>';
+ h+='<div class="score"><div class="ring" style="background:conic-gradient('+si.c+' '+(r.score*3.6)+'deg,#e3ece8 0)"><span>'+r.score+'</span></div>';
+ h+='<div><div style="font-size:13px;color:var(--mute)">'+t('score')+'</div><div style="font-size:22px;font-weight:800;color:'+si.c+'">'+si.l+'</div>';
+ h+='<div style="font-size:13px;color:var(--mute)">'+t('date')+': '+dateStr(last.date)+'</div></div></div>';
+ if(r.doctor)h+='<div class="warnbox">⚠️ '+t('w_doctor')+'</div>';
+ if(r.goalNote)h+='<div class="warnbox">ℹ️ '+t('w_underlose')+'</div>';
+ if(r.healthNote)h+='<div class="warnbox">ℹ️ '+t(r.bmiCat==='under'?'hn_under':r.bmiCat==='normal'?'hn_normal':'hn_over')+'</div>';
+ h+='</section>';
+
+ h+='<section class="card"><h2>'+t('sec_find')+'</h2><div class="metrics">';
+ h+=metric(t('m_bmi'),r1(r.bmi),t('bmi_'+r.bmiCat),r.bmiSt);
+ if(r.whtr!==null)h+=metric(t('m_whtr'),r.whtr.toFixed(2),t('whtr_'+r.whtrCat),r.whtrCat);
+ if(r.whr!==null)h+=metric(t('m_whr'),r.whr.toFixed(2),t('whr_'+r.whrCat),r.whrCat);
+ if(r.bf!==null)h+=metric(t('m_bf'),r1(r.bf)+'%',t('bf_'+r.bfCat),r.bfSt);
+ h+=metric(t('m_ideal'),Math.round(r.idealMin)+' - '+Math.round(r.idealMax)+' '+t('kg'),'');
+ h+=metric(t('m_bmr'),Math.round(r.bmr),t('kcal'));
+ h+=metric(t('m_tdee'),Math.round(r.tdee),t('kcal'));
+ h+=metric(t('m_water'),r1(r.water)+' '+t('l'),'');
+ if(r.cw!==null)h+=metric(t('m_cw'),r.cw.toFixed(2),t('chestwaist_note'));
+ h+='</div>';
+ if(r.bf===null)h+='<p class="hint">'+t('w_nobf')+'</p>';
+ const ms=[['height',d.height],['weight',d.weight],['neck',d.neck],['chest',d.chest],['waist',d.waist],['hip',d.hip],['thigh',d.thigh],['arm',d.arm],['fore',d.fore]].filter(x=>x[1]);
+ h+='<h3 style="margin:16px 0 6px;font-size:15px">'+t('m_meas')+'</h3><table><tbody>';
+ ms.forEach(x=>{h+='<tr><td>'+t(x[0])+'</td><td><b>'+x[1]+'</b></td></tr>'});
+ h+='</tbody></table></section>';
+
+ // diet
+ const meals=T[lang].meals[r.goal];
+ const parts=[['mb',0.25,'b'],['ml',0.35,'l'],['md',0.25,'d'],['ms',0.15,'s']];
+ h+='<section class="card"><h2>'+t('sec_diet')+'</h2>';
+ h+='<p><b>'+t('target')+':</b> <span class="tag">'+r.kcal+' '+t('kcal')+'</span> <span class="tag">'+t('protein')+' '+r.protein+t('g')+'</span> <span class="tag">'+t('carbs')+' '+r.carbs+t('g')+'</span> <span class="tag">'+t('fat')+' '+r.fat+t('g')+'</span></p>';
+ parts.forEach(p=>{
+  h+='<div class="meal"><b>'+t(p[0])+'</b> <span class="tag">≈ '+Math.round(r.kcal*p[1]/10)*10+' '+t('kcal')+'</span><br>'+esc(meals[p[2]])+'</div>';
+ });
+ h+='</section>';
+
+ // exercise
+ const plan=T[lang].plans[r.goal];
+ h+='<section class="card"><h2>'+t('sec_ex')+'</h2>';
+ if(r.bmi>=30)h+='<div class="warnbox">'+t('ex_low')+'</div>';
+ if(d.age>=60)h+='<div class="warnbox">'+t('ex_old')+'</div>';
+ h+='<table><tbody>';
+ plan.forEach((x,i)=>{h+='<tr><td style="white-space:nowrap"><b>'+T[lang].days[i]+'</b></td><td>'+esc(x)+'</td></tr>'});
+ h+='</tbody></table></section>';
+
+ // tips
+ h+='<section class="card"><h2>'+t('sec_tips')+'</h2><ul>';
+ for(let i=1;i<=5;i++)h+='<li>'+t('tip'+i)+'</li>';
+ h+='</ul><p class="disc">'+t('disc')+'</p></section>';
+ $('report').innerHTML=h;
+}
+
+// history
+function getHist(){try{return JSON.parse(localStorage.getItem('bh_hist')||'[]')}catch(e){return[]}}
+function setHist(a){try{localStorage.setItem('bh_hist',JSON.stringify(a))}catch(e){}}
+function saveRec(){
+ if(!last)return;
+ const a=getHist();
+ a.unshift({date:last.date,d:last.d,bmi:r1(last.r.bmi),score:last.r.score});
+ setHist(a);renderHistory();
+ alert(t('h_saved'));
+}
+function renderHistory(){
+ const a=getHist(),box=$('history');
+ if(!a.length){box.innerHTML='<p class="hint">'+t('h_empty')+'</p>';return}
+ let h='<table><thead><tr><th>'+t('h_date')+'</th><th>'+t('h_w')+'</th><th>BMI</th><th>'+t('h_s')+'</th><th></th></tr></thead><tbody>';
+ a.forEach((x,i)=>{
+  const prev=a[i+1];
+  let chg='';
+  if(prev){const dw=r1(x.d.weight-prev.d.weight);chg=' <span class="tag" title="'+t('h_chg')+'">'+(dw>0?'+':'')+dw+'</span>'}
+  h+='<tr><td>'+dateStr(x.date)+(x.d.name?'<br><small>'+esc(x.d.name)+'</small>':'')+'</td><td>'+x.d.weight+chg+'</td><td>'+x.bmi+'</td><td>'+x.score+'</td>'
+   +'<td style="white-space:nowrap"><button class="b sec small" onclick="viewRec('+i+')">'+t('h_view')+'</button> <button class="b red small" onclick="delRec('+i+')">'+t('h_del')+'</button></td></tr>';
+ });
+ h+='</tbody></table><div class="btns"><button class="b red small" onclick="clearHist()">'+t('h_clear')+'</button></div>';
+ box.innerHTML=h;
+}
+function viewRec(i){
+ const x=getHist()[i];if(!x)return;
+ fillForm(x.d);
+ last={d:x.d,r:calc(x.d),date:x.date};
+ render();$('reportWrap').style.display='block';
+ $('reportWrap').scrollIntoView({behavior:'smooth'});
+}
+function delRec(i){const a=getHist();a.splice(i,1);setHist(a);renderHistory()}
+function clearHist(){if(confirm(t('h_conf'))){setHist([]);renderHistory()}}
+
+function doPdf(){
+ const old=document.title;
+ document.title=(last&&last.d.name?last.d.name+' - ':'')+t('rep_title');
+ window.print();
+ setTimeout(()=>{document.title=old},500);
+}
+
+applyLang();
+</script>
+</body>
+</html>
