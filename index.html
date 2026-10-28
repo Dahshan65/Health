@@ -81,7 +81,6 @@ ul{margin:6px 0;padding-inline-start:20px}
    <div><label data-i18n="hip">محيط الورك (سم)</label><input id="hip" type="number" inputmode="decimal"></div>
    <div><label data-i18n="thigh">محيط الفخذ (سم)</label><input id="thigh" type="number" inputmode="decimal"></div>
    <div><label data-i18n="arm">محيط الذراع - العضد (سم)</label><input id="arm" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="fore">محيط الساعد (سم)</label><input id="fore" type="number" inputmode="decimal"></div>
    <div><label data-i18n="activity">مستوى النشاط</label>
     <select id="activity">
      <option value="1.2" data-i18n="act1">قليل الحركة</option>
@@ -89,6 +88,11 @@ ul{margin:6px 0;padding-inline-start:20px}
      <option value="1.55" data-i18n="act3">نشاط متوسط (3-5 أيام)</option>
      <option value="1.725" data-i18n="act4">نشاط عالٍ (6-7 أيام)</option>
     </select></div>
+   <div><label data-i18n="tw">الوزن المستهدف (كغ) - اختياري</label><input id="tw" type="number" inputmode="decimal"></div>
+   <div><label data-i18n="cond">حالتك الصحية</label>
+    <select id="cond"><option value="none" data-i18n="c_none" selected>لا شيء مما يلي</option><option value="preg" data-i18n="c_preg">حمل أو رضاعة</option><option value="chronic" data-i18n="c_chronic">مرض مزمن (سكري، ضغط، قلب، كلى)</option></select></div>
+   <div><label data-i18n="fast">نمط الصيام</label>
+    <select id="fast"><option value="none" data-i18n="f_none" selected>عادي (بدون صيام)</option><option value="ramadan" data-i18n="f_ram">شهر رمضان</option><option value="mt" data-i18n="f_mt">صيام الإثنين والخميس</option></select></div>
    <div><label data-i18n="goal">هدفك</label>
     <select id="goal">
      <option value="health" data-i18n="g_health" selected>صحة سليمة للجسم (متوازن)</option>
@@ -124,7 +128,28 @@ ul{margin:6px 0;padding-inline-start:20px}
 
 <script>
 const T={
-ar:{credit:"إعداد وبرمجة: وائل دهشان",title:"صحتي",sub:"احسب صحتك واحصل على تقرير ونظام غذائي ورياضي",f_title:"بياناتك",name:"الاسم (اختياري)",sex:"الجنس",male:"ذكر",female:"أنثى",age:"العمر (سنة)",height:"الطول (سم)",weight:"الوزن (كغ)",neck:"محيط الرقبة (سم)",chest:"محيط الصدر (سم)",waist:"محيط الخصر عند السرّة (سم)",hip:"محيط الورك (سم)",thigh:"محيط الفخذ (سم)",arm:"محيط الذراع - العضد (سم)",fore:"محيط الساعد (سم)",activity:"مستوى النشاط",act1:"قليل الحركة",act2:"نشاط خفيف (1-3 أيام/أسبوع)",act3:"نشاط متوسط (3-5 أيام)",act4:"نشاط عالٍ (6-7 أيام)",goal:"هدفك",g_lose:"إنقاص الوزن",g_maintain:"تثبيت الوزن",g_gain:"زيادة الوزن / بناء العضل",g_health:"صحة سليمة للجسم (متوازن)",
+ar:{credit:"إعداد وبرمجة: وائل دهشان",title:"صحتي",sub:"احسب صحتك واحصل على تقرير ونظام غذائي ورياضي",f_title:"بياناتك",name:"الاسم (اختياري)",sex:"الجنس",male:"ذكر",female:"أنثى",age:"العمر (سنة)",height:"الطول (سم)",weight:"الوزن (كغ)",neck:"محيط الرقبة (سم)",chest:"محيط الصدر (سم)",waist:"محيط الخصر عند السرّة (سم)",hip:"محيط الورك (سم)",thigh:"محيط الفخذ (سم)",arm:"محيط الذراع - العضد (سم)",activity:"مستوى النشاط",act1:"قليل الحركة",act2:"نشاط خفيف (1-3 أيام/أسبوع)",act3:"نشاط متوسط (3-5 أيام)",act4:"نشاط عالٍ (6-7 أيام)",goal:"هدفك",tw:"الوزن المستهدف (كغ) - اختياري",cond:"حالتك الصحية",c_none:"لا شيء مما يلي",c_preg:"حمل أو رضاعة",c_chronic:"مرض مزمن (سكري، ضغط، قلب، كلى)",fast:"نمط الصيام",f_none:"عادي (بدون صيام)",f_ram:"شهر رمضان",f_mt:"صيام الإثنين والخميس",
+m_waist:"محيط الخصر",wc_good:"ضمن الحد الصحي",wc_warn:"قريب من حد الخطر",wc_bad:"مرتفع (خطر على القلب والسكري)",
+m_tw:"الوزن المستهدف",tw_near:"أنت قريب من هدفك",wk:"أسابيع تقريبًا",m_steps:"المشي اليومي المقترح",steps:"خطوة",
+m_cw2:"تناسق الصدر والخصر",cw_good:"تناسق ممتاز",cw_mid:"تناسق جيد",cw_low:"الخصر كبير نسبة للصدر",cw_track:"للمتابعة مع الوقت",
+m_arm:"محيط العضد",arm_ok:"طبيعي",arm_low:"منخفض: قد يدل على قلة العضل أو نقص التغذية",
+m_thigh:"محيط الفخذ",thigh_ok:"طبيعي",thigh_low:"منخفض: ضعف عضلات الفخذ يرتبط بضعف الصحة مع العمر",
+w_preg:"الحمل والرضاعة لهما احتياجات غذائية خاصة؛ هذه الخطة عامة ولا تتضمن إنقاص وزن. اتبعي تعليمات طبيبك أو أخصائي التغذية.",
+w_chronic:"مع المرض المزمن (كالسكري أو الضغط أو القلب أو الكلى) قد تحتاج لخطة غذائية خاصة؛ استشر طبيبك أو أخصائي التغذية قبل الالتزام بهذه الخطة.",
+w_fastdoc:"الصيام مع الحمل أو الرضاعة أو المرض المزمن يحتاج استشارة الطبيب قبل البدء، وللمريض رخصة شرعية بالفطر عند الضرر.",
+w_skinny:"وزنك طبيعي لكن نسبة الدهون مرتفعة؛ ركّز على تمارين القوة والبروتين وليس على الحمية وحدها.",
+tw_low:"وزنك المستهدف أقل من الحد الصحي؛ اختر هدفًا ضمن المدى الصحي.",
+ex_muscle:"قياسات الذراع أو الفخذ منخفضة: ركّز على تمارين القوة 3 مرات أسبوعيًا وزد البروتين تدريجيًا.",
+r_i:"الإفطار",r_n:"بعد التراويح",r_s:"السحور",
+ram_water:"الماء في رمضان: كمية الماء اليومية {l} لتر (حوالي {t} أكواب) فقسّمها بين الإفطار والسحور: {a} عند الإفطار، و{b} بين الإفطار والنوم، و{c} عند السحور. قلّل الشاي والقهوة والمالح والمقليات.",
+ram_w:"موزّعة بين الإفطار والسحور",cups:"أكواب (250 مل)",water_note:"زد الكمية في الحر أو عند التعرّق",
+ram_ex:"في رمضان الهدف تثبيت الوزن والمحافظة على العضل لا الإنقاص السريع: خفّف الشدة، ولا تتمرن بجهد عالٍ وأنت صائم.",
+mt_note:"في يومي الصيام (الإثنين والخميس): افطر على تمر وماء، ثم وجبة خفيفة بلا إسراف، وتسحّر بوجبة فيها بروتين وألياف. اجعل تمارين القوة في الأيام التي لا تصوم فيها، واكتفِ بالمشي الخفيف في أيام الصيام.",
+sec_prog:"تقدّم قياساتك عن آخر قياس محفوظ",pg_note:"التغيّر",pg_fat:"نزل الوزن والخصر مع ثبات العضل: إنقاص دهون جيد 👍",pg_muscle:"زاد الذراع أو الفخذ أو الصدر مع ثبات الخصر: بناء عضل جيد 💪",pg_fatgain:"زاد الخصر مع الوزن: راجع غذاءك وزد حركتك.",pg_lossmuscle:"نزل الوزن مع نقص في الذراع أو الفخذ: قد تفقد عضلًا؛ زد البروتين وتمارين القوة.",pg_stable:"لا تغيّر كبير بين القياسين.",pg_cm:"سم",
+h_chart:"تطور الوزن",
+tip6:"من هدي النبي ﷺ: «ما ملأ آدميٌّ وعاءً شرًّا من بطن، بحسب ابن آدم أُكُلاتٌ يُقِمْنَ صلبه، فإن كان لا محالة فثلثٌ لطعامه وثلثٌ لشرابه وثلثٌ لنَفَسه» (رواه الترمذي وابن ماجه).",
+tip7:"اجعل المشي إلى المسجد وصلاة الجماعة جزءًا من نشاطك اليومي، وابدأ إفطارك بالتمر والماء.",
+g_lose:"إنقاص الوزن",g_maintain:"تثبيت الوزن",g_gain:"زيادة الوزن / بناء العضل",g_health:"صحة سليمة للجسم (متوازن)",
 hn_normal:"وزنك ضمن الطبيعي، فالخطة لتثبيت صحتك: سعرات الحفاظ مع غذاء متوازن ونشاط منتظم.",hn_under:"وزنك أقل من الطبيعي، فرفعنا السعرات قليلًا للوصول التدريجي إلى وزن صحي.",hn_over:"وزنك أعلى من الطبيعي، فخفّضنا السعرات قليلًا (حوالي 300) لنزول تدريجي وآمن.",
 hint:"الحقول الأساسية: الجنس والعمر والطول والوزن. باقي المقاسات اختيارية لكنها ترفع دقة التقرير (الخصر والرقبة لتقدير نسبة الدهون، والورك للنساء).",calc:"احسب وأعطني التقرير",reset:"مسح الحقول",save:"حفظ في السجل",pdf:"تصدير PDF",pdfhint:"عند ظهور نافذة الطباعة اختر «حفظ بصيغة PDF» (Save as PDF).",h_title:"سجل القياسات",
 e_req:"أدخل الجنس والعمر والطول والوزن بشكل صحيح.",e_age:"هذا التطبيق مخصص للبالغين (18 سنة فأكثر).",e_range:"تحقق من القيم المدخلة: الطول بين 120 و230 سم، والوزن بين 30 و300 كغ.",
@@ -146,6 +171,8 @@ tip1:"اشرب الماء على مدار اليوم ولا تنتظر العط�
 h_empty:"لا توجد قياسات محفوظة بعد.",h_date:"التاريخ",h_w:"الوزن",h_s:"الصحة",h_view:"عرض",h_del:"حذف",h_clear:"مسح السجل كله",h_conf:"هل تريد حذف السجل كله؟",h_saved:"تم الحفظ في السجل ✓",h_chg:"التغيّر عن القياس السابق",
 days:["اليوم 1","اليوم 2","اليوم 3","اليوم 4","اليوم 5","اليوم 6","اليوم 7"],
 ex_low:"ملاحظة: اختر تمارين منخفضة الأثر على المفاصل (مشي، سباحة، دراجة) وارفع الشدة تدريجيًا.",ex_old:"ملاحظة: أضف تمارين توازن ومرونة وابدأ بشدة خفيفة.",
+ram:{i:"افطر على 3 تمرات وماء، ثم صلاة المغرب، ثم شوربة (عدس أو خضار) وسلطة، ثم طبق رئيسي: دجاج أو سمك أو لحم (120-150 غ) + أرز أو برغل (½ كوب) + خضار",n:"بعد التراويح: زبادي أو لبن + فاكهة، أو حفنة مكسرات غير مملحة، مع الماء",s:"سحور لا تتركه: فول أو بيض + خبز أسمر + لبن أو لبنة + خيار وطماطم، أو شوفان بالحليب مع تمر وحفنة مكسرات. أكثر من الألياف والبروتين لتطول فترة الشبع"},
+ramplan:["مشي خفيف 20-30 دقيقة بعد الإفطار بساعة","تمارين قوة خفيفة لكل الجسم 25-30 دقيقة بعد الإفطار بساعتين","مشي خفيف 20 دقيقة + تمدد","تمارين قوة خفيفة 25-30 دقيقة","مشي خفيف 20-30 دقيقة","تمدد وراحة نشطة 15 دقيقة","راحة"],
 meals:{
 health:{b:"شوفان بالحليب مع فاكهة ومكسرات، أو بيض + خبز أسمر + خضار",l:"سمك أو دجاج أو لحم (150 غ) + سلطة كبيرة + أرز أو برغل (½-¾ كوب) + خضار. اجعل البقوليات (عدس، حمص) والسمك جزءًا من الأسبوع",d:"زبادي أو لبن + بيض أو جبنة + خضار، أو شوربة خضار مع خبز أسمر",s:"فاكهة طازجة + حفنة مكسرات غير مملحة، مع الإكثار من الماء"},
 lose:{b:"بيض مسلوق أو عجّة (2) + خبز أسمر (شريحة) + خيار وطماطم + شاي/قهوة بدون سكر",l:"صدر دجاج أو سمك مشوي (150 غ) + سلطة كبيرة + أرز أو برغل (½ كوب) + خضار مطبوخة",d:"زبادي/لبن + تونة أو جبنة قريش + خضار، أو شوربة عدس مع سلطة",s:"فاكهة + حفنة لوز صغيرة، أو جزر وخيار مع حمّص (ملعقتان)"},
@@ -156,7 +183,28 @@ health:["مشي سريع 30-40 دقيقة","تمارين قوة لكل الجس�
 lose:["مشي سريع 40 دقيقة","تمارين قوة لكل الجسم 40 دقيقة (سكوات، ضغط، تجديف، بلانك)","كارديو خفيف 30 دقيقة (دراجة أو سباحة)","تمارين قوة لكل الجسم 40 دقيقة","مشي/جري متناوب 25 دقيقة + تمدد","مشي طويل أو رحلة مشي 60 دقيقة","راحة + تمدد خفيف 10 دقائق"],
 maintain:["مشي سريع 30-40 دقيقة","تمارين قوة للجزء العلوي 40 دقيقة","كارديو متوسط 30 دقيقة","تمارين قوة للجزء السفلي والبطن 40 دقيقة","رياضة تحبها 45 دقيقة (كرة، سباحة، دراجة)","مشي خفيف + تمدد","راحة"],
 gain:["قوة: صدر وأكتاف وترايسبس 45-60 دقيقة","قوة: أرجل (سكوات، طعنات) 45-60 دقيقة","راحة أو مشي خفيف 20 دقيقة","قوة: ظهر وبايسبس 45-60 دقيقة","قوة: أرجل وبطن 45 دقيقة","قوة لكل الجسم خفيفة + تمدد","راحة تامة"]}},
-en:{credit:"Prepared & programmed by: Wael Dahshan",title:"My Health",sub:"Calculate your health and get a report with diet and workout plans",f_title:"Your data",name:"Name (optional)",sex:"Sex",male:"Male",female:"Female",age:"Age (years)",height:"Height (cm)",weight:"Weight (kg)",neck:"Neck circumference (cm)",chest:"Chest circumference (cm)",waist:"Waist at navel (cm)",hip:"Hip circumference (cm)",thigh:"Thigh circumference (cm)",arm:"Upper arm circumference (cm)",fore:"Forearm circumference (cm)",activity:"Activity level",act1:"Sedentary",act2:"Light (1-3 days/week)",act3:"Moderate (3-5 days)",act4:"High (6-7 days)",goal:"Your goal",g_lose:"Lose weight",g_maintain:"Maintain weight",g_gain:"Gain weight / build muscle",g_health:"Overall healthy body (balanced)",
+en:{credit:"Prepared & programmed by: Wael Dahshan",title:"My Health",sub:"Calculate your health and get a report with diet and workout plans",f_title:"Your data",name:"Name (optional)",sex:"Sex",male:"Male",female:"Female",age:"Age (years)",height:"Height (cm)",weight:"Weight (kg)",neck:"Neck circumference (cm)",chest:"Chest circumference (cm)",waist:"Waist at navel (cm)",hip:"Hip circumference (cm)",thigh:"Thigh circumference (cm)",arm:"Upper arm circumference (cm)",activity:"Activity level",act1:"Sedentary",act2:"Light (1-3 days/week)",act3:"Moderate (3-5 days)",act4:"High (6-7 days)",goal:"Your goal",tw:"Target weight (kg) - optional",cond:"Health condition",c_none:"None of the below",c_preg:"Pregnancy or breastfeeding",c_chronic:"Chronic illness (diabetes, blood pressure, heart, kidney)",fast:"Fasting pattern",f_none:"Normal (no fasting)",f_ram:"Ramadan",f_mt:"Monday & Thursday fasting",
+m_waist:"Waist",wc_good:"Within healthy limit",wc_warn:"Near the risk limit",wc_bad:"High (heart and diabetes risk)",
+m_tw:"Target weight",tw_near:"You are close to your target",wk:"weeks approx.",m_steps:"Suggested daily walking",steps:"steps",
+m_cw2:"Chest-waist proportion",cw_good:"Excellent proportion",cw_mid:"Good proportion",cw_low:"Waist large relative to chest",cw_track:"For tracking over time",
+m_arm:"Upper arm",arm_ok:"Normal",arm_low:"Low: may suggest low muscle or undernutrition",
+m_thigh:"Thigh",thigh_ok:"Normal",thigh_low:"Low: weak thigh muscle is linked to poorer health with age",
+w_preg:"Pregnancy and breastfeeding have special nutritional needs; this plan is general and does not include weight loss. Follow your doctor or dietitian.",
+w_chronic:"With a chronic illness (diabetes, blood pressure, heart or kidney) you may need a special plan; consult your doctor or dietitian before following this one.",
+w_fastdoc:"Fasting with pregnancy, breastfeeding or a chronic illness needs a doctor's advice first; the sick are permitted by Sharia to break the fast when harmed.",
+w_skinny:"Your weight is normal but body fat is high; focus on strength training and protein, not dieting alone.",
+tw_low:"Your target weight is below the healthy range; choose a target within it.",
+ex_muscle:"Arm or thigh measurements are low: focus on strength training 3 times a week and raise protein gradually.",
+r_i:"Iftar",r_n:"After Taraweeh",r_s:"Suhoor",
+ram_water:"Water in Ramadan: your daily amount is {l} L (about {t} cups), so spread it between iftar and suhoor: {a} at iftar, {b} between iftar and sleep, {c} at suhoor. Cut tea, coffee, salty and fried foods.",
+ram_w:"spread between iftar and suhoor",cups:"cups (250 ml)",water_note:"Drink more in hot weather or when sweating",
+ram_ex:"In Ramadan aim to maintain weight and muscle rather than lose fast: lower the intensity and avoid hard training while fasting.",
+mt_note:"On fasting days (Monday & Thursday): break the fast with dates and water, then a light meal without overeating, and have a suhoor with protein and fiber. Keep strength training for non-fasting days and only light walking on fasting days.",
+sec_prog:"Your progress since the last saved entry",pg_note:"Change",pg_fat:"Weight and waist down with muscle kept: good fat loss 👍",pg_muscle:"Arm, thigh or chest up with waist steady: good muscle gain 💪",pg_fatgain:"Waist grew with weight: review your diet and move more.",pg_lossmuscle:"Weight down with arm or thigh also down: you may be losing muscle; raise protein and strength training.",pg_stable:"No big change between the two entries.",pg_cm:"cm",
+h_chart:"Weight trend",
+tip6:"From the Prophet's ﷺ guidance: “No human ever filled a vessel worse than his stomach. A few morsels to keep his back straight are enough; if he must, then a third for food, a third for drink and a third for air” (Tirmidhi, Ibn Majah).",
+tip7:"Make walking to the mosque and congregational prayer part of your daily activity, and start iftar with dates and water.",
+g_lose:"Lose weight",g_maintain:"Maintain weight",g_gain:"Gain weight / build muscle",g_health:"Overall healthy body (balanced)",
 hn_normal:"Your weight is in the normal range, so the plan keeps you healthy: maintenance calories, balanced food and regular activity.",hn_under:"You are underweight, so calories were raised slightly for a gradual move to a healthy weight.",hn_over:"You are above the normal range, so calories were lowered slightly (about 300) for a gradual, safe decrease.",
 hint:"Required: sex, age, height and weight. Other measurements are optional but improve accuracy (waist and neck for body fat, hip for women).",calc:"Calculate & get report",reset:"Clear fields",save:"Save to history",pdf:"Export PDF",pdfhint:"In the print window choose “Save as PDF”.",h_title:"Measurement history",
 e_req:"Please enter sex, age, height and weight correctly.",e_age:"This app is for adults (18 years and older).",e_range:"Check your values: height 120-230 cm, weight 30-300 kg.",
@@ -178,6 +226,8 @@ tip1:"Drink water through the day; don't wait for thirst.",tip2:"Sleep 7-9 hours
 h_empty:"No saved measurements yet.",h_date:"Date",h_w:"Weight",h_s:"Health",h_view:"View",h_del:"Delete",h_clear:"Clear all history",h_conf:"Delete the entire history?",h_saved:"Saved to history ✓",h_chg:"Change since previous entry",
 days:["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
 ex_low:"Note: choose low-impact exercise (walking, swimming, cycling) and increase intensity gradually.",ex_old:"Note: add balance and flexibility work and start at light intensity.",
+ram:{i:"Break the fast with 3 dates and water, then Maghrib prayer, then soup (lentil or vegetable) and salad, then a main plate: chicken, fish or meat (120-150 g) + ½ cup rice or bulgur + vegetables",n:"After Taraweeh: yogurt or laban + fruit, or a handful of unsalted nuts, with water",s:"Never skip suhoor: fava beans or eggs + whole-grain bread + laban or labneh + cucumber & tomato, or oatmeal with milk, dates and nuts. Favor fiber and protein to stay full longer"},
+ramplan:["Easy walk 20-30 min, an hour after iftar","Light full-body strength 25-30 min, two hours after iftar","Easy walk 20 min + stretching","Light strength 25-30 min","Easy walk 20-30 min","Stretching and active rest 15 min","Rest"],
 meals:{
 health:{b:"Oatmeal with milk, fruit and nuts, or eggs + whole-grain bread + vegetables",l:"Fish, chicken or meat (150 g) + large salad + ½-¾ cup rice or bulgur + vegetables. Include legumes (lentils, chickpeas) and fish during the week",d:"Yogurt + eggs or cheese + vegetables, or vegetable soup with whole-grain bread",s:"Fresh fruit + handful of unsalted nuts, and plenty of water"},
 lose:{b:"2 boiled eggs or omelette + 1 slice whole-grain bread + cucumber & tomato + unsweetened tea/coffee",l:"Grilled chicken or fish (150 g) + large salad + ½ cup rice or bulgur + cooked vegetables",d:"Yogurt + tuna or cottage cheese + vegetables, or lentil soup with salad",s:"Fruit + small handful of almonds, or carrots & cucumber with 2 tbsp hummus"},
@@ -211,27 +261,33 @@ function toggleLang(){lang=lang==='ar'?'en':'ar';localStorage.setItem('bh_lang',
 
 function readForm(){
  return {name:$('name').value.trim(),sex:$('sex').value,age:num('age'),height:num('height'),weight:num('weight'),
- neck:num('neck'),chest:num('chest'),waist:num('waist'),hip:num('hip'),thigh:num('thigh'),arm:num('arm'),fore:num('fore'),
- act:parseFloat($('activity').value),goal:$('goal').value};
+ neck:num('neck'),chest:num('chest'),waist:num('waist'),hip:num('hip'),thigh:num('thigh'),arm:num('arm'),
+ act:parseFloat($('activity').value),goal:$('goal').value,tw:num('tw'),cond:$('cond').value,fast:$('fast').value};
 }
 function fillForm(d){
  $('name').value=d.name||'';$('sex').value=d.sex;
- ['age','height','weight','neck','chest','waist','hip','thigh','arm','fore'].forEach(k=>$(k).value=d[k]==null?'':d[k]);
- $('activity').value=String(d.act);$('goal').value=d.goal;
+ ['age','height','weight','neck','chest','waist','hip','thigh','arm'].forEach(k=>$(k).value=d[k]==null?'':d[k]);
+ $('activity').value=String(d.act);$('goal').value=d.goal;$('tw').value=d.tw==null?'':d.tw;$('cond').value=d.cond||'none';$('fast').value=d.fast||'none';
 }
 function resetForm(){
- ['name','age','height','weight','neck','chest','waist','hip','thigh','arm','fore'].forEach(k=>$(k).value='');
+ ['name','age','height','weight','neck','chest','waist','hip','thigh','arm','tw'].forEach(k=>$(k).value='');
  $('err').style.display='none';
 }
 function showErr(k){const e=$('err');e.textContent=t(k);e.style.display='block'}
 
 function calc(d){
- const H=d.height/100,r={};
+ const H=d.height/100,r={};const cond=d.cond||'none';
  r.bmi=d.weight/(H*H);
  r.bmiCat=r.bmi<18.5?'under':r.bmi<25?'normal':r.bmi<30?'over':r.bmi<35?'ob1':'ob2';
  r.whtr=d.waist?d.waist/d.height:null;
  r.whr=(d.waist&&d.hip)?d.waist/d.hip:null;
  r.cw=(d.chest&&d.waist)?d.chest/d.waist:null;
+ r.cwCat=null;
+ if(r.cw!==null&&d.sex==='m')r.cwCat=r.cw>=1.3?'good':r.cw>=1.15?'mid':'low';
+ r.wc=null;
+ if(d.waist){r.wc=d.sex==='m'?(d.waist<94?'good':d.waist<102?'warn':'bad'):(d.waist<80?'good':d.waist<88?'warn':'bad')}
+ r.armSt=null;if(d.arm){r.armSt=d.arm<(d.sex==='m'?23:22)?'warn':'good'}
+ r.thighSt=null;if(d.thigh){r.thighSt=d.thigh<60?'warn':'good'}
  r.bf=null;
  try{
   if(d.neck&&d.waist){
@@ -247,7 +303,10 @@ function calc(d){
  r.bmr=10*d.weight+6.25*d.height-5*d.age+(d.sex==='m'?5:-161);
  r.tdee=r.bmr*d.act;
  r.idealMin=18.5*H*H;r.idealMax=24.9*H*H;
- r.water=d.weight*0.033;
+ r.water=d.weight*0.033+(d.act>=1.725?0.5:d.act>=1.55?0.35:d.act>=1.375?0.15:0);
+ r.cups=Math.max(4,Math.round(r.water/0.25));
+ r.tw=null;r.twLow=false;
+ if(d.tw&&d.tw>=30&&d.tw<=300){const df=d.tw-d.weight,ab=Math.abs(df);let a=null,b=null;if(ab>=0.5){const lo=0.25,hi=df<0?0.75:0.5;a=Math.max(1,Math.round(ab/hi));b=Math.max(a,Math.round(ab/lo))}r.tw={df:df,a:a,b:b};r.twLow=d.tw/(H*H)<18.5}
  // statuses
  r.bmiSt=r.bmiCat==='normal'?'good':(r.bmiCat==='ob1'||r.bmiCat==='ob2')?'bad':'warn';
  if(r.whtr!==null){r.whtrCat=r.whtr<0.5?'good':r.whtr<0.6?'warn':'bad'}
@@ -264,11 +323,15 @@ function calc(d){
  if(r.whrCat)sc.push({good:100,warn:65,bad:35}[r.whrCat]);
  if(r.bfSt)sc.push({good:100,warn:65,bad:30}[r.bfSt]);
  r.score=Math.round(sc.reduce((a,b)=>a+b,0)/sc.length);
- r.doctor=(r.bmi>=35||r.bmi<17||d.age>=60||r.bfCat==='veryhigh'||r.whtr>=0.6);
+ r.doctor=(r.bmi>=35||r.bmi<17||d.age>=60||r.bfCat==='veryhigh'||r.whtr>=0.6||cond!=='none');
+ r.skinny=(r.bf!==null&&r.bmiCat==='normal'&&(r.bfCat==='high'||r.bfCat==='veryhigh'));
+ r.lowMuscle=(r.armSt==='warn'||r.thighSt==='warn');
  // plan
  let goal=d.goal;r.goalNote=false;r.healthNote=false;
  if(r.bmi<18.5&&goal==='lose'){goal='gain';r.goalNote=true}
+ if(cond==='preg'&&(goal==='lose'||goal==='health')){goal='maintain'}
  r.goal=goal;
+ {let lo={lose:8000,health:7000,maintain:7000,gain:6000}[goal],hi={lose:10000,health:9000,maintain:8000,gain:8000}[goal];if(d.age>=60||r.bmi>=30){lo=5000;hi=7000}r.steps=[lo,hi]}
  let k=goal==='lose'?r.tdee-500:goal==='gain'?r.tdee+300:r.tdee;
  if(goal==='health'){r.healthNote=true;k=r.bmi<18.5?r.tdee+250:r.bmi>=25?r.tdee-300:r.tdee}
  k=Math.max(k,d.sex==='f'?1200:1500);
@@ -316,6 +379,11 @@ function render(){
  if(r.doctor)h+='<div class="warnbox">⚠️ '+t('w_doctor')+'</div>';
  if(r.goalNote)h+='<div class="warnbox">ℹ️ '+t('w_underlose')+'</div>';
  if(r.healthNote)h+='<div class="warnbox">ℹ️ '+t(r.bmiCat==='under'?'hn_under':r.bmiCat==='normal'?'hn_normal':'hn_over')+'</div>';
+ if(d.cond==='preg')h+='<div class="warnbox">🤰 '+t('w_preg')+'</div>';
+ if(d.cond==='chronic')h+='<div class="warnbox">⚕️ '+t('w_chronic')+'</div>';
+ if((d.fast||'none')!=='none'&&(d.cond||'none')!=='none')h+='<div class="warnbox">🌙 '+t('w_fastdoc')+'</div>';
+ if(r.skinny)h+='<div class="warnbox">ℹ️ '+t('w_skinny')+'</div>';
+ if(r.twLow)h+='<div class="warnbox">ℹ️ '+t('tw_low')+'</div>';
  h+='</section>';
 
  h+='<section class="card"><h2>'+t('sec_find')+'</h2><div class="metrics">';
@@ -326,28 +394,57 @@ function render(){
  h+=metric(t('m_ideal'),Math.round(r.idealMin)+' - '+Math.round(r.idealMax)+' '+t('kg'),'');
  h+=metric(t('m_bmr'),Math.round(r.bmr),t('kcal'));
  h+=metric(t('m_tdee'),Math.round(r.tdee),t('kcal'));
- h+=metric(t('m_water'),r1(r.water)+' '+t('l'),'');
- if(r.cw!==null)h+=metric(t('m_cw'),r.cw.toFixed(2),t('chestwaist_note'));
+ h+=metric(t('m_water'),r1(r.water)+' '+t('l'),'≈ '+r.cups+' '+t('cups')+' · '+((d.fast==='ramadan')?t('ram_w'):t('water_note')));
+ if(r.cw!==null)h+=metric(t('m_cw'),r.cw.toFixed(2),r.cwCat?t('cw_'+r.cwCat):t('chestwaist_note'),r.cwCat==='good'?'good':r.cwCat==='mid'?'warn':r.cwCat==='low'?'bad':'');
+ if(r.wc)h+=metric(t('m_waist'),d.waist+' '+t('pg_cm'),t('wc_'+r.wc),r.wc);
+ if(r.armSt)h+=metric(t('m_arm'),d.arm+' '+t('pg_cm'),t(r.armSt==='good'?'arm_ok':'arm_low'),r.armSt);
+ if(r.thighSt)h+=metric(t('m_thigh'),d.thigh+' '+t('pg_cm'),t(r.thighSt==='good'?'thigh_ok':'thigh_low'),r.thighSt);
+ if(r.tw){const x=r.tw;h+=metric(t('m_tw'),d.tw+' '+t('kg'),x.a===null?t('tw_near'):((x.df>0?'+':'')+r1(x.df)+' '+t('kg')+' · '+x.a+'-'+x.b+' '+t('wk')));}
+ h+=metric(t('m_steps'),r.steps[0]+' - '+r.steps[1],t('steps'));
  h+='</div>';
  if(r.bf===null)h+='<p class="hint">'+t('w_nobf')+'</p>';
- const ms=[['height',d.height],['weight',d.weight],['neck',d.neck],['chest',d.chest],['waist',d.waist],['hip',d.hip],['thigh',d.thigh],['arm',d.arm],['fore',d.fore]].filter(x=>x[1]);
+ const ms=[['height',d.height],['weight',d.weight],['neck',d.neck],['chest',d.chest],['waist',d.waist],['hip',d.hip],['thigh',d.thigh],['arm',d.arm]].filter(x=>x[1]);
  h+='<h3 style="margin:16px 0 6px;font-size:15px">'+t('m_meas')+'</h3><table><tbody>';
  ms.forEach(x=>{h+='<tr><td>'+t(x[0])+'</td><td><b>'+x[1]+'</b></td></tr>'});
  h+='</tbody></table></section>';
 
+ // progress vs previous saved record
+ {
+  const prev=getHist().find(x=>x.date<last.date);
+  if(prev){
+   const keys=[['weight','weight'],['waist','waist'],['hip','hip'],['neck','neck'],['chest','chest'],['thigh','thigh'],['arm','arm']];
+   const dl={};let rows='';
+   keys.forEach(k=>{const a=d[k[1]],b=prev.d[k[1]];if(a!=null&&b!=null){const df=r1(a-b);dl[k[0]]=df;rows+='<tr><td>'+t(k[1])+'</td><td>'+b+'</td><td>'+a+'</td><td><b>'+(df>0?'+':'')+df+'</b></td></tr>'}});
+   if(rows){
+    let msg='pg_stable';
+    const dw=dl.weight||0,dwa=dl.waist,da=dl.arm,dt=dl.thigh,dc=dl.chest;
+    if(dw<=-0.5&&dwa!==undefined&&dwa<=-1&&(da===undefined||da>=-0.5)&&(dt===undefined||dt>=-0.5))msg='pg_fat';
+    else if(dwa!==undefined&&dwa<=0.5&&((da!==undefined&&da>=0.5)||(dt!==undefined&&dt>=0.5)||(dc!==undefined&&dc>=0.5)))msg='pg_muscle';
+    else if(dwa!==undefined&&dwa>=1&&dw>=0.5)msg='pg_fatgain';
+    else if(dw<=-0.5&&((da!==undefined&&da<=-1)||(dt!==undefined&&dt<=-1)))msg='pg_lossmuscle';
+    h+='<section class="card"><h2>'+t('sec_prog')+'</h2><table><thead><tr><th></th><th>'+dateStr(prev.date)+'</th><th>'+dateStr(last.date)+'</th><th>'+t('pg_note')+'</th></tr></thead><tbody>'+rows+'</tbody></table><div class="warnbox">'+t(msg)+'</div></section>';
+   }
+  }
+ }
+
  // diet
- const meals=T[lang].meals[r.goal];
- const parts=[['mb',0.25,'b'],['ml',0.35,'l'],['md',0.25,'d'],['ms',0.15,'s']];
+ const ramd=(d.fast==='ramadan');
+ const meals=ramd?T[lang].ram:T[lang].meals[r.goal];
+ const parts=ramd?[['r_i',0.40,'i'],['r_n',0.20,'n'],['r_s',0.40,'s']]:[['mb',0.25,'b'],['ml',0.35,'l'],['md',0.25,'d'],['ms',0.15,'s']];
  h+='<section class="card"><h2>'+t('sec_diet')+'</h2>';
  h+='<p><b>'+t('target')+':</b> <span class="tag">'+r.kcal+' '+t('kcal')+'</span> <span class="tag">'+t('protein')+' '+r.protein+t('g')+'</span> <span class="tag">'+t('carbs')+' '+r.carbs+t('g')+'</span> <span class="tag">'+t('fat')+' '+r.fat+t('g')+'</span></p>';
  parts.forEach(p=>{
   h+='<div class="meal"><b>'+t(p[0])+'</b> <span class="tag">≈ '+Math.round(r.kcal*p[1]/10)*10+' '+t('kcal')+'</span><br>'+esc(meals[p[2]])+'</div>';
  });
+ if(ramd){const c=r.cups,a=Math.max(1,Math.round(c*0.25)),cc=Math.max(1,Math.round(c*0.25)),b=Math.max(1,c-a-cc);h+='<div class="warnbox">💧 '+t('ram_water').replace('{l}',r1(r.water)).replace('{t}',c).replace('{a}',a).replace('{b}',b).replace('{c}',cc)+'</div>'}
+ if(d.fast==='mt')h+='<div class="warnbox">🌙 '+t('mt_note')+'</div>';
  h+='</section>';
 
  // exercise
- const plan=T[lang].plans[r.goal];
+ const plan=ramd?T[lang].ramplan:T[lang].plans[r.goal];
  h+='<section class="card"><h2>'+t('sec_ex')+'</h2>';
+ if(ramd)h+='<div class="warnbox">'+t('ram_ex')+'</div>';
+ if(r.lowMuscle)h+='<div class="warnbox">'+t('ex_muscle')+'</div>';
  if(r.bmi>=30)h+='<div class="warnbox">'+t('ex_low')+'</div>';
  if(d.age>=60)h+='<div class="warnbox">'+t('ex_old')+'</div>';
  h+='<table><tbody>';
@@ -356,7 +453,7 @@ function render(){
 
  // tips
  h+='<section class="card"><h2>'+t('sec_tips')+'</h2><ul>';
- for(let i=1;i<=5;i++)h+='<li>'+t('tip'+i)+'</li>';
+ for(let i=1;i<=7;i++)h+='<li>'+t('tip'+i)+'</li>';
  h+='</ul><p class="disc">'+t('disc')+'</p></section>';
  $('report').innerHTML=h;
 }
@@ -374,7 +471,15 @@ function saveRec(){
 function renderHistory(){
  const a=getHist(),box=$('history');
  if(!a.length){box.innerHTML='<p class="hint">'+t('h_empty')+'</p>';return}
- let h='<table><thead><tr><th>'+t('h_date')+'</th><th>'+t('h_w')+'</th><th>BMI</th><th>'+t('h_s')+'</th><th></th></tr></thead><tbody>';
+ let h='';
+ if(a.length>=2){
+  const pts=a.slice(0,12).reverse().map(x=>x.d.weight);
+  const mn=Math.min.apply(null,pts),mx=Math.max.apply(null,pts),W=300,Hh=110,pd=14,rg=(mx-mn)||1;
+  const xy=pts.map((v,i)=>[pd+i*(W-2*pd)/(pts.length-1),Hh-pd-(v-mn)/rg*(Hh-2*pd)]);
+  h+='<h3 style="margin:0 0 6px;font-size:15px">'+t('h_chart')+'</h3><svg viewBox="0 0 '+W+' '+Hh+'" style="width:100%;max-width:420px;direction:ltr;background:#f6faf8;border-radius:12px"><polyline fill="none" stroke="#0f7b6c" stroke-width="2.5" points="'+xy.map(p=>p.join(',')).join(' ')+'"/>'
+   +xy.map((p,i)=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="#0f7b6c"/><text x="'+p[0]+'" y="'+(p[1]-7)+'" font-size="9" text-anchor="middle" fill="#1d2b27">'+pts[i]+'</text>').join('')+'</svg>';
+ }
+ h+='<table><thead><tr><th>'+t('h_date')+'</th><th>'+t('h_w')+'</th><th>BMI</th><th>'+t('h_s')+'</th><th></th></tr></thead><tbody>';
  a.forEach((x,i)=>{
   const prev=a[i+1];
   let chg='';
