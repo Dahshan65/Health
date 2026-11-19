@@ -841,8 +841,8 @@ function fmtDur(s){s=Math.round(s);const h=Math.floor(s/3600),m=Math.floor(s%360
 function fmtPace(sec,m){if(m<50)return '--';const p=sec/(m/1000);return Math.floor(p/60)+':'+pad(Math.round(p%60))}
 function kcalOf(type,m){return Math.round(userBody().w*(m/1000)*(type==='run'?1.0:0.6))}
 function stepsOf(type,m){const b=userBody();return Math.round(m/(b.h/100*(type==='run'?0.65:0.415)))}
-async function keepAwake(){try{if('wakeLock' in navigator&&!trk.lock){trk.lock=await navigator.wakeLock.request('screen');trk.lock.addEventListener('release',()=>{trk.lock=null})}}catch(e){}}
-function release(){try{if(trk.lock)trk.lock.release()}catch(e){}trk.lock=null}
+async function keepAwake(){try{if(window.AndroidApp)AndroidApp.keepScreen(true)}catch(e){}try{if('wakeLock' in navigator&&!trk.lock){trk.lock=await navigator.wakeLock.request('screen');trk.lock.addEventListener('release',()=>{trk.lock=null})}}catch(e){}}
+function release(){try{if(window.AndroidApp)AndroidApp.keepScreen(false)}catch(e){}try{if(trk.lock)trk.lock.release()}catch(e){}trk.lock=null}
 function onPos(p){
  const c=p.coords;trk.acc=Math.round(c.accuracy);trk.gerr=false;
  if(trk.st==='run'&&c.accuracy<=35){
@@ -981,6 +981,7 @@ function logTable(a,key,val,cat){
 function exportData(){
  if(!isPro()){showTab('sub');return}
  const data=JSON.stringify({app:'sehati',ver:APP_VER,exported:new Date().toISOString(),hist:getHist(),runs:getRuns(),bp:jget('bh_bp',[]),bs:jget('bh_bs',[]),water:jget('bh_water',{})});
+ if(window.AndroidApp){AndroidApp.saveFile('sehati-backup-'+dayKey()+'.json',data);return}
  const blob=new Blob([data],{type:'application/json'}),a=document.createElement('a');
  a.href=URL.createObjectURL(blob);a.download='sehati-backup-'+dayKey()+'.json';
  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
@@ -1006,6 +1007,7 @@ function importData(inp){
 function doPdf(){
  if(!isPro()){showTab('sub');return}
  const old=document.title;document.title=(last&&last.d.name?last.d.name+' - ':'')+t('rep_title');
+ if(window.AndroidApp){AndroidApp.print(document.title);setTimeout(()=>{document.title=old},500);return}
  window.print();setTimeout(()=>{document.title=old},500);
 }
 function shareRep(){
@@ -1015,7 +1017,8 @@ function shareRep(){
  if(r.bf!==null)s+=t('m_bf')+': '+r1(r.bf)+'%\n';
  if(r.whtr!==null)s+=t('m_whtr')+': '+r.whtr.toFixed(2)+'\n';
  s+=t('target')+': '+r.kcal+' '+t('kcal')+' · '+t('protein')+' '+r.protein+t('g')+'\n'+t('m_water')+': '+r1(r.water)+' '+t('l')+'\n\n'+t('sh_from');
- if(navigator.share)navigator.share({title:t('sh_head'),text:s}).catch(()=>{});
+ if(window.AndroidApp)AndroidApp.share(s);
+ else if(navigator.share)navigator.share({title:t('sh_head'),text:s}).catch(()=>{});
  else if(navigator.clipboard)navigator.clipboard.writeText(s).then(()=>toast(t('copied')),()=>{});
 }
 
