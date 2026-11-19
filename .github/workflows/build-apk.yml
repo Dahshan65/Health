@@ -32,14 +32,27 @@ jobs:
           echo "Android SDK: $ANDROID_HOME" && ls "$ANDROID_HOME/platforms"
 
           cat > apk/settings.gradle <<'EOF'
-          pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
-          dependencyResolutionManagement { repositories { google(); mavenCentral() } }
           rootProject.name = "Sehati"
           include ':app'
           EOF
 
           cat > apk/build.gradle <<'EOF'
-          plugins { id 'com.android.application' version '8.5.2' apply false }
+          buildscript {
+              repositories {
+                  google()
+                  mavenCentral()
+                  maven { url 'https://repo1.maven.org/maven2' }
+              }
+              dependencies {
+                  classpath 'com.android.tools.build:gradle:8.5.2'
+              }
+          }
+          allprojects {
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
           EOF
 
           cat > apk/gradle.properties <<'EOF'
@@ -48,7 +61,7 @@ jobs:
           EOF
 
           cat > apk/app/build.gradle <<'EOF'
-          plugins { id 'com.android.application' }
+          apply plugin: 'com.android.application'
           android {
               namespace 'com.dahshansoft.sehati'
               compileSdk 34
@@ -265,7 +278,11 @@ jobs:
       - name: Build APK
         run: |
           cd apk
-          gradle assembleDebug --no-daemon --stacktrace
+          for i in 1 2 3; do
+            gradle assembleDebug --no-daemon --stacktrace --refresh-dependencies && break
+            echo "Build attempt $i failed, retrying..."; sleep 20
+          done
+          test -f app/build/outputs/apk/debug/app-debug.apk
           cp app/build/outputs/apk/debug/app-debug.apk ../Sehati.apk
 
       - uses: actions/upload-artifact@v4
