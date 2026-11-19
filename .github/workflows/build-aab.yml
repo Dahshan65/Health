@@ -40,6 +40,8 @@ jobs:
           echo "----- Checking the alias -----"
           keytool -list -v -keystore twa/app/upload.keystore -storepass "$KEYSTORE_PASSWORD" -alias "$KEY_ALIAS" > /tmp/k.txt 2>&1 || { cat /tmp/k.txt; exit 1; }
           grep -E "Alias name|SHA256" /tmp/k.txt
+          echo "----- Checking the key password -----"
+          keytool -certreq -alias "$KEY_ALIAS" -keystore twa/app/upload.keystore -storepass "$KEYSTORE_PASSWORD" -keypass "$KEYSTORE_PASSWORD" > /dev/null && echo "Key password OK"
 
       - name: Create Android TWA project
         run: |
@@ -93,7 +95,7 @@ jobs:
                       storeFile file('upload.keystore')
                       storePassword System.getenv('KEYSTORE_PASSWORD')
                       keyAlias System.getenv('KEY_ALIAS')
-                      keyPassword System.getenv('KEY_PASSWORD')
+                      keyPassword System.getenv('KEYSTORE_PASSWORD')
                   }
               }
               buildTypes {
