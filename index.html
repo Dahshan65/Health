@@ -2,41 +2,54 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>صحتي | My Health</title>
+<meta name="description" content="صحتي: حاسبة صحة الجسم بتقرير شامل ونظام غذائي ورياضي ومتتبع مشي وجري ويوميات صحية - Dahshan Soft">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f7b6c">
+<meta name="theme-color" content="#0a74c4">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
-:root{--bg:#f2f6f4;--card:#fff;--ink:#1d2b27;--mute:#64756f;--main:#0f7b6c;--main2:#0a5c51;--good:#1e9e57;--warn:#e29a12;--bad:#d64545;--line:#dde7e3}
-*{box-sizing:border-box}
+:root{--bg:#eef4f9;--card:#fff;--ink:#132a3e;--mute:#5e7387;--main:#0a74c4;--main2:#06548f;--acc:#12a89d;--soft:#e5f1fb;--good:#1e9e57;--warn:#e29a12;--bad:#d64545;--line:#d8e4ee;--field:#f7fbfe;--wbg:#fff7e6;--wbd:#f3d79a;--ibg:#e8f4fd;--ibd:#b5d8f3;--ebg:#fdecec;--chart:#f4f9fd}
+[data-theme=dark]{--bg:#0c1622;--card:#14212f;--ink:#e3edf6;--mute:#8fa4b8;--main:#3a9be0;--main2:#9ccff5;--acc:#2cc2b5;--soft:#1b2f44;--line:#26384b;--field:#101b27;--wbg:#2c2614;--wbd:#5c4c1d;--ibg:#13263a;--ibd:#24496b;--ebg:#3a1c1c;--chart:#101b27}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Tajawal,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.7}
-header{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;padding:18px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-header h1{margin:0;font-size:22px}
-header p{margin:2px 0 0;font-size:13px;opacity:.9}
-.langbtn{background:#fff;color:var(--main2);border:0;border-radius:20px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:14px}
-main{max-width:900px;margin:0 auto;padding:14px}
-.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.card h2{margin:0 0 12px;font-size:18px;color:var(--main2)}
+header{background:linear-gradient(135deg,#0a74c4 0%,#0b8fd1 60%,#12a89d 100%);color:#fff;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;inset:auto 0 0 0;height:46px;opacity:.22;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='46'%3E%3Cpolyline fill='none' stroke='white' stroke-width='2' points='0,30 60,30 72,30 80,12 88,42 96,4 104,36 112,30 170,30 178,24 186,30 240,30'/%3E%3C/svg%3E") repeat-x;pointer-events:none}
+.brand{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.logo{width:44px;height:44px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+header h1{margin:0;font-size:21px}
+header p{margin:0;font-size:12px;opacity:.92}
+.hbtns{display:flex;gap:6px;flex-shrink:0;position:relative;z-index:1}
+.hbtn{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.45);border-radius:20px;padding:7px 12px;font-weight:700;cursor:pointer;font-size:13px;font-family:inherit}
+main{max-width:900px;margin:0 auto;padding:14px 14px calc(90px + env(safe-area-inset-bottom))}
+.tab{display:none}.tab.on{display:block}
+.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 12px rgba(10,60,110,.06);border:1px solid var(--line)}
+.card h2{margin:0 0 12px;font-size:17px;color:var(--main2);display:flex;align-items:center;gap:8px}
+.card h2::before{content:"";width:4px;height:18px;border-radius:3px;background:linear-gradient(var(--main),var(--acc))}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
 label{display:block;font-size:13px;color:var(--mute);margin-bottom:3px}
-input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:#fafcfb;font-family:inherit;color:var(--ink)}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:var(--field);font-family:inherit;color:var(--ink)}
 input:focus,select:focus{outline:2px solid var(--main);border-color:var(--main)}
+input.bad{border-color:var(--bad);outline-color:var(--bad)}
 .hint{font-size:12px;color:var(--mute);margin:8px 0 0}
 .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-button.b{background:var(--main);color:#fff;border:0;border-radius:12px;padding:12px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
-button.b.sec{background:#e6f1ee;color:var(--main2)}
-button.b.red{background:#fbe9e9;color:var(--bad)}
-.err{background:#fdecec;color:var(--bad);padding:10px;border-radius:10px;margin-top:10px;display:none;font-size:14px}
+button.b{background:linear-gradient(135deg,var(--main),#0b8fd1);color:#fff;border:0;border-radius:12px;padding:12px 18px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 12px rgba(10,116,196,.25)}
+button.b:active{transform:scale(.98)}
+button.b.sec{background:var(--soft);color:var(--main2);box-shadow:none;border:1px solid var(--ibd)}
+button.b.red{background:var(--ebg);color:var(--bad);box-shadow:none}
+button.b.grn{background:linear-gradient(135deg,#12a89d,#1e9e57);box-shadow:0 4px 12px rgba(18,168,157,.25)}
+button.b.big{font-size:18px;padding:14px 26px;flex:1}
+button.b:disabled{opacity:.5}
+.err{background:var(--ebg);color:var(--bad);padding:10px;border-radius:10px;margin-top:10px;display:none;font-size:14px}
 .score{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .ring{width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
-.ring::before{content:"";position:absolute;inset:11px;background:#fff;border-radius:50%}
+.ring::before{content:"";position:absolute;inset:11px;background:var(--card);border-radius:50%}
 .ring span{position:relative;font-size:30px;font-weight:800}
 .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
 @media(min-width:640px){.metrics{grid-template-columns:repeat(3,1fr)}}
-.m{border:1px solid var(--line);border-radius:12px;padding:10px;border-inline-start:5px solid var(--line)}
+.m{border:1px solid var(--line);border-radius:12px;padding:10px;border-inline-start:5px solid var(--line);background:var(--card)}
 .m.good{border-inline-start-color:var(--good)}.m.warn{border-inline-start-color:var(--warn)}.m.bad{border-inline-start-color:var(--bad)}
 .m .l{font-size:12px;color:var(--mute)}.m .v{font-size:20px;font-weight:800}.m .n{font-size:12px;color:var(--mute)}
 table{width:100%;border-collapse:collapse;font-size:14px}
@@ -44,18 +57,68 @@ th,td{padding:8px;border-bottom:1px solid var(--line);text-align:start}
 th{color:var(--mute);font-weight:600;font-size:12px}
 .meal{padding:8px 0;border-bottom:1px dashed var(--line)}
 .meal:last-child{border:0}
-.tag{display:inline-block;background:#e6f1ee;color:var(--main2);border-radius:8px;padding:1px 8px;font-size:12px;font-weight:700}
+.tag{display:inline-block;background:var(--soft);color:var(--main2);border-radius:8px;padding:1px 8px;font-size:12px;font-weight:700}
+.tag.good{background:#e3f6ec;color:#16784a}.tag.warn{background:#fdf1dc;color:#9a6408}.tag.bad{background:#fbe3e3;color:#b23030}
+[data-theme=dark] .tag.good{background:#173726;color:#7fdba7}[data-theme=dark] .tag.warn{background:#3a2e12;color:#f1c56b}[data-theme=dark] .tag.bad{background:#3d1b1b;color:#f19a9a}
 ul{margin:6px 0;padding-inline-start:20px}
-.warnbox{background:#fff6e0;border:1px solid #f1d58a;border-radius:12px;padding:10px;margin:10px 0;font-size:14px}
+.warnbox{background:var(--wbg);border:1px solid var(--wbd);border-radius:12px;padding:10px;margin:10px 0;font-size:14px}
+.infobox{background:var(--ibg);border:1px solid var(--ibd);border-radius:12px;padding:10px;margin:10px 0;font-size:14px}
 .disc{font-size:12px;color:var(--mute);margin-top:14px}
 .rhead{display:none}
-.small{padding:5px 10px;font-size:12px;border-radius:8px}
-.credit{text-align:center;padding:18px 12px 26px;color:var(--main2);font-size:14px;font-weight:700}
+.small{padding:6px 10px!important;font-size:12px!important;border-radius:8px!important}
+details{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-top:12px}
+details summary{cursor:pointer;font-weight:700;color:var(--main2);font-size:14px}
+details p,details li{font-size:13px}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:3px}
+.bar i{display:block;height:100%;border-radius:6px}
+.brow{display:flex;justify-content:space-between;font-size:13px;margin-top:8px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.tools select{width:auto;padding:6px 10px;font-size:13px}
+.banner{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:linear-gradient(135deg,#e8f4fd,#e3f7f4);border:1px solid var(--ibd);border-radius:14px;padding:10px 14px;margin-bottom:14px;font-size:14px;font-weight:700;color:#06548f}
+[data-theme=dark] .banner{background:var(--ibg);color:var(--main2)}
+.banner.exp{background:var(--wbg);border-color:var(--wbd);color:#8a5a06}
+.lock{text-align:center;padding:22px 16px}
+.lock .ic{font-size:34px}
+.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.big3 div{background:var(--soft);border-radius:12px;padding:10px 4px}
+.big3 b{display:block;font-size:22px;color:var(--main2)}
+.big3 small{color:var(--mute);font-size:12px}
+.hero{text-align:center;padding:6px 0 10px}
+.hero .km{font-size:56px;font-weight:800;color:var(--main2);line-height:1.1}
+.hero .lbl{color:var(--mute);font-size:13px}
+.gps{font-size:12px;color:var(--mute);text-align:center;margin-top:8px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--mute);margin-inline-end:5px;vertical-align:middle}
+.dot.on{background:var(--good);box-shadow:0 0 0 4px rgba(30,158,87,.18)}
+.water{display:flex;align-items:center;justify-content:center;gap:16px;margin:8px 0}
+.water .cnt{font-size:40px;font-weight:800;color:var(--main2);min-width:110px;text-align:center}
+.water button.b{width:54px;height:54px;padding:0;font-size:26px;border-radius:50%}
+.wk{display:flex;gap:6px;align-items:flex-end;height:80px;margin-top:10px;direction:ltr}
+.wk div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:10px;color:var(--mute)}
+.wk i{display:block;width:100%;max-width:26px;border-radius:6px 6px 2px 2px;background:linear-gradient(var(--acc),var(--main));min-height:3px}
+.plan{border:2px solid var(--line);border-radius:14px;padding:14px;text-align:center;flex:1;min-width:140px}
+.plan b{display:block;font-size:22px;color:var(--main2)}
+.plan.best{border-color:var(--acc);position:relative}
+.devid{font-family:monospace;font-size:20px;font-weight:800;letter-spacing:2px;background:var(--soft);border-radius:10px;padding:8px 14px;display:inline-block;direction:ltr}
+.about{text-align:center}
+.about a{color:var(--main2);font-weight:700;text-decoration:none}
+.wa{display:inline-block;background:#25d366;color:#fff!important;border-radius:20px;padding:8px 18px;margin:6px 4px}
+.ig{display:inline-block;background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);color:#fff!important;border-radius:20px;padding:8px 18px;margin:6px 4px}
+.credit{text-align:center;padding:4px 12px 10px;color:var(--main2);font-size:14px;font-weight:700}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:40;box-shadow:0 -2px 12px rgba(10,60,110,.08)}
+nav button{flex:1;background:none;border:0;color:var(--mute);font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;padding:4px 2px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:1px}
+nav button span{font-size:20px;line-height:1.2}
+nav button.on{color:var(--main);background:var(--soft)}
+.modal{position:fixed;inset:0;background:rgba(5,20,35,.6);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal.on{display:flex}
+.modal .box{background:var(--card);color:var(--ink);border-radius:16px;padding:18px;max-width:460px;width:100%;max-height:85vh;overflow:auto}
+.modal h3{margin:0 0 8px;color:var(--main2)}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#132a3e;color:#fff;padding:10px 18px;border-radius:24px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:60;max-width:90%;text-align:center}
+.toast.on{opacity:1}
 @media print{
- body{background:#fff}
- header,#formCard,#historyCard,.btns,.noprint{display:none!important}
+ body{background:#fff;color:#000}
+ header,nav,#formCard,.tab:not(#tab-home),.banner,.btns,.noprint,.credit,.toast,.modal{display:none!important}
  .rhead{display:block;text-align:center;margin-bottom:10px}
- .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+ .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;background:#fff}
  main{padding:0}
  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
@@ -63,78 +126,160 @@ ul{margin:6px 0;padding-inline-start:20px}
 </head>
 <body>
 <header>
- <div><h1 data-i18n="title">صحتي</h1><p data-i18n="sub">احسب صحتك واحصل على تقرير ونظام غذائي ورياضي</p></div>
- <button class="langbtn" id="langBtn" onclick="toggleLang()">English</button>
+ <div class="brand">
+  <div class="logo"><svg width="30" height="30" viewBox="0 0 30 30"><rect x="11" y="3" width="8" height="24" rx="2" fill="#0a74c4"/><rect x="3" y="11" width="24" height="8" rx="2" fill="#0a74c4"/><polyline points="5,15 10,15 12,11 15,19 17,13 19,15 25,15" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+  <div><h1 data-i18n="title">صحتي</h1><p data-i18n="sub">فحص الجسم · التغذية · الرياضة · المتابعة</p></div>
+ </div>
+ <div class="hbtns">
+  <button class="hbtn" id="themeBtn" onclick="toggleTheme()" aria-label="theme">🌙</button>
+  <button class="hbtn" id="langBtn" onclick="toggleLang()">English</button>
+ </div>
 </header>
+
 <main>
+<div id="banner"></div>
+
+<!-- ============ HOME ============ -->
+<div class="tab on" id="tab-home">
  <section class="card" id="formCard">
   <h2 data-i18n="f_title">بياناتك</h2>
   <div class="grid">
-   <div><label data-i18n="name">الاسم (اختياري)</label><input id="name" type="text"></div>
-   <div><label data-i18n="sex">الجنس</label><select id="sex"><option value="m" data-i18n="male">ذكر</option><option value="f" data-i18n="female">أنثى</option></select></div>
-   <div><label data-i18n="age">العمر (سنة)</label><input id="age" type="number" inputmode="decimal" min="18" max="100"></div>
-   <div><label data-i18n="height">الطول (سم)</label><input id="height" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="weight">الوزن (كغ)</label><input id="weight" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="neck">محيط الرقبة (سم)</label><input id="neck" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="chest">محيط الصدر (سم)</label><input id="chest" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="waist">محيط الخصر عند السرّة (سم)</label><input id="waist" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="hip">محيط الورك (سم)</label><input id="hip" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="thigh">محيط الفخذ (سم)</label><input id="thigh" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="arm">محيط الذراع - العضد (سم)</label><input id="arm" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="activity">مستوى النشاط</label>
+   <div><label for="name" data-i18n="name"></label><input id="name" type="text" maxlength="40" list="names"><datalist id="names"></datalist></div>
+   <div><label for="sex" data-i18n="sex"></label><select id="sex" onchange="sexChanged()"><option value="m" data-i18n="male"></option><option value="f" data-i18n="female"></option></select></div>
+   <div><label for="age" data-i18n="age"></label><input id="age" type="number" inputmode="decimal" min="18" max="100"></div>
+   <div><label for="height" data-i18n="height"></label><input id="height" type="number" inputmode="decimal"></div>
+   <div><label for="weight" data-i18n="weight"></label><input id="weight" type="number" inputmode="decimal"></div>
+   <div><label for="neck" data-i18n="neck"></label><input id="neck" type="number" inputmode="decimal"></div>
+   <div><label for="chest" data-i18n="chest"></label><input id="chest" type="number" inputmode="decimal"></div>
+   <div><label for="waist" data-i18n="waist"></label><input id="waist" type="number" inputmode="decimal"></div>
+   <div><label for="hip" data-i18n="hip"></label><input id="hip" type="number" inputmode="decimal"></div>
+   <div><label for="thigh" data-i18n="thigh"></label><input id="thigh" type="number" inputmode="decimal"></div>
+   <div><label for="arm" data-i18n="arm"></label><input id="arm" type="number" inputmode="decimal"></div>
+   <div><label for="activity" data-i18n="activity"></label>
     <select id="activity">
-     <option value="1.2" data-i18n="act1">قليل الحركة</option>
-     <option value="1.375" data-i18n="act2" selected>نشاط خفيف (1-3 أيام/أسبوع)</option>
-     <option value="1.55" data-i18n="act3">نشاط متوسط (3-5 أيام)</option>
-     <option value="1.725" data-i18n="act4">نشاط عالٍ (6-7 أيام)</option>
+     <option value="1.2" data-i18n="act1"></option>
+     <option value="1.375" data-i18n="act2" selected></option>
+     <option value="1.55" data-i18n="act3"></option>
+     <option value="1.725" data-i18n="act4"></option>
+     <option value="1.9" data-i18n="act5"></option>
     </select></div>
-   <div><label data-i18n="tw">الوزن المستهدف (كغ) - اختياري</label><input id="tw" type="number" inputmode="decimal"></div>
-   <div><label data-i18n="cond">حالتك الصحية</label>
-    <select id="cond"><option value="none" data-i18n="c_none" selected>لا شيء مما يلي</option><option value="preg" data-i18n="c_preg">حمل أو رضاعة</option><option value="chronic" data-i18n="c_chronic">مرض مزمن (سكري، ضغط، قلب، كلى)</option></select></div>
-   <div><label data-i18n="fast">نمط الصيام</label>
-    <select id="fast"><option value="none" data-i18n="f_none" selected>عادي (بدون صيام)</option><option value="ramadan" data-i18n="f_ram">شهر رمضان</option><option value="mt" data-i18n="f_mt">صيام الإثنين والخميس</option></select></div>
-   <div><label data-i18n="goal">هدفك</label>
+   <div><label for="tw" data-i18n="tw"></label><input id="tw" type="number" inputmode="decimal"></div>
+   <div><label for="cond" data-i18n="cond"></label>
+    <select id="cond"><option value="none" data-i18n="c_none" selected></option><option value="preg" data-i18n="c_preg"></option><option value="chronic" data-i18n="c_chronic"></option></select></div>
+   <div><label for="fast" data-i18n="fast"></label>
+    <select id="fast"><option value="none" data-i18n="f_none" selected></option><option value="ramadan" data-i18n="f_ram"></option><option value="mt" data-i18n="f_mt"></option></select></div>
+   <div><label for="goal" data-i18n="goal"></label>
     <select id="goal">
-     <option value="health" data-i18n="g_health" selected>صحة سليمة للجسم (متوازن)</option>
-     <option value="lose" data-i18n="g_lose">إنقاص الوزن</option>
-     <option value="maintain" data-i18n="g_maintain">تثبيت الوزن</option>
-     <option value="gain" data-i18n="g_gain">زيادة الوزن / بناء العضل</option>
+     <option value="health" data-i18n="g_health" selected></option>
+     <option value="lose" data-i18n="g_lose"></option>
+     <option value="maintain" data-i18n="g_maintain"></option>
+     <option value="gain" data-i18n="g_gain"></option>
     </select></div>
   </div>
-  <p class="hint" data-i18n="hint">الحقول الأساسية: الجنس والعمر والطول والوزن. باقي المقاسات اختيارية لكنها ترفع دقة التقرير (الخصر والرقبة لتقدير نسبة الدهون، والورك للنساء).</p>
-  <div class="err" id="err"></div>
+  <p class="hint" data-i18n="hint"></p>
+  <details>
+   <summary data-i18n="guide_title"></summary>
+   <ul>
+    <li data-i18n="gd_neck"></li><li data-i18n="gd_chest"></li><li data-i18n="gd_waist"></li>
+    <li data-i18n="gd_hip"></li><li data-i18n="gd_thigh"></li><li data-i18n="gd_arm"></li><li data-i18n="gd_tip"></li>
+   </ul>
+  </details>
+  <div class="err" id="err" role="alert"></div>
   <div class="btns">
-   <button class="b" onclick="run()" data-i18n="calc">احسب وأعطني التقرير</button>
-   <button class="b sec" onclick="resetForm()" data-i18n="reset">مسح الحقول</button>
+   <button class="b" onclick="run()" data-i18n="calc"></button>
+   <button class="b sec" onclick="resetForm()" data-i18n="reset"></button>
   </div>
  </section>
 
  <div id="reportWrap" style="display:none">
-  <div class="rhead"><h1 data-i18n="title">صحتي</h1></div>
+  <div class="rhead"><h1 data-i18n="title"></h1></div>
   <div id="report"></div>
   <div class="btns noprint">
-   <button class="b" onclick="saveRec()" data-i18n="save">حفظ في السجل</button>
-   <button class="b sec" onclick="doPdf()" data-i18n="pdf">تصدير PDF</button>
+   <button class="b" onclick="saveRec()" data-i18n="save"></button>
+   <button class="b sec" onclick="doPdf()" data-i18n="pdf"></button>
+   <button class="b sec" onclick="shareRep()" data-i18n="share"></button>
   </div>
-  <p class="hint noprint" data-i18n="pdfhint">عند ظهور نافذة الطباعة اختر «حفظ بصيغة PDF» (Save as PDF).</p>
+  <p class="hint noprint" data-i18n="pdfhint"></p>
  </div>
+</div>
 
- <section class="card" id="historyCard" style="margin-top:14px">
-  <h2 data-i18n="h_title">سجل القياسات</h2>
+<!-- ============ TRACKER ============ -->
+<div class="tab" id="tab-track"><div id="trackBox"></div></div>
+
+<!-- ============ DAILY ============ -->
+<div class="tab" id="tab-daily"><div id="dailyBox"></div></div>
+
+<!-- ============ HISTORY ============ -->
+<div class="tab" id="tab-hist">
+ <section class="card">
+  <h2 data-i18n="h_title"></h2>
   <div id="history"></div>
  </section>
+ <section class="card">
+  <h2 data-i18n="bk_title"></h2>
+  <p class="hint" style="margin-top:0" data-i18n="bk_note"></p>
+  <div class="btns">
+   <button class="b sec small" onclick="exportData()" data-i18n="backup"></button>
+   <button class="b sec small" onclick="$('impFile').click()" data-i18n="restore"></button>
+   <input type="file" id="impFile" accept=".json,application/json" style="display:none" onchange="importData(this)">
+  </div>
+ </section>
+</div>
+
+<!-- ============ SUBSCRIPTION / ABOUT ============ -->
+<div class="tab" id="tab-sub">
+ <div id="subBox"></div>
+ <section class="card about">
+  <h2 data-i18n="about"></h2>
+  <p style="margin:0 0 6px"><b data-i18n="title"></b> — <span data-i18n="ver"></span></p>
+  <p class="hint" style="margin:0 0 8px" data-i18n="priv_note"></p>
+  <a class="wa" href="https://wa.me/962779221235" target="_blank" rel="noopener" data-i18n="contact"></a>
+  <a class="ig" href="https://www.instagram.com/dahshansoft?hvrq=MTB6YTF4OW5ucmxpZw==" target="_blank" rel="noopener" data-i18n="follow"></a>
+  <p class="hint"><a href="https://dahshan65.github.io/Health/privacy.html" target="_blank" rel="noopener" data-i18n="privacy_link"></a> · <a href="#" onclick="showDisc(true);return false" data-i18n="d_title"></a></p>
+ </section>
+ <footer class="credit" data-i18n="credit"></footer>
+</div>
 </main>
-<footer class="credit" data-i18n="credit">إعداد وبرمجة: وائل دهشان</footer>
+
+<nav>
+ <button data-tab="home" onclick="showTab('home')"><span>🩺</span><b data-i18n="n_home"></b></button>
+ <button data-tab="track" onclick="showTab('track')"><span>🏃</span><b data-i18n="n_track"></b></button>
+ <button data-tab="daily" onclick="showTab('daily')"><span>❤️</span><b data-i18n="n_daily"></b></button>
+ <button data-tab="hist" onclick="showTab('hist')"><span>📋</span><b data-i18n="n_hist"></b></button>
+ <button data-tab="sub" onclick="showTab('sub')"><span>⭐</span><b data-i18n="n_sub"></b></button>
+</nav>
+
+<div class="modal" id="discModal"><div class="box">
+ <h3 data-i18n="d_title"></h3>
+ <p data-i18n="d_body" style="font-size:14px"></p>
+ <div class="btns"><button class="b" onclick="acceptDisc()" data-i18n="d_ok"></button></div>
+</div></div>
+<div class="modal" id="cfmModal"><div class="box">
+ <p id="cfmText" style="font-size:15px;margin-top:0"></p>
+ <div class="btns"><button class="b red" id="cfmYes" data-i18n="yes"></button><button class="b sec" onclick="closeCfm()" data-i18n="cancel"></button></div>
+</div></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
+/* ================= CONFIG (عدّل هنا) ================= */
+const APP_VER='3.0';
+const TRIAL_DAYS=14;                         // مدة التجربة المجانية
+const PRICE_M='1.5 JOD', PRICE_Y='10 JOD';   // الأسعار المعروضة في نسخة الويب/الآيفون
+const WA_NUM='962779221235';                 // رقم واتساب لطلب التفعيل
+const SECRET='DAHSHAN-SEHATI-CHANGE-ME';     // غيّرها لكلمة سرية خاصة بك (نفسها في keygen.html)
+const SKU_M='sehati_monthly', SKU_Y='sehati_yearly'; // معرّفات الاشتراك في Google Play
+const TWA_ID='com.dahshan.health';
+
 const T={
-ar:{credit:"إعداد وبرمجة: وائل دهشان",title:"صحتي",sub:"احسب صحتك واحصل على تقرير ونظام غذائي ورياضي",f_title:"بياناتك",name:"الاسم (اختياري)",sex:"الجنس",male:"ذكر",female:"أنثى",age:"العمر (سنة)",height:"الطول (سم)",weight:"الوزن (كغ)",neck:"محيط الرقبة (سم)",chest:"محيط الصدر (سم)",waist:"محيط الخصر عند السرّة (سم)",hip:"محيط الورك (سم)",thigh:"محيط الفخذ (سم)",arm:"محيط الذراع - العضد (سم)",activity:"مستوى النشاط",act1:"قليل الحركة",act2:"نشاط خفيف (1-3 أيام/أسبوع)",act3:"نشاط متوسط (3-5 أيام)",act4:"نشاط عالٍ (6-7 أيام)",goal:"هدفك",tw:"الوزن المستهدف (كغ) - اختياري",cond:"حالتك الصحية",c_none:"لا شيء مما يلي",c_preg:"حمل أو رضاعة",c_chronic:"مرض مزمن (سكري، ضغط، قلب، كلى)",fast:"نمط الصيام",f_none:"عادي (بدون صيام)",f_ram:"شهر رمضان",f_mt:"صيام الإثنين والخميس",
+ar:{credit:"تطوير: Dahshan Soft",title:"صحتي",sub:"فحص الجسم · التغذية · الرياضة · المتابعة",f_title:"بياناتك",name:"الاسم (اختياري)",sex:"الجنس",male:"ذكر",female:"أنثى",age:"العمر (سنة)",height:"الطول (سم)",weight:"الوزن (كغ)",neck:"محيط الرقبة (سم)",chest:"محيط الصدر (سم)",waist:"محيط الخصر عند السرّة (سم)",hip:"محيط الورك (سم)",thigh:"محيط الفخذ (سم)",arm:"محيط الذراع - العضد (سم)",activity:"مستوى النشاط",act1:"قليل الحركة",act2:"نشاط خفيف (1-3 أيام/أسبوع)",act3:"نشاط متوسط (3-5 أيام)",act4:"نشاط عالٍ (6-7 أيام)",act5:"نشاط عالٍ جدًا (عمل بدني أو تمرين مرتين يوميًا)",goal:"هدفك",tw:"الوزن المستهدف (كغ) - اختياري",cond:"حالتك الصحية",c_none:"لا شيء مما يلي",c_preg:"حمل أو رضاعة",c_chronic:"مرض مزمن (سكري، ضغط، قلب، كلى)",fast:"نمط الصيام",f_none:"عادي (بدون صيام)",f_ram:"شهر رمضان",f_mt:"صيام الإثنين والخميس",
+n_home:"الفحص",n_track:"المشي والجري",n_daily:"يومياتي",n_hist:"السجل",n_sub:"الاشتراك",
+guide_title:"📏 كيف أقيس محيطات جسمي بدقة؟",gd_neck:"الرقبة: تحت تفاحة آدم مباشرة، والشريط مائل قليلًا للأسفل نحو الأمام.",gd_chest:"الصدر: عند مستوى الحلمتين، بعد زفير عادي والذراعان مرتخيتان.",gd_waist:"الخصر: أفقيًا عند مستوى السرّة، بعد زفير عادي ودون شدّ البطن.",gd_hip:"الورك: عند أعرض نقطة في الأرداف والقدمان متلاصقتان.",gd_thigh:"الفخذ: عند منتصف المسافة بين الورك والركبة والعضلة مرتخية.",gd_arm:"العضد: عند منتصف المسافة بين الكتف والكوع والذراع مرتخية.",gd_tip:"قِس صباحًا قبل الأكل، بشريط قماشي مرن غير مشدود، وكرر كل قياس مرتين وخذ المتوسط.",
 m_waist:"محيط الخصر",wc_good:"ضمن الحد الصحي",wc_warn:"قريب من حد الخطر",wc_bad:"مرتفع (خطر على القلب والسكري)",
 m_tw:"الوزن المستهدف",tw_near:"أنت قريب من هدفك",wk:"أسابيع تقريبًا",m_steps:"المشي اليومي المقترح",steps:"خطوة",
-m_cw2:"تناسق الصدر والخصر",cw_good:"تناسق ممتاز",cw_mid:"تناسق جيد",cw_low:"الخصر كبير نسبة للصدر",cw_track:"للمتابعة مع الوقت",
+cw_good:"تناسق ممتاز",cw_mid:"تناسق جيد",cw_low:"الخصر كبير نسبة للصدر",
 m_arm:"محيط العضد",arm_ok:"طبيعي",arm_low:"منخفض: قد يدل على قلة العضل أو نقص التغذية",
 m_thigh:"محيط الفخذ",thigh_ok:"طبيعي",thigh_low:"منخفض: ضعف عضلات الفخذ يرتبط بضعف الصحة مع العمر",
-w_preg:"الحمل والرضاعة لهما احتياجات غذائية خاصة؛ هذه الخطة عامة ولا تتضمن إنقاص وزن. اتبعي تعليمات طبيبك أو أخصائي التغذية.",
+w_preg:"الحمل والرضاعة لهما احتياجات غذائية خاصة، ومؤشرات الوزن والدهون لا تكون دقيقة أثناء الحمل؛ هذه الخطة عامة ولا تتضمن إنقاص وزن. اتبعي تعليمات طبيبك أو أخصائي التغذية.",
 w_chronic:"مع المرض المزمن (كالسكري أو الضغط أو القلب أو الكلى) قد تحتاج لخطة غذائية خاصة؛ استشر طبيبك أو أخصائي التغذية قبل الالتزام بهذه الخطة.",
 w_fastdoc:"الصيام مع الحمل أو الرضاعة أو المرض المزمن يحتاج استشارة الطبيب قبل البدء، وللمريض رخصة شرعية بالفطر عند الضرر.",
 w_skinny:"وزنك طبيعي لكن نسبة الدهون مرتفعة؛ ركّز على تمارين القوة والبروتين وليس على الحمية وحدها.",
@@ -146,33 +291,66 @@ ram_w:"موزّعة بين الإفطار والسحور",cups:"أكواب (250 
 ram_ex:"في رمضان الهدف تثبيت الوزن والمحافظة على العضل لا الإنقاص السريع: خفّف الشدة، ولا تتمرن بجهد عالٍ وأنت صائم.",
 mt_note:"في يومي الصيام (الإثنين والخميس): افطر على تمر وماء، ثم وجبة خفيفة بلا إسراف، وتسحّر بوجبة فيها بروتين وألياف. اجعل تمارين القوة في الأيام التي لا تصوم فيها، واكتفِ بالمشي الخفيف في أيام الصيام.",
 sec_prog:"تقدّم قياساتك عن آخر قياس محفوظ",pg_note:"التغيّر",pg_fat:"نزل الوزن والخصر مع ثبات العضل: إنقاص دهون جيد 👍",pg_muscle:"زاد الذراع أو الفخذ أو الصدر مع ثبات الخصر: بناء عضل جيد 💪",pg_fatgain:"زاد الخصر مع الوزن: راجع غذاءك وزد حركتك.",pg_lossmuscle:"نزل الوزن مع نقص في الذراع أو الفخذ: قد تفقد عضلًا؛ زد البروتين وتمارين القوة.",pg_stable:"لا تغيّر كبير بين القياسين.",pg_cm:"سم",
-h_chart:"تطور الوزن",
+h_chart:"الرسم البياني",ch_weight:"الوزن",ch_waist:"الخصر",ch_bmi:"BMI",ch_score:"مؤشر الصحة",
 tip6:"من هدي النبي ﷺ: «ما ملأ آدميٌّ وعاءً شرًّا من بطن، بحسب ابن آدم أُكُلاتٌ يُقِمْنَ صلبه، فإن كان لا محالة فثلثٌ لطعامه وثلثٌ لشرابه وثلثٌ لنَفَسه» (رواه الترمذي وابن ماجه).",
 tip7:"اجعل المشي إلى المسجد وصلاة الجماعة جزءًا من نشاطك اليومي، وابدأ إفطارك بالتمر والماء.",
 g_lose:"إنقاص الوزن",g_maintain:"تثبيت الوزن",g_gain:"زيادة الوزن / بناء العضل",g_health:"صحة سليمة للجسم (متوازن)",
 hn_normal:"وزنك ضمن الطبيعي، فالخطة لتثبيت صحتك: سعرات الحفاظ مع غذاء متوازن ونشاط منتظم.",hn_under:"وزنك أقل من الطبيعي، فرفعنا السعرات قليلًا للوصول التدريجي إلى وزن صحي.",hn_over:"وزنك أعلى من الطبيعي، فخفّضنا السعرات قليلًا (حوالي 300) لنزول تدريجي وآمن.",
-hint:"الحقول الأساسية: الجنس والعمر والطول والوزن. باقي المقاسات اختيارية لكنها ترفع دقة التقرير (الخصر والرقبة لتقدير نسبة الدهون، والورك للنساء).",calc:"احسب وأعطني التقرير",reset:"مسح الحقول",save:"حفظ في السجل",pdf:"تصدير PDF",pdfhint:"عند ظهور نافذة الطباعة اختر «حفظ بصيغة PDF» (Save as PDF).",h_title:"سجل القياسات",
-e_req:"أدخل الجنس والعمر والطول والوزن بشكل صحيح.",e_age:"هذا التطبيق مخصص للبالغين (18 سنة فأكثر).",e_range:"تحقق من القيم المدخلة: الطول بين 120 و230 سم، والوزن بين 30 و300 كغ.",
-rep_title:"تقرير الصحة",date:"التاريخ",score:"مؤشر الصحة العام",s_exc:"ممتاز",s_good:"جيد",s_mid:"يحتاج تحسينًا",s_low:"يحتاج اهتمامًا",
-m_bmi:"مؤشر كتلة الجسم BMI",m_whtr:"الخصر / الطول",m_whr:"الخصر / الورك",m_bf:"نسبة الدهون التقديرية",m_bmr:"الحرق الأساسي BMR",m_tdee:"السعرات اليومية للحفاظ",m_ideal:"الوزن الصحي",m_water:"الماء يوميًا",m_cw:"الصدر / الخصر",kcal:"سعرة",l:"لتر",kg:"كغ",
+hint:"الحقول الأساسية: الجنس والعمر والطول والوزن. باقي المقاسات اختيارية لكنها ترفع دقة التقرير (الخصر والرقبة لتقدير نسبة الدهون، والورك للنساء).",calc:"🩺 احسب وأعطني التقرير",reset:"مسح الحقول",save:"💾 حفظ في السجل",pdf:"📄 تصدير PDF",share:"📤 مشاركة الملخص",pdfhint:"عند ظهور نافذة الطباعة اختر «حفظ بصيغة PDF» (Save as PDF).",h_title:"سجل القياسات",
+e_req:"أدخل الجنس والعمر والطول والوزن بشكل صحيح.",e_age:"هذا التطبيق مخصص للبالغين (18 سنة فأكثر).",e_range:"تحقق من القيم المدخلة: الطول بين 120 و230 سم، والوزن بين 30 و300 كغ، والعمر حتى 100.",e_meas:"قيمة «{f}» تبدو غير منطقية، تحقق منها (المدى المقبول {a} - {b}).",e_neckwaist:"محيط الرقبة يجب أن يكون أصغر من محيط الخصر.",
+rep_title:"تقرير الصحة",date:"التاريخ",score:"مؤشر الصحة العام",s_exc:"ممتاز",s_good:"جيد",s_mid:"يحتاج تحسينًا",s_low:"يحتاج اهتمامًا",sb_title:"مكوّنات المؤشر",sb_more:"أضف محيط الخصر والورك والرقبة ليصبح المؤشر أدق.",
+m_bmi:"مؤشر كتلة الجسم BMI",m_whtr:"الخصر / الطول",m_whr:"الخصر / الورك",m_bf:"نسبة الدهون التقديرية",m_bmr:"الحرق الأساسي BMR",m_tdee:"السعرات اليومية للحفاظ",m_ideal:"الوزن الصحي",m_water:"الماء يوميًا",m_cw:"الصدر / الخصر",m_lean:"الكتلة الخالية من الدهون",m_rate:"معدل التغيّر المتوقع",per_wk:"كغ/أسبوع",kcal:"سعرة",l:"لتر",kg:"كغ",chestwaist_note:"نسبة الصدر للخصر (معلومة للمتابعة)",
 bmi_under:"وزن أقل من الطبيعي",bmi_normal:"وزن طبيعي",bmi_over:"وزن زائد",bmi_ob1:"سمنة درجة أولى",bmi_ob2:"سمنة مرتفعة",
 whtr_good:"ممتاز (أقل من 0.5)",whtr_warn:"زيادة دهون بطنية",whtr_bad:"خطر مرتفع للدهون الحشوية",
 whr_good:"نسبة جيدة",whr_warn:"نسبة متوسطة",whr_bad:"نسبة مرتفعة",
 bf_low:"أقل من المعتاد",bf_healthy:"ضمن المعدل الصحي",bf_high:"أعلى من المعدل",bf_veryhigh:"مرتفعة جدًا",
-m_meas:"قياسات الجسم",chestwaist_note:"نسبة الصدر للخصر (معلومة للمتابعة)",
+m_meas:"قياسات الجسم",
 sec_find:"قراءة النتائج",sec_diet:"النظام الغذائي المقترح",sec_ex:"البرنامج الرياضي الأسبوعي",sec_tips:"نصائح عامة",
+method_title:"ℹ️ كيف تُحسب هذه النتائج؟",
+method_body:["مؤشر كتلة الجسم وتصنيفه حسب منظمة الصحة العالمية (WHO).","الحرق الأساسي بمعادلة Mifflin-St Jeor، والسعرات اليومية = الحرق × معامل النشاط.","نسبة الدهون بطريقة البحرية الأمريكية (US Navy) من محيط الرقبة والخصر (والورك للنساء).","حدود محيط الخصر ونسبة الخصر للورك حسب توصيات منظمة الصحة العالمية، ونسبة الخصر للطول (أقل من 0.5 صحي).","الماء: حوالي 33 مل لكل كغ من الوزن مع زيادة حسب النشاط.","كل النتائج تقديرية وقد تختلف عن الفحوصات الطبية."],
 target:"هدفك اليومي",protein:"بروتين",carbs:"كربوهيدرات",fat:"دهون",g:"غ",
 mb:"الفطور",ml:"الغداء",md:"العشاء",ms:"وجبات خفيفة",
 w_underlose:"وزنك أقل من الطبيعي، لذلك عدّلنا الخطة إلى زيادة تدريجية بدل الإنقاص.",
-w_doctor:"بعض قيمك خارج المعدل بشكل كبير أو العمر متقدم؛ يُفضّل استشارة الطبيب قبل البدء بنظام غذائي أو رياضي مكثف.",
+w_doctor:"بعض قيمك خارج المعدل بشكل كبير أو العمر متقدم أو لديك حالة صحية؛ يُفضّل استشارة الطبيب قبل البدء بنظام غذائي أو رياضي مكثف.",
 w_nobf:"لإظهار نسبة الدهون أضف محيط الرقبة والخصر (وللنساء الورك أيضًا).",
 disc:"هذا التقرير تقديري وتثقيفي ولا يغني عن الاستشارة الطبية أو استشارة أخصائي تغذية. المؤشرات (مثل BMI) لها حدود ولا تميّز بين العضل والدهون.",
 tip1:"اشرب الماء على مدار اليوم ولا تنتظر العطش.",tip2:"نم من 7 إلى 9 ساعات؛ قلة النوم تضعف الحرق وتزيد الشهية.",tip3:"قِس نفسك كل 2-4 أسابيع وبنفس الطريقة والوقت لمتابعة التقدم.",tip4:"قلّل السكريات والمشروبات الغازية والمقليات، وزد الخضار والألياف.",tip5:"التغيّر الآمن للوزن حوالي 0.25-0.75 كغ في الأسبوع.",
-h_empty:"لا توجد قياسات محفوظة بعد.",h_date:"التاريخ",h_w:"الوزن",h_s:"الصحة",h_view:"عرض",h_del:"حذف",h_clear:"مسح السجل كله",h_conf:"هل تريد حذف السجل كله؟",h_saved:"تم الحفظ في السجل ✓",h_chg:"التغيّر عن القياس السابق",
+h_empty:"لا توجد قياسات محفوظة بعد. احسب تقريرك ثم اضغط «حفظ في السجل» لتتابع تقدّمك.",h_date:"التاريخ",h_w:"الوزن",h_s:"الصحة",h_view:"عرض",h_del:"حذف",h_clear:"مسح السجل",h_conf:"هل تريد حذف السجل المعروض كله؟",h_delc:"هل تريد حذف هذا القياس؟",h_saved:"تم الحفظ في السجل ✓",h_dup:"هذا التقرير محفوظ مسبقًا",h_chg:"التغيّر عن القياس السابق",
+prof:"الشخص",prof_all:"الكل",prof_none:"بدون اسم",last_ago:"آخر قياس قبل {n} يوم.",remeasure:"حان وقت قياس جديد لمتابعة تقدّمك ⏰",
+bk_title:"النسخ الاحتياطي",bk_note:"احفظ كل بياناتك (القياسات، المشي والجري، الضغط، السكر، الماء) في ملف، واستعدها على هاتف جديد.",backup:"💾 نسخة احتياطية",restore:"📂 استعادة نسخة",r_ok:"تمت استعادة البيانات ✓ ({n} سجل جديد)",r_bad:"الملف غير صالح",copied:"تم نسخ الملخص ✓",
+about:"عن التطبيق",ver:"الإصدار "+APP_VER,priv_note:"🔒 بياناتك تُحفظ على جهازك فقط، ولا نرسلها إلى أي خادم.",contact:"تواصل عبر واتساب",follow:"تابعنا على إنستجرام",privacy_link:"سياسة الخصوصية",
+d_title:"تنبيه طبي",d_body:"«صحتي» أداة تثقيفية تعطي تقديرات عامة لصحة الجسم بناءً على القياسات التي تُدخلها، وليست جهازًا طبيًا ولا تشخّص أي مرض ولا تغني عن الطبيب أو أخصائي التغذية. قراءات الضغط والسكر للمتابعة الشخصية فقط. إذا كنت حاملًا أو مرضعًا، أو لديك مرض مزمن، أو تتناول أدوية، فاستشر طبيبك قبل تغيير غذائك أو نشاطك. التطبيق مخصص للبالغين (18 سنة فأكثر).",d_ok:"فهمت وأوافق",yes:"نعم",cancel:"إلغاء",
+sh_head:"تقرير صحتي",sh_from:"من تطبيق صحتي - Dahshan Soft",
+/* subscription */
+tr_left:"🎁 تجربة مجانية كاملة: متبقٍ {n} يوم",tr_end:"⏳ انتهت التجربة المجانية، فعّل الاشتراك لتستمر بكل الميزات",tr_pro:"⭐ اشتراكك فعّال حتى {d}",act_btn:"تفعيل الاشتراك",
+lk_title:"ميزة ضمن الاشتراك",lk_body:"انتهت فترة التجربة المجانية. فعّل الاشتراك لتستخدم هذه الميزة وكل ميزات صحتي.",
+sb_head:"اشتراك صحتي المميز",sb_free:"المجاني دائمًا: حساب مؤشرات الجسم ومؤشر الصحة وحفظ القياسات.",sb_feat:["خطة غذائية مفصّلة حسب هدفك وصيامك","برنامج رياضي أسبوعي","متتبّع المشي والجري بالـ GPS مع المسار والسعرات","يوميات الماء وضغط الدم والسكر","الرسوم البيانية ومقارنة التقدّم","تصدير التقرير PDF والنسخ الاحتياطي","ملفات لكل أفراد العائلة"],
+st_trial:"أنت الآن في التجربة المجانية: متبقٍ {n} يوم.",st_exp:"انتهت التجربة المجانية.",st_pro:"اشتراكك فعّال حتى {d} ✓",st_free:"كل الميزات مفتوحة حاليًا ✓",
+pl_m:"شهري",pl_y:"سنوي",pl_save:"الأوفر",buy:"اشترك",dev_lbl:"رقم جهازك",wa_req:"📲 اطلب التفعيل عبر واتساب",code_lbl:"كود التفعيل",code_ph:"مثال: 47",code_btn:"تفعيل",
+code_ok:"تم تفعيل الاشتراك حتى {d} ✓",code_bad:"كود التفعيل غير صحيح لهذا الجهاز",code_used:"هذا الكود مستخدم من قبل",code_old:"محاولات كثيرة خاطئة، حاول بعد ساعة",
+how_web:"طريقة التفعيل: أرسل رقم جهازك عبر واتساب واختر الخطة، وبعد الدفع يصلك كود التفعيل فتكتبه هنا.",
+wa_msg:"السلام عليكم، أريد تفعيل اشتراك تطبيق صحتي.\nرقم الجهاز: {id}\nالخطة: ",
+play_ok:"تم الاشتراك بنجاح ✓",play_err:"لم تكتمل عملية الشراء",restore_buy:"استعادة مشترياتي",
+/* tracker */
+tk_title:"متتبّع المشي والجري",tk_walk:"🚶 مشي",tk_run:"🏃 جري",tk_start:"▶ ابدأ",tk_pause:"⏸ إيقاف مؤقت",tk_resume:"▶ متابعة",tk_stop:"⏹ إنهاء وحفظ",
+tk_km:"كيلومتر",tk_time:"المدة",tk_pace:"الوتيرة (د/كم)",tk_speed:"السرعة (كم/س)",tk_kcal:"سعرات",tk_steps:"خطوات تقريبًا",
+tk_gps_wait:"جارٍ البحث عن إشارة GPS…",tk_gps_ok:"إشارة GPS جيدة (دقة {a} م)",tk_gps_weak:"إشارة GPS ضعيفة (دقة {a} م)، اخرج لمكان مفتوح",tk_gps_no:"لا يمكن الوصول إلى الموقع. فعّل GPS واسمح للتطبيق باستخدام الموقع.",
+tk_note:"أبقِ التطبيق مفتوحًا أثناء التمرين (الشاشة ستبقى مضاءة). يعمل الـ GPS بأفضل دقة في الأماكن المفتوحة.",
+tk_short:"التمرين قصير جدًا ولم يُحفظ",tk_saved:"تم حفظ التمرين ✓",tk_week:"هذا الأسبوع",tk_who:"هدف منظمة الصحة العالمية: 150 دقيقة نشاط معتدل أسبوعيًا",tk_min:"دقيقة",tk_sess:"تمارين",tk_hist:"تمارينك السابقة",tk_empty:"لا توجد تمارين محفوظة بعد.",tk_last:"آخر تمرين",tk_delc:"هل تريد حذف هذا التمرين؟",tk_leave:"التمرين ما زال جاريًا",
+/* daily */
+dw_title:"💧 ماء اليوم",dw_goal:"الهدف: {g} أكواب",dw_done:"أحسنت! وصلت لهدف الماء اليوم 🎉",dw_week:"آخر 7 أيام",
+bp_title:"🩸 ضغط الدم والنبض",bp_sys:"الانقباضي (العلوي)",bp_dia:"الانبساطي (السفلي)",bp_pulse:"النبض (اختياري)",add:"إضافة",bp_err:"تحقق من قراءة الضغط (الانقباضي 60-260، الانبساطي 30-160، والانقباضي أكبر من الانبساطي).",
+bp_n:"طبيعي",bp_e:"مرتفع قليلًا",bp_1:"ارتفاع درجة أولى",bp_2:"ارتفاع درجة ثانية",bp_c:"مرتفع جدًا: أعد القياس بعد 5 دقائق، وإن بقي مرتفعًا أو ظهرت أعراض (ألم صدر، ضيق نفس، صداع شديد) فاطلب مساعدة طبية فورًا",bp_l:"منخفض",
+bp_tip:"قِس وأنت جالس مرتاح 5 دقائق، الظهر مسنود والذراع على مستوى القلب، وبدون قهوة أو تدخين قبلها بنصف ساعة.",
+bs_title:"🍬 سكر الدم",bs_val:"القراءة (ملغ/دسل)",bs_type:"نوع القياس",bs_f:"صائم",bs_pp:"بعد الأكل بساعتين",bs_r:"عشوائي",bs_err:"تحقق من قراءة السكر (20-600 ملغ/دسل).",
+bs_low:"منخفض: تناول سكرًا سريعًا وأعد القياس بعد 15 دقيقة",bs_n:"طبيعي",bs_pre:"أعلى من الطبيعي",bs_hi:"مرتفع",
+dl_note:"هذه التصنيفات للمتابعة الشخصية حسب المعايير الشائعة، وليست تشخيصًا. راجع طبيبك عند تكرار القراءات غير الطبيعية.",
+dl_last:"آخر القراءات",dl_none:"لا توجد قراءات بعد.",dl_delc:"هل تريد حذف هذه القراءة؟",dl_saved:"تم الحفظ ✓",time:"الوقت",
 days:["اليوم 1","اليوم 2","اليوم 3","اليوم 4","اليوم 5","اليوم 6","اليوم 7"],
-ex_low:"ملاحظة: اختر تمارين منخفضة الأثر على المفاصل (مشي، سباحة، دراجة) وارفع الشدة تدريجيًا.",ex_old:"ملاحظة: أضف تمارين توازن ومرونة وابدأ بشدة خفيفة.",
+ex_low:"ملاحظة: اختر تمارين منخفضة الأثر على المفاصل (مشي، سباحة، دراجة) وارفع الشدة تدريجيًا.",ex_old:"ملاحظة: أضف تمارين توازن ومرونة وابدأ بشدة خفيفة.",ex_preg:"للحامل: مشي خفيف وتمارين خاصة بالحمل فقط وبموافقة الطبيب، وتجنّبي تمارين الاستلقاء على الظهر والقفز.",
 ram:{i:"افطر على 3 تمرات وماء، ثم صلاة المغرب، ثم شوربة (عدس أو خضار) وسلطة، ثم طبق رئيسي: دجاج أو سمك أو لحم (120-150 غ) + أرز أو برغل (½ كوب) + خضار",n:"بعد التراويح: زبادي أو لبن + فاكهة، أو حفنة مكسرات غير مملحة، مع الماء",s:"سحور لا تتركه: فول أو بيض + خبز أسمر + لبن أو لبنة + خيار وطماطم، أو شوفان بالحليب مع تمر وحفنة مكسرات. أكثر من الألياف والبروتين لتطول فترة الشبع"},
 ramplan:["مشي خفيف 20-30 دقيقة بعد الإفطار بساعة","تمارين قوة خفيفة لكل الجسم 25-30 دقيقة بعد الإفطار بساعتين","مشي خفيف 20 دقيقة + تمدد","تمارين قوة خفيفة 25-30 دقيقة","مشي خفيف 20-30 دقيقة","تمدد وراحة نشطة 15 دقيقة","راحة"],
+pregplan:["مشي خفيف 20-30 دقيقة","تمارين تمدد خاصة بالحمل 15 دقيقة","مشي خفيف 20-30 دقيقة","راحة","مشي خفيف أو سباحة هادئة 20-30 دقيقة","تمارين تنفس واسترخاء 15 دقيقة","راحة"],
 meals:{
 health:{b:"شوفان بالحليب مع فاكهة ومكسرات، أو بيض + خبز أسمر + خضار",l:"سمك أو دجاج أو لحم (150 غ) + سلطة كبيرة + أرز أو برغل (½-¾ كوب) + خضار. اجعل البقوليات (عدس، حمص) والسمك جزءًا من الأسبوع",d:"زبادي أو لبن + بيض أو جبنة + خضار، أو شوربة خضار مع خبز أسمر",s:"فاكهة طازجة + حفنة مكسرات غير مملحة، مع الإكثار من الماء"},
 lose:{b:"بيض مسلوق أو عجّة (2) + خبز أسمر (شريحة) + خيار وطماطم + شاي/قهوة بدون سكر",l:"صدر دجاج أو سمك مشوي (150 غ) + سلطة كبيرة + أرز أو برغل (½ كوب) + خضار مطبوخة",d:"زبادي/لبن + تونة أو جبنة قريش + خضار، أو شوربة عدس مع سلطة",s:"فاكهة + حفنة لوز صغيرة، أو جزر وخيار مع حمّص (ملعقتان)"},
@@ -183,13 +361,15 @@ health:["مشي سريع 30-40 دقيقة","تمارين قوة لكل الجس�
 lose:["مشي سريع 40 دقيقة","تمارين قوة لكل الجسم 40 دقيقة (سكوات، ضغط، تجديف، بلانك)","كارديو خفيف 30 دقيقة (دراجة أو سباحة)","تمارين قوة لكل الجسم 40 دقيقة","مشي/جري متناوب 25 دقيقة + تمدد","مشي طويل أو رحلة مشي 60 دقيقة","راحة + تمدد خفيف 10 دقائق"],
 maintain:["مشي سريع 30-40 دقيقة","تمارين قوة للجزء العلوي 40 دقيقة","كارديو متوسط 30 دقيقة","تمارين قوة للجزء السفلي والبطن 40 دقيقة","رياضة تحبها 45 دقيقة (كرة، سباحة، دراجة)","مشي خفيف + تمدد","راحة"],
 gain:["قوة: صدر وأكتاف وترايسبس 45-60 دقيقة","قوة: أرجل (سكوات، طعنات) 45-60 دقيقة","راحة أو مشي خفيف 20 دقيقة","قوة: ظهر وبايسبس 45-60 دقيقة","قوة: أرجل وبطن 45 دقيقة","قوة لكل الجسم خفيفة + تمدد","راحة تامة"]}},
-en:{credit:"Prepared & programmed by: Wael Dahshan",title:"My Health",sub:"Calculate your health and get a report with diet and workout plans",f_title:"Your data",name:"Name (optional)",sex:"Sex",male:"Male",female:"Female",age:"Age (years)",height:"Height (cm)",weight:"Weight (kg)",neck:"Neck circumference (cm)",chest:"Chest circumference (cm)",waist:"Waist at navel (cm)",hip:"Hip circumference (cm)",thigh:"Thigh circumference (cm)",arm:"Upper arm circumference (cm)",activity:"Activity level",act1:"Sedentary",act2:"Light (1-3 days/week)",act3:"Moderate (3-5 days)",act4:"High (6-7 days)",goal:"Your goal",tw:"Target weight (kg) - optional",cond:"Health condition",c_none:"None of the below",c_preg:"Pregnancy or breastfeeding",c_chronic:"Chronic illness (diabetes, blood pressure, heart, kidney)",fast:"Fasting pattern",f_none:"Normal (no fasting)",f_ram:"Ramadan",f_mt:"Monday & Thursday fasting",
+en:{credit:"Developed by: Dahshan Soft",title:"My Health",sub:"Body check · Nutrition · Exercise · Tracking",f_title:"Your data",name:"Name (optional)",sex:"Sex",male:"Male",female:"Female",age:"Age (years)",height:"Height (cm)",weight:"Weight (kg)",neck:"Neck circumference (cm)",chest:"Chest circumference (cm)",waist:"Waist at navel (cm)",hip:"Hip circumference (cm)",thigh:"Thigh circumference (cm)",arm:"Upper arm circumference (cm)",activity:"Activity level",act1:"Sedentary",act2:"Light (1-3 days/week)",act3:"Moderate (3-5 days)",act4:"High (6-7 days)",act5:"Very high (physical job or training twice a day)",goal:"Your goal",tw:"Target weight (kg) - optional",cond:"Health condition",c_none:"None of the below",c_preg:"Pregnancy or breastfeeding",c_chronic:"Chronic illness (diabetes, blood pressure, heart, kidney)",fast:"Fasting pattern",f_none:"Normal (no fasting)",f_ram:"Ramadan",f_mt:"Monday & Thursday fasting",
+n_home:"Check",n_track:"Walk & Run",n_daily:"Daily",n_hist:"History",n_sub:"Premium",
+guide_title:"📏 How do I measure accurately?",gd_neck:"Neck: just below the Adam's apple, tape sloping slightly down to the front.",gd_chest:"Chest: at nipple level, after a normal breath out, arms relaxed.",gd_waist:"Waist: horizontally at the navel, after a normal breath out, without pulling the belly in.",gd_hip:"Hip: at the widest point of the buttocks, feet together.",gd_thigh:"Thigh: midway between hip and knee, muscle relaxed.",gd_arm:"Upper arm: midway between shoulder and elbow, arm relaxed.",gd_tip:"Measure in the morning before eating, with a soft tape that is snug but not tight; measure twice and take the average.",
 m_waist:"Waist",wc_good:"Within healthy limit",wc_warn:"Near the risk limit",wc_bad:"High (heart and diabetes risk)",
 m_tw:"Target weight",tw_near:"You are close to your target",wk:"weeks approx.",m_steps:"Suggested daily walking",steps:"steps",
-m_cw2:"Chest-waist proportion",cw_good:"Excellent proportion",cw_mid:"Good proportion",cw_low:"Waist large relative to chest",cw_track:"For tracking over time",
+cw_good:"Excellent proportion",cw_mid:"Good proportion",cw_low:"Waist large relative to chest",
 m_arm:"Upper arm",arm_ok:"Normal",arm_low:"Low: may suggest low muscle or undernutrition",
 m_thigh:"Thigh",thigh_ok:"Normal",thigh_low:"Low: weak thigh muscle is linked to poorer health with age",
-w_preg:"Pregnancy and breastfeeding have special nutritional needs; this plan is general and does not include weight loss. Follow your doctor or dietitian.",
+w_preg:"Pregnancy and breastfeeding have special nutritional needs, and weight and fat indicators are not accurate during pregnancy; this plan is general and does not include weight loss. Follow your doctor or dietitian.",
 w_chronic:"With a chronic illness (diabetes, blood pressure, heart or kidney) you may need a special plan; consult your doctor or dietitian before following this one.",
 w_fastdoc:"Fasting with pregnancy, breastfeeding or a chronic illness needs a doctor's advice first; the sick are permitted by Sharia to break the fast when harmed.",
 w_skinny:"Your weight is normal but body fat is high; focus on strength training and protein, not dieting alone.",
@@ -201,33 +381,63 @@ ram_w:"spread between iftar and suhoor",cups:"cups (250 ml)",water_note:"Drink m
 ram_ex:"In Ramadan aim to maintain weight and muscle rather than lose fast: lower the intensity and avoid hard training while fasting.",
 mt_note:"On fasting days (Monday & Thursday): break the fast with dates and water, then a light meal without overeating, and have a suhoor with protein and fiber. Keep strength training for non-fasting days and only light walking on fasting days.",
 sec_prog:"Your progress since the last saved entry",pg_note:"Change",pg_fat:"Weight and waist down with muscle kept: good fat loss 👍",pg_muscle:"Arm, thigh or chest up with waist steady: good muscle gain 💪",pg_fatgain:"Waist grew with weight: review your diet and move more.",pg_lossmuscle:"Weight down with arm or thigh also down: you may be losing muscle; raise protein and strength training.",pg_stable:"No big change between the two entries.",pg_cm:"cm",
-h_chart:"Weight trend",
+h_chart:"Chart",ch_weight:"Weight",ch_waist:"Waist",ch_bmi:"BMI",ch_score:"Health score",
 tip6:"From the Prophet's ﷺ guidance: “No human ever filled a vessel worse than his stomach. A few morsels to keep his back straight are enough; if he must, then a third for food, a third for drink and a third for air” (Tirmidhi, Ibn Majah).",
 tip7:"Make walking to the mosque and congregational prayer part of your daily activity, and start iftar with dates and water.",
 g_lose:"Lose weight",g_maintain:"Maintain weight",g_gain:"Gain weight / build muscle",g_health:"Overall healthy body (balanced)",
 hn_normal:"Your weight is in the normal range, so the plan keeps you healthy: maintenance calories, balanced food and regular activity.",hn_under:"You are underweight, so calories were raised slightly for a gradual move to a healthy weight.",hn_over:"You are above the normal range, so calories were lowered slightly (about 300) for a gradual, safe decrease.",
-hint:"Required: sex, age, height and weight. Other measurements are optional but improve accuracy (waist and neck for body fat, hip for women).",calc:"Calculate & get report",reset:"Clear fields",save:"Save to history",pdf:"Export PDF",pdfhint:"In the print window choose “Save as PDF”.",h_title:"Measurement history",
-e_req:"Please enter sex, age, height and weight correctly.",e_age:"This app is for adults (18 years and older).",e_range:"Check your values: height 120-230 cm, weight 30-300 kg.",
-rep_title:"Health Report",date:"Date",score:"Overall health score",s_exc:"Excellent",s_good:"Good",s_mid:"Needs improvement",s_low:"Needs attention",
-m_bmi:"Body Mass Index (BMI)",m_whtr:"Waist / Height",m_whr:"Waist / Hip",m_bf:"Estimated body fat",m_bmr:"Basal metabolic rate",m_tdee:"Daily calories to maintain",m_ideal:"Healthy weight range",m_water:"Water per day",m_cw:"Chest / Waist",kcal:"kcal",l:"L",kg:"kg",
+hint:"Required: sex, age, height and weight. Other measurements are optional but improve accuracy (waist and neck for body fat, hip for women).",calc:"🩺 Calculate & get report",reset:"Clear fields",save:"💾 Save to history",pdf:"📄 Export PDF",share:"📤 Share summary",pdfhint:"In the print window choose “Save as PDF”.",h_title:"Measurement history",
+e_req:"Please enter sex, age, height and weight correctly.",e_age:"This app is for adults (18 years and older).",e_range:"Check your values: height 120-230 cm, weight 30-300 kg, age up to 100.",e_meas:"The value of “{f}” looks wrong; please check it (accepted range {a} - {b}).",e_neckwaist:"Neck must be smaller than waist.",
+rep_title:"Health Report",date:"Date",score:"Overall health score",s_exc:"Excellent",s_good:"Good",s_mid:"Needs improvement",s_low:"Needs attention",sb_title:"Score breakdown",sb_more:"Add waist, hip and neck for a more accurate score.",
+m_bmi:"Body Mass Index (BMI)",m_whtr:"Waist / Height",m_whr:"Waist / Hip",m_bf:"Estimated body fat",m_bmr:"Basal metabolic rate",m_tdee:"Daily calories to maintain",m_ideal:"Healthy weight range",m_water:"Water per day",m_cw:"Chest / Waist",m_lean:"Lean body mass",m_rate:"Expected rate of change",per_wk:"kg/week",kcal:"kcal",l:"L",kg:"kg",chestwaist_note:"Chest to waist ratio (for tracking)",
 bmi_under:"Underweight",bmi_normal:"Normal weight",bmi_over:"Overweight",bmi_ob1:"Obesity class I",bmi_ob2:"High obesity",
 whtr_good:"Excellent (under 0.5)",whtr_warn:"Extra belly fat",whtr_bad:"High visceral fat risk",
 whr_good:"Good ratio",whr_warn:"Moderate ratio",whr_bad:"High ratio",
 bf_low:"Below usual range",bf_healthy:"Within healthy range",bf_high:"Above range",bf_veryhigh:"Very high",
-m_meas:"Body measurements",chestwaist_note:"Chest to waist ratio (for tracking)",
+m_meas:"Body measurements",
 sec_find:"Results explained",sec_diet:"Suggested diet plan",sec_ex:"Weekly workout plan",sec_tips:"General tips",
+method_title:"ℹ️ How are these results calculated?",
+method_body:["BMI and its categories follow the World Health Organization (WHO).","Basal metabolic rate uses the Mifflin-St Jeor equation; daily calories = BMR × activity factor.","Body fat uses the US Navy method from neck and waist (plus hip for women).","Waist and waist-to-hip limits follow WHO guidance; waist-to-height under 0.5 is healthy.","Water: about 33 ml per kg of body weight, plus extra for activity.","All results are estimates and may differ from medical tests."],
 target:"Your daily target",protein:"Protein",carbs:"Carbs",fat:"Fat",g:"g",
 mb:"Breakfast",ml:"Lunch",md:"Dinner",ms:"Snacks",
 w_underlose:"You are underweight, so the plan was changed to gradual weight gain instead of loss.",
-w_doctor:"Some values are well outside the usual range or age is advanced; please consult a doctor before starting an intensive diet or workout plan.",
+w_doctor:"Some values are well outside the usual range, age is advanced or you have a health condition; please consult a doctor before starting an intensive diet or workout plan.",
 w_nobf:"To see body fat, add neck and waist (and hip for women).",
 disc:"This report is an estimate for education only and does not replace medical advice or a dietitian. Indicators such as BMI have limits and do not separate muscle from fat.",
 tip1:"Drink water through the day; don't wait for thirst.",tip2:"Sleep 7-9 hours; poor sleep slows metabolism and raises appetite.",tip3:"Re-measure every 2-4 weeks, same way and time, to track progress.",tip4:"Cut sugary drinks, sweets and fried foods; add vegetables and fiber.",tip5:"A safe rate of weight change is about 0.25-0.75 kg per week.",
-h_empty:"No saved measurements yet.",h_date:"Date",h_w:"Weight",h_s:"Health",h_view:"View",h_del:"Delete",h_clear:"Clear all history",h_conf:"Delete the entire history?",h_saved:"Saved to history ✓",h_chg:"Change since previous entry",
+h_empty:"No saved measurements yet. Calculate your report, then tap “Save to history” to track your progress.",h_date:"Date",h_w:"Weight",h_s:"Health",h_view:"View",h_del:"Delete",h_clear:"Clear history",h_conf:"Delete all entries shown?",h_delc:"Delete this entry?",h_saved:"Saved to history ✓",h_dup:"This report is already saved",h_chg:"Change since previous entry",
+prof:"Person",prof_all:"All",prof_none:"No name",last_ago:"Last measurement was {n} days ago.",remeasure:"Time for a new measurement to track your progress ⏰",
+bk_title:"Backup",bk_note:"Save all your data (measurements, walks & runs, blood pressure, sugar, water) to a file and restore it on a new phone.",backup:"💾 Backup",restore:"📂 Restore",r_ok:"Data restored ✓ ({n} new records)",r_bad:"Invalid file",copied:"Summary copied ✓",
+about:"About",ver:"Version "+APP_VER,priv_note:"🔒 Your data is stored on your device only and is never sent to any server.",contact:"Contact on WhatsApp",follow:"Follow us on Instagram",privacy_link:"Privacy policy",
+d_title:"Medical notice",d_body:"“My Health” is an educational tool that gives general estimates of body health from the measurements you enter. It is not a medical device, does not diagnose any disease, and does not replace a doctor or dietitian. Blood pressure and sugar readings are for personal tracking only. If you are pregnant or breastfeeding, have a chronic illness, or take medication, consult your doctor before changing your diet or activity. For adults (18+) only.",d_ok:"I understand and agree",yes:"Yes",cancel:"Cancel",
+sh_head:"My Health report",sh_from:"From the My Health app - Dahshan Soft",
+tr_left:"🎁 Full free trial: {n} days left",tr_end:"⏳ Your free trial has ended. Activate premium to keep all features",tr_pro:"⭐ Premium active until {d}",act_btn:"Activate premium",
+lk_title:"Premium feature",lk_body:"Your free trial has ended. Activate premium to use this feature and all of My Health.",
+sb_head:"My Health Premium",sb_free:"Always free: body indicators, health score and saving measurements.",sb_feat:["Detailed diet plan for your goal and fasting","Weekly workout plan","GPS walk & run tracker with route and calories","Water, blood pressure and blood sugar diary","Charts and progress comparison","PDF report export and backup","Profiles for every family member"],
+st_trial:"You are on the free trial: {n} days left.",st_exp:"Your free trial has ended.",st_pro:"Premium active until {d} ✓",st_free:"All features are currently unlocked ✓",
+pl_m:"Monthly",pl_y:"Yearly",pl_save:"Best value",buy:"Subscribe",dev_lbl:"Your device ID",wa_req:"📲 Request activation on WhatsApp",code_lbl:"Activation code",code_ph:"e.g. 47",code_btn:"Activate",
+code_ok:"Premium activated until {d} ✓",code_bad:"This code is not valid for this device",code_used:"This code was already used",code_old:"Too many wrong attempts, try again in an hour",
+how_web:"How to activate: send your device ID on WhatsApp and choose a plan; after payment you receive an activation code to enter here.",
+wa_msg:"Hello, I want to activate My Health premium.\nDevice ID: {id}\nPlan: ",
+play_ok:"Subscribed successfully ✓",play_err:"Purchase was not completed",restore_buy:"Restore purchases",
+tk_title:"Walk & Run tracker",tk_walk:"🚶 Walk",tk_run:"🏃 Run",tk_start:"▶ Start",tk_pause:"⏸ Pause",tk_resume:"▶ Resume",tk_stop:"⏹ Finish & save",
+tk_km:"kilometers",tk_time:"Time",tk_pace:"Pace (min/km)",tk_speed:"Speed (km/h)",tk_kcal:"kcal",tk_steps:"steps approx.",
+tk_gps_wait:"Searching for GPS signal…",tk_gps_ok:"Good GPS signal (±{a} m)",tk_gps_weak:"Weak GPS signal (±{a} m), move to an open area",tk_gps_no:"Location unavailable. Turn on GPS and allow the app to use your location.",
+tk_note:"Keep the app open during your workout (the screen stays on). GPS is most accurate in open areas.",
+tk_short:"Workout too short, not saved",tk_saved:"Workout saved ✓",tk_week:"This week",tk_who:"WHO goal: 150 minutes of moderate activity per week",tk_min:"min",tk_sess:"workouts",tk_hist:"Your past workouts",tk_empty:"No saved workouts yet.",tk_last:"Last workout",tk_delc:"Delete this workout?",tk_leave:"A workout is still running",
+dw_title:"💧 Today's water",dw_goal:"Goal: {g} cups",dw_done:"Well done! You reached today's water goal 🎉",dw_week:"Last 7 days",
+bp_title:"🩸 Blood pressure & pulse",bp_sys:"Systolic (upper)",bp_dia:"Diastolic (lower)",bp_pulse:"Pulse (optional)",add:"Add",bp_err:"Check the reading (systolic 60-260, diastolic 30-160, systolic above diastolic).",
+bp_n:"Normal",bp_e:"Elevated",bp_1:"High, stage 1",bp_2:"High, stage 2",bp_c:"Very high: re-measure in 5 minutes; if still high or you have symptoms (chest pain, shortness of breath, severe headache) seek medical help immediately",bp_l:"Low",
+bp_tip:"Measure seated after 5 minutes of rest, back supported, arm at heart level, no coffee or smoking 30 minutes before.",
+bs_title:"🍬 Blood sugar",bs_val:"Reading (mg/dL)",bs_type:"Measurement type",bs_f:"Fasting",bs_pp:"2 hours after a meal",bs_r:"Random",bs_err:"Check the reading (20-600 mg/dL).",
+bs_low:"Low: take fast sugar and re-check in 15 minutes",bs_n:"Normal",bs_pre:"Above normal",bs_hi:"High",
+dl_note:"These categories are for personal tracking using common standards, not a diagnosis. See your doctor if abnormal readings repeat.",
+dl_last:"Latest readings",dl_none:"No readings yet.",dl_delc:"Delete this reading?",dl_saved:"Saved ✓",time:"Time",
 days:["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7"],
-ex_low:"Note: choose low-impact exercise (walking, swimming, cycling) and increase intensity gradually.",ex_old:"Note: add balance and flexibility work and start at light intensity.",
+ex_low:"Note: choose low-impact exercise (walking, swimming, cycling) and increase intensity gradually.",ex_old:"Note: add balance and flexibility work and start at light intensity.",ex_preg:"In pregnancy: only light walking and pregnancy-specific exercise approved by your doctor; avoid lying on your back and jumping.",
 ram:{i:"Break the fast with 3 dates and water, then Maghrib prayer, then soup (lentil or vegetable) and salad, then a main plate: chicken, fish or meat (120-150 g) + ½ cup rice or bulgur + vegetables",n:"After Taraweeh: yogurt or laban + fruit, or a handful of unsalted nuts, with water",s:"Never skip suhoor: fava beans or eggs + whole-grain bread + laban or labneh + cucumber & tomato, or oatmeal with milk, dates and nuts. Favor fiber and protein to stay full longer"},
 ramplan:["Easy walk 20-30 min, an hour after iftar","Light full-body strength 25-30 min, two hours after iftar","Easy walk 20 min + stretching","Light strength 25-30 min","Easy walk 20-30 min","Stretching and active rest 15 min","Rest"],
+pregplan:["Easy walk 20-30 min","Pregnancy stretching 15 min","Easy walk 20-30 min","Rest","Easy walk or gentle swim 20-30 min","Breathing and relaxation 15 min","Rest"],
 meals:{
 health:{b:"Oatmeal with milk, fruit and nuts, or eggs + whole-grain bread + vegetables",l:"Fish, chicken or meat (150 g) + large salad + ½-¾ cup rice or bulgur + vegetables. Include legumes (lentils, chickpeas) and fish during the week",d:"Yogurt + eggs or cheese + vegetables, or vegetable soup with whole-grain bread",s:"Fresh fruit + handful of unsalted nuts, and plenty of water"},
 lose:{b:"2 boiled eggs or omelette + 1 slice whole-grain bread + cucumber & tomato + unsweetened tea/coffee",l:"Grilled chicken or fish (150 g) + large salad + ½ cup rice or bulgur + cooked vegetables",d:"Yogurt + tuna or cottage cheese + vegetables, or lentil soup with salad",s:"Fruit + small handful of almonds, or carrots & cucumber with 2 tbsp hummus"},
@@ -240,41 +450,165 @@ maintain:["Brisk walk 30-40 min","Upper-body strength 40 min","Moderate cardio 3
 gain:["Strength: chest, shoulders, triceps 45-60 min","Strength: legs (squats, lunges) 45-60 min","Rest or easy walk 20 min","Strength: back & biceps 45-60 min","Strength: legs & abs 45 min","Light full-body strength + stretching","Full rest"]}}
 };
 
-let lang=localStorage.getItem('bh_lang')||'ar';
+/* ================= helpers ================= */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const jget=(k,d)=>{try{const v=JSON.parse(store.get(k,'null'));return v==null?d:v}catch(e){return d}};
+const jset=(k,v)=>store.set(k,JSON.stringify(v));
+let lang=store.get('bh_lang','ar'),theme=store.get('bh_theme','light'),prof=store.get('bh_prof','__all'),chartKey=store.get('bh_chart','weight'),tab=store.get('bh_tab','home');
 let last=null;
 const $=id=>document.getElementById(id);
 const t=k=>T[lang][k]!==undefined?T[lang][k]:k;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const num=id=>{const v=parseFloat($(id).value);return isNaN(v)?null:v};
+const toNum=s=>{const v=parseFloat(String(s).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(',','.'));return isNaN(v)?null:v};
+const num=id=>toNum($(id).value);
 const r1=x=>Math.round(x*10)/10;
+const pad=n=>String(n).padStart(2,'0');
+const dayKey=d=>{d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+const FIELDS=['age','height','weight','neck','chest','waist','hip','thigh','arm'];
+const RANGES={neck:[20,70],chest:[50,200],waist:[40,220],hip:[50,220],thigh:[25,110],arm:[15,70],tw:[30,300]};
 
+function toast(msg){const e=$('toast');e.textContent=msg;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),2600)}
+function ask(msg,fn){$('cfmText').textContent=msg;$('cfmModal').classList.add('on');$('cfmYes').onclick=()=>{closeCfm();fn()}}
+function closeCfm(){$('cfmModal').classList.remove('on')}
+function dateStr(iso){try{return new Date(iso).toLocaleDateString(lang==='ar'?'ar-JO':'en-GB')}catch(e){return String(iso).slice(0,10)}}
+function dtStr(ms){try{return new Date(ms).toLocaleString(lang==='ar'?'ar-JO':'en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}}
+
+/* ================= navigation, language, theme ================= */
+function showTab(n){
+ tab=n;store.set('bh_tab',n);
+ document.querySelectorAll('.tab').forEach(e=>e.classList.toggle('on',e.id==='tab-'+n));
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===n));
+ if(n==='track')renderTrack();if(n==='daily')renderDaily();if(n==='hist')renderHistory();if(n==='sub')renderSub();
+ window.scrollTo(0,0);
+}
+function renderAll(){renderBanner();if(last)render();renderHistory();renderTrack();renderDaily();renderSub()}
 function applyLang(){
- document.documentElement.lang=lang;
- document.documentElement.dir=lang==='ar'?'rtl':'ltr';
- document.title=t('title');
+ document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+ document.title=t('title')+' | Dahshan Soft';
  document.querySelectorAll('[data-i18n]').forEach(e=>{e.textContent=t(e.getAttribute('data-i18n'))});
  $('langBtn').textContent=lang==='ar'?'English':'العربية';
- if(last)render();
- renderHistory();
+ renderAll();
 }
-function toggleLang(){lang=lang==='ar'?'en':'ar';localStorage.setItem('bh_lang',lang);applyLang()}
+function toggleLang(){lang=lang==='ar'?'en':'ar';store.set('bh_lang',lang);applyLang()}
+function applyTheme(){document.documentElement.setAttribute('data-theme',theme);$('themeBtn').textContent=theme==='dark'?'☀️':'🌙'}
+function toggleTheme(){theme=theme==='dark'?'light':'dark';store.set('bh_theme',theme);applyTheme()}
+function showDisc(force){if(force||store.get('bh_ok','')!=='1')$('discModal').classList.add('on')}
+function acceptDisc(){store.set('bh_ok','1');$('discModal').classList.remove('on')}
 
+/* ================= subscription ================= */
+let billing=null; // Google Play Billing service (inside the Play Store app only)
+if(document.referrer.indexOf('android-app://'+TWA_ID)===0)store.set('bh_twa','1');
+const inTwa=()=>store.get('bh_twa','')==='1';
+function trialStart(){let s=+store.get('bh_first','0');if(!s){s=Date.now();store.set('bh_first',String(s))}return s}
+function devId(){let d=store.get('bh_dev','');if(d.length!==3){const A='23456789ABCDEFGHJKLMNPQRSTUVWXYZ',a=new Uint8Array(3);try{crypto.getRandomValues(a)}catch(e){for(let i=0;i<3;i++)a[i]=Math.random()*256|0}d=Array.from(a).map(x=>A[x%32]).join('');store.set('bh_dev',d)}return d}
+function h53(str){let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return 4294967296*(2097151&h2)+(h1>>>0)}
+const normDev=s=>String(s).toUpperCase().replace(/[^A-Z0-9]/g,'');
+const PLANS=[12,6,3,1]; // مدد الاشتراك بالأشهر
+const ym=d=>String(d.getFullYear()%100).padStart(2,'0')+String(d.getMonth()+1).padStart(2,'0');
+function codeFor(dev,yymm,months){return String(h53(normDev(dev)+'|'+yymm+'|'+months+'|'+SECRET)%100).padStart(2,'0')}
+function sub(){
+ const exp=+store.get('bh_exp','0');
+ if(exp>Date.now())return{pro:true,paid:true,exp:exp};
+ if(inTwa()&&!billing)return{pro:true,open:true}; // Play app before Play Billing is set up: everything open
+ const left=Math.ceil((trialStart()+TRIAL_DAYS*864e5-Date.now())/864e5);
+ if(left>0)return{pro:true,trial:true,left:left};
+ return{pro:false};
+}
+const isPro=()=>sub().pro;
+function lockCard(){return '<section class="card lock"><div class="ic">🔒</div><h3 style="margin:6px 0;color:var(--main2)">'+t('lk_title')+'</h3><p style="font-size:14px;margin:0 0 12px">'+t('lk_body')+'</p><button class="b grn" onclick="showTab(\'sub\')">⭐ '+t('act_btn')+'</button></section>'}
+function renderBanner(){
+ const s=sub();let h='';
+ if(s.trial)h='<div class="banner"><span>'+t('tr_left').replace('{n}',s.left)+'</span><button class="b grn small" onclick="showTab(\'sub\')">'+t('act_btn')+'</button></div>';
+ else if(!s.pro)h='<div class="banner exp"><span>'+t('tr_end')+'</span><button class="b grn small" onclick="showTab(\'sub\')">'+t('act_btn')+'</button></div>';
+ $('banner').innerHTML=h;
+}
+function renderSub(){
+ const s=sub();let h='<section class="card"><h2>'+t('sb_head')+'</h2>';
+ h+='<div class="'+(s.pro?'infobox':'warnbox')+'"><b>'+(s.paid?t('st_pro').replace('{d}',dateStr(s.exp)):s.open?t('st_free'):s.trial?t('st_trial').replace('{n}',s.left):t('st_exp'))+'</b></div>';
+ h+='<ul>'+T[lang].sb_feat.map(x=>'<li>✅ '+x+'</li>').join('')+'</ul><p class="hint">'+t('sb_free')+'</p></section>';
+ if(!s.open){
+  h+='<section class="card"><h2>'+t('act_btn')+'</h2>';
+  if(billing){
+   h+='<div class="btns"><div class="plan"><span>'+t('pl_m')+'</span><b id="prM">…</b><button class="b small" onclick="buyPlay(SKU_M)">'+t('buy')+'</button></div><div class="plan best"><span class="tag good">'+t('pl_save')+'</span><br><span>'+t('pl_y')+'</span><b id="prY">…</b><button class="b grn small" onclick="buyPlay(SKU_Y)">'+t('buy')+'</button></div></div>';
+   h+='<div class="btns"><button class="b sec small" onclick="checkPlay(true)">'+t('restore_buy')+'</button></div>';
+  }else{
+   h+='<div class="btns"><div class="plan"><span>'+t('pl_m')+'</span><b>'+PRICE_M+'</b></div><div class="plan best"><span class="tag good">'+t('pl_save')+'</span><br><span>'+t('pl_y')+'</span><b>'+PRICE_Y+'</b></div></div>';
+   h+='<p style="font-size:14px">'+t('how_web')+'</p>';
+   h+='<p style="text-align:center;margin:8px 0"><span class="hint">'+t('dev_lbl')+'</span><br><span class="devid">'+devId()+'</span></p>';
+   h+='<div class="btns" style="justify-content:center"><button class="b grn" onclick="waReq()">'+t('wa_req')+'</button></div>';
+   h+='<div style="margin-top:14px"><label for="code">'+t('code_lbl')+'</label><div style="display:flex;gap:8px"><input id="code" dir="ltr" type="tel" inputmode="numeric" maxlength="2" placeholder="'+t('code_ph')+'" autocomplete="off" style="font-size:22px;text-align:center;letter-spacing:6px"><button class="b" onclick="activateCode()">'+t('code_btn')+'</button></div></div>';
+  }
+  h+='</section>';
+ }
+ $('subBox').innerHTML=h;
+ if(billing)fillPrices();
+}
+function waReq(){location.href='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(t('wa_msg').replace('{id}',devId()))}
+function activateCode(){
+ const lk=+store.get('bh_lk','0');if(lk>Date.now()){toast(t('code_old'));return}
+ const v=String($('code').value).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/\D/g,'');
+ const now=new Date(),prevM=new Date(now.getFullYear(),now.getMonth()-1,15);
+ let months=0,usedK='';
+ if(v.length===2)for(const mo of [ym(now),ym(prevM)]){for(const p of PLANS){if(codeFor(devId(),mo,p)===v){months=p;usedK=mo+'|'+p;break}}if(months)break}
+ if(!months){const f=+store.get('bh_fail','0')+1;store.set('bh_fail',String(f));if(f>=5){store.set('bh_lk',String(Date.now()+36e5));store.set('bh_fail','0');toast(t('code_old'))}else toast(t('code_bad'));return}
+ store.set('bh_fail','0');
+ const used=jget('bh_used',[]);if(used.indexOf(usedK)>=0){toast(t('code_used'));return}used.push(usedK);jset('bh_used',used.slice(-50));
+ const base=Math.max(Date.now(),+store.get('bh_exp','0')),e=new Date(base);e.setMonth(e.getMonth()+months);
+ const exp=e.getTime();store.set('bh_exp',String(exp));toast(t('code_ok').replace('{d}',dateStr(exp)));renderAll();
+}
+async function initBilling(){
+ if(!('getDigitalGoodsService' in window))return;
+ try{
+  const s=await window.getDigitalGoodsService('https://play.google.com/billing');
+  if(!s)return;
+  const det=await s.getDetails([SKU_M,SKU_Y]);
+  if(!det||!det.length)return; // subscriptions not created yet in Play Console
+  billing=s;billing.det=det;
+  await checkPlay(false);renderAll();
+ }catch(e){}
+}
+async function checkPlay(show){
+ if(!billing)return;
+ try{
+  const p=await billing.listPurchases();
+  if(p&&p.some(x=>x.itemId===SKU_M||x.itemId===SKU_Y)){store.set('bh_exp',String(Date.now()+3*864e5));if(show)toast(t('play_ok'))}
+  else if(+store.get('bh_exp','0')>Date.now()&&store.get('bh_expsrc','')==='play')store.set('bh_exp','0');
+  store.set('bh_expsrc','play');
+  if(show)renderAll();
+ }catch(e){}
+}
+function fillPrices(){
+ const f=id=>{const d=billing.det.find(x=>x.itemId===id);if(!d||!d.price)return'';try{return new Intl.NumberFormat(lang==='ar'?'ar-JO':'en',{style:'currency',currency:d.price.currency}).format(d.price.value)}catch(e){return d.price.value+' '+d.price.currency}};
+ if($('prM'))$('prM').textContent=f(SKU_M);if($('prY'))$('prY').textContent=f(SKU_Y);
+}
+async function buyPlay(sku){
+ try{
+  const req=new PaymentRequest([{supportedMethods:'https://play.google.com/billing',data:{sku:sku}}],{total:{label:'Total',amount:{currency:'USD',value:'0'}}});
+  const res=await req.show();await res.complete('success');
+  await checkPlay(true);
+ }catch(e){toast(t('play_err'))}
+}
+
+/* ================= form ================= */
 function readForm(){
  return {name:$('name').value.trim(),sex:$('sex').value,age:num('age'),height:num('height'),weight:num('weight'),
  neck:num('neck'),chest:num('chest'),waist:num('waist'),hip:num('hip'),thigh:num('thigh'),arm:num('arm'),
  act:parseFloat($('activity').value),goal:$('goal').value,tw:num('tw'),cond:$('cond').value,fast:$('fast').value};
 }
 function fillForm(d){
- $('name').value=d.name||'';$('sex').value=d.sex;
- ['age','height','weight','neck','chest','waist','hip','thigh','arm'].forEach(k=>$(k).value=d[k]==null?'':d[k]);
- $('activity').value=String(d.act);$('goal').value=d.goal;$('tw').value=d.tw==null?'':d.tw;$('cond').value=d.cond||'none';$('fast').value=d.fast||'none';
+ $('name').value=d.name||'';$('sex').value=d.sex||'m';
+ FIELDS.forEach(k=>$(k).value=d[k]==null?'':d[k]);
+ $('activity').value=String(d.act);if(!$('activity').value)$('activity').value='1.375';
+ $('goal').value=d.goal||'health';$('tw').value=d.tw==null?'':d.tw;$('cond').value=d.cond||'none';$('fast').value=d.fast||'none';
+ sexChanged();
 }
-function resetForm(){
- ['name','age','height','weight','neck','chest','waist','hip','thigh','arm','tw'].forEach(k=>$(k).value='');
- $('err').style.display='none';
-}
-function showErr(k){const e=$('err');e.textContent=t(k);e.style.display='block'}
+function sexChanged(){const m=$('sex').value==='m',o=$('cond').querySelector('option[value=preg]');o.disabled=m;o.hidden=m;if(m&&$('cond').value==='preg')$('cond').value='none'}
+function resetForm(){['name','tw'].concat(FIELDS).forEach(k=>{$(k).value='';$(k).classList.remove('bad')});$('err').style.display='none';store.set('bh_draft','')}
+function saveDraft(){jset('bh_draft',readForm())}
+function loadDraft(){const d=jget('bh_draft',null);if(d&&d.sex)fillForm(d)}
+function showErr(msg,field){const e=$('err');e.textContent=msg;e.style.display='block';if(field){$(field).classList.add('bad');$(field).focus()}}
 
+/* ================= body calculations ================= */
 function calc(d){
  const H=d.height/100,r={};const cond=d.cond||'none';
  r.bmi=d.weight/(H*H);
@@ -282,108 +616,93 @@ function calc(d){
  r.whtr=d.waist?d.waist/d.height:null;
  r.whr=(d.waist&&d.hip)?d.waist/d.hip:null;
  r.cw=(d.chest&&d.waist)?d.chest/d.waist:null;
- r.cwCat=null;
- if(r.cw!==null&&d.sex==='m')r.cwCat=r.cw>=1.3?'good':r.cw>=1.15?'mid':'low';
- r.wc=null;
- if(d.waist){r.wc=d.sex==='m'?(d.waist<94?'good':d.waist<102?'warn':'bad'):(d.waist<80?'good':d.waist<88?'warn':'bad')}
+ r.cwCat=null;if(r.cw!==null&&d.sex==='m')r.cwCat=r.cw>=1.3?'good':r.cw>=1.15?'mid':'low';
+ r.wc=null;if(d.waist){r.wc=d.sex==='m'?(d.waist<94?'good':d.waist<102?'warn':'bad'):(d.waist<80?'good':d.waist<88?'warn':'bad')}
  r.armSt=null;if(d.arm){r.armSt=d.arm<(d.sex==='m'?23:22)?'warn':'good'}
- r.thighSt=null;if(d.thigh){r.thighSt=d.thigh<60?'warn':'good'}
+ r.thighSt=null;if(d.thigh){r.thighSt=d.thigh<(d.sex==='m'?48:46)?'warn':'good'}
  r.bf=null;
- try{
-  if(d.neck&&d.waist){
-   if(d.sex==='m'&&d.waist>d.neck)r.bf=495/(1.0324-0.19077*Math.log10(d.waist-d.neck)+0.15456*Math.log10(d.height))-450;
-   else if(d.sex==='f'&&d.hip&&(d.waist+d.hip)>d.neck)r.bf=495/(1.29579-0.35004*Math.log10(d.waist+d.hip-d.neck)+0.22100*Math.log10(d.height))-450;
-  }
- }catch(e){}
- if(r.bf!==null){if(!isFinite(r.bf)||r.bf<2||r.bf>60)r.bf=null}
- if(r.bf!==null){
-  const m=d.sex==='m';
-  r.bfCat=m?(r.bf<6?'low':r.bf<=24?'healthy':r.bf<=30?'high':'veryhigh'):(r.bf<14?'low':r.bf<=31?'healthy':r.bf<=37?'high':'veryhigh');
+ if(d.neck&&d.waist){
+  if(d.sex==='m'&&d.waist>d.neck)r.bf=495/(1.0324-0.19077*Math.log10(d.waist-d.neck)+0.15456*Math.log10(d.height))-450;
+  else if(d.sex==='f'&&d.hip&&(d.waist+d.hip)>d.neck)r.bf=495/(1.29579-0.35004*Math.log10(d.waist+d.hip-d.neck)+0.22100*Math.log10(d.height))-450;
  }
+ if(r.bf!==null&&(!isFinite(r.bf)||r.bf<2||r.bf>60))r.bf=null;
+ if(cond==='preg')r.bf=null;
+ if(r.bf!==null){const m=d.sex==='m';r.bfCat=m?(r.bf<6?'low':r.bf<=24?'healthy':r.bf<=30?'high':'veryhigh'):(r.bf<14?'low':r.bf<=31?'healthy':r.bf<=37?'high':'veryhigh');r.lean=d.weight*(1-r.bf/100)}
  r.bmr=10*d.weight+6.25*d.height-5*d.age+(d.sex==='m'?5:-161);
  r.tdee=r.bmr*d.act;
  r.idealMin=18.5*H*H;r.idealMax=24.9*H*H;
- r.water=d.weight*0.033+(d.act>=1.725?0.5:d.act>=1.55?0.35:d.act>=1.375?0.15:0);
+ r.water=d.weight*0.033+(d.act>=1.9?0.7:d.act>=1.725?0.5:d.act>=1.55?0.35:d.act>=1.375?0.15:0)+(cond==='preg'?0.5:0);
  r.cups=Math.max(4,Math.round(r.water/0.25));
  r.tw=null;r.twLow=false;
  if(d.tw&&d.tw>=30&&d.tw<=300){const df=d.tw-d.weight,ab=Math.abs(df);let a=null,b=null;if(ab>=0.5){const lo=0.25,hi=df<0?0.75:0.5;a=Math.max(1,Math.round(ab/hi));b=Math.max(a,Math.round(ab/lo))}r.tw={df:df,a:a,b:b};r.twLow=d.tw/(H*H)<18.5}
- // statuses
  r.bmiSt=r.bmiCat==='normal'?'good':(r.bmiCat==='ob1'||r.bmiCat==='ob2')?'bad':'warn';
  if(r.whtr!==null){r.whtrCat=r.whtr<0.5?'good':r.whtr<0.6?'warn':'bad'}
- if(r.whr!==null){
-  const m=d.sex==='m';
-  r.whrCat=m?(r.whr<0.9?'good':r.whr<1?'warn':'bad'):(r.whr<0.85?'good':r.whr<0.9?'warn':'bad');
- }
+ if(r.whr!==null){const m=d.sex==='m';r.whrCat=m?(r.whr<0.9?'good':r.whr<1?'warn':'bad'):(r.whr<0.85?'good':r.whr<0.9?'warn':'bad')}
  if(r.bf!==null){r.bfSt=r.bfCat==='healthy'?'good':r.bfCat==='veryhigh'?'bad':'warn'}
- // score
- const sc=[];
- sc.push({good:100,warn:70,bad:35}[r.bmiSt]);
- if(r.bmi>=35||r.bmi<17)sc[0]=30;
- if(r.whtrCat)sc.push({good:100,warn:65,bad:30}[r.whtrCat]);
- if(r.whrCat)sc.push({good:100,warn:65,bad:35}[r.whrCat]);
- if(r.bfSt)sc.push({good:100,warn:65,bad:30}[r.bfSt]);
- r.score=Math.round(sc.reduce((a,b)=>a+b,0)/sc.length);
- r.doctor=(r.bmi>=35||r.bmi<17||d.age>=60||r.bfCat==='veryhigh'||r.whtr>=0.6||cond!=='none');
+ r.parts=[];
+ let bs={good:100,warn:70,bad:35}[r.bmiSt];if(r.bmi>=35||r.bmi<17)bs=30;
+ r.parts.push(['m_bmi',bs]);
+ if(r.whtrCat)r.parts.push(['m_whtr',{good:100,warn:65,bad:30}[r.whtrCat]]);
+ if(r.whrCat)r.parts.push(['m_whr',{good:100,warn:65,bad:35}[r.whrCat]]);
+ if(r.bfSt)r.parts.push(['m_bf',{good:100,warn:65,bad:30}[r.bfSt]]);
+ r.score=Math.round(r.parts.reduce((a,b)=>a+b[1],0)/r.parts.length);
+ r.doctor=(r.bmi>=35||r.bmi<17||d.age>=60||r.bfCat==='veryhigh'||(r.whtr!==null&&r.whtr>=0.6)||cond!=='none');
  r.skinny=(r.bf!==null&&r.bmiCat==='normal'&&(r.bfCat==='high'||r.bfCat==='veryhigh'));
  r.lowMuscle=(r.armSt==='warn'||r.thighSt==='warn');
- // plan
  let goal=d.goal;r.goalNote=false;r.healthNote=false;
  if(r.bmi<18.5&&goal==='lose'){goal='gain';r.goalNote=true}
- if(cond==='preg'&&(goal==='lose'||goal==='health')){goal='maintain'}
+ if(cond==='preg')goal='maintain';
  r.goal=goal;
- {let lo={lose:8000,health:7000,maintain:7000,gain:6000}[goal],hi={lose:10000,health:9000,maintain:8000,gain:8000}[goal];if(d.age>=60||r.bmi>=30){lo=5000;hi=7000}r.steps=[lo,hi]}
+ {let lo={lose:8000,health:7000,maintain:7000,gain:6000}[goal],hi={lose:10000,health:9000,maintain:8000,gain:8000}[goal];if(d.age>=60||r.bmi>=30||cond==='preg'){lo=5000;hi=7000}r.steps=[lo,hi]}
  let k=goal==='lose'?r.tdee-500:goal==='gain'?r.tdee+300:r.tdee;
  if(goal==='health'){r.healthNote=true;k=r.bmi<18.5?r.tdee+250:r.bmi>=25?r.tdee-300:r.tdee}
+ if(cond==='preg')k=r.tdee+300;
  k=Math.max(k,d.sex==='f'?1200:1500);
  r.kcal=Math.round(k/10)*10;
+ r.rate=cond==='preg'?0:(r.kcal-r.tdee)*7/7700;
  const pk={lose:1.6,gain:1.8,maintain:1.2,health:1.3}[goal];
- r.protein=Math.round(Math.min(d.weight,100)*pk);
+ r.protein=Math.round(Math.min(d.weight,r.idealMax*1.1,120)*pk);
  r.fat=Math.round(r.kcal*0.27/9);
  r.carbs=Math.max(0,Math.round((r.kcal-r.protein*4-r.fat*9)/4));
  return r;
 }
-
 function run(){
- $('err').style.display='none';
+ $('err').style.display='none';document.querySelectorAll('input.bad').forEach(e=>e.classList.remove('bad'));
  const d=readForm();
- if(!d.age||!d.height||!d.weight){showErr('e_req');return}
- if(d.age<18){showErr('e_age');return}
- if(d.height<120||d.height>230||d.weight<30||d.weight>300||d.age>100){showErr('e_range');return}
+ if(!d.age||!d.height||!d.weight){showErr(t('e_req'),!d.age?'age':!d.height?'height':'weight');return}
+ if(d.age<18){showErr(t('e_age'),'age');return}
+ if(d.height<120||d.height>230){showErr(t('e_range'),'height');return}
+ if(d.weight<30||d.weight>300){showErr(t('e_range'),'weight');return}
+ if(d.age>100){showErr(t('e_range'),'age');return}
+ for(const f in RANGES){const v=d[f];if(v!=null&&(v<RANGES[f][0]||v>RANGES[f][1])){showErr(t('e_meas').replace('{f}',t(f)).replace('{a}',RANGES[f][0]).replace('{b}',RANGES[f][1]),f);return}}
+ if(d.neck&&d.waist&&d.neck>=d.waist){showErr(t('e_neckwaist'),'neck');return}
+ if(d.sex==='m'&&d.cond==='preg')d.cond='none';
  last={d:d,r:calc(d),date:new Date().toISOString()};
- render();
- $('reportWrap').style.display='block';
+ render();$('reportWrap').style.display='block';
  setTimeout(()=>$('reportWrap').scrollIntoView({behavior:'smooth'}),50);
 }
-
-function scoreInfo(s){
- if(s>=80)return {c:'var(--good)',l:t('s_exc')};
- if(s>=60)return {c:'#7bb333',l:t('s_good')};
- if(s>=40)return {c:'var(--warn)',l:t('s_mid')};
- return {c:'var(--bad)',l:t('s_low')};
-}
-function metric(label,val,note,st){
- return '<div class="m '+(st||'')+'"><div class="l">'+esc(label)+'</div><div class="v">'+val+'</div><div class="n">'+(note||'')+'</div></div>';
-}
-function dateStr(iso){
- try{return new Date(iso).toLocaleDateString(lang==='ar'?'ar-JO':'en-GB')}catch(e){return iso.slice(0,10)}
-}
+function scoreInfo(s){if(s>=80)return{c:'var(--good)',l:t('s_exc')};if(s>=60)return{c:'#7bb333',l:t('s_good')};if(s>=40)return{c:'var(--warn)',l:t('s_mid')};return{c:'var(--bad)',l:t('s_low')}}
+function metric(label,val,note,st){return '<div class="m '+(st||'')+'"><div class="l">'+esc(label)+'</div><div class="v">'+val+'</div><div class="n">'+(note||'')+'</div></div>'}
 
 function render(){
  if(!last)return;
- const d=last.d,r=last.r,si=scoreInfo(r.score);
- let h='';
- h+='<section class="card"><h2>'+t('rep_title')+(d.name?' — '+esc(d.name):'')+'</h2>';
- h+='<div class="score"><div class="ring" style="background:conic-gradient('+si.c+' '+(r.score*3.6)+'deg,#e3ece8 0)"><span>'+r.score+'</span></div>';
+ const d=last.d,r=last.r,si=scoreInfo(r.score),preg=d.cond==='preg',pro=isPro();
+ let h='<section class="card"><h2>'+t('rep_title')+(d.name?' — '+esc(d.name):'')+'</h2>';
+ h+='<div class="score"><div class="ring" style="background:conic-gradient('+si.c+' '+(r.score*3.6)+'deg,var(--line) 0)"><span>'+r.score+'</span></div>';
  h+='<div><div style="font-size:13px;color:var(--mute)">'+t('score')+'</div><div style="font-size:22px;font-weight:800;color:'+si.c+'">'+si.l+'</div>';
  h+='<div style="font-size:13px;color:var(--mute)">'+t('date')+': '+dateStr(last.date)+'</div></div></div>';
+ h+='<details><summary>'+t('sb_title')+'</summary>';
+ r.parts.forEach(p=>{const c=p[1]>=80?'var(--good)':p[1]>=60?'var(--warn)':'var(--bad)';h+='<div class="brow"><span>'+t(p[0])+'</span><b>'+p[1]+'</b></div><div class="bar"><i style="width:'+p[1]+'%;background:'+c+'"></i></div>'});
+ if(r.parts.length<3)h+='<p class="hint">'+t('sb_more')+'</p>';
+ h+='</details>';
  if(r.doctor)h+='<div class="warnbox">⚠️ '+t('w_doctor')+'</div>';
- if(r.goalNote)h+='<div class="warnbox">ℹ️ '+t('w_underlose')+'</div>';
- if(r.healthNote)h+='<div class="warnbox">ℹ️ '+t(r.bmiCat==='under'?'hn_under':r.bmiCat==='normal'?'hn_normal':'hn_over')+'</div>';
- if(d.cond==='preg')h+='<div class="warnbox">🤰 '+t('w_preg')+'</div>';
+ if(r.goalNote)h+='<div class="infobox">ℹ️ '+t('w_underlose')+'</div>';
+ if(r.healthNote&&!preg)h+='<div class="infobox">ℹ️ '+t(r.bmiCat==='under'?'hn_under':r.bmiCat==='normal'?'hn_normal':'hn_over')+'</div>';
+ if(preg)h+='<div class="warnbox">🤰 '+t('w_preg')+'</div>';
  if(d.cond==='chronic')h+='<div class="warnbox">⚕️ '+t('w_chronic')+'</div>';
  if((d.fast||'none')!=='none'&&(d.cond||'none')!=='none')h+='<div class="warnbox">🌙 '+t('w_fastdoc')+'</div>';
- if(r.skinny)h+='<div class="warnbox">ℹ️ '+t('w_skinny')+'</div>';
- if(r.twLow)h+='<div class="warnbox">ℹ️ '+t('tw_low')+'</div>';
+ if(r.skinny)h+='<div class="infobox">ℹ️ '+t('w_skinny')+'</div>';
+ if(r.twLow)h+='<div class="infobox">ℹ️ '+t('tw_low')+'</div>';
  h+='</section>';
 
  h+='<section class="card"><h2>'+t('sec_find')+'</h2><div class="metrics">';
@@ -391,6 +710,7 @@ function render(){
  if(r.whtr!==null)h+=metric(t('m_whtr'),r.whtr.toFixed(2),t('whtr_'+r.whtrCat),r.whtrCat);
  if(r.whr!==null)h+=metric(t('m_whr'),r.whr.toFixed(2),t('whr_'+r.whrCat),r.whrCat);
  if(r.bf!==null)h+=metric(t('m_bf'),r1(r.bf)+'%',t('bf_'+r.bfCat),r.bfSt);
+ if(r.lean)h+=metric(t('m_lean'),r1(r.lean)+' '+t('kg'),'');
  h+=metric(t('m_ideal'),Math.round(r.idealMin)+' - '+Math.round(r.idealMax)+' '+t('kg'),'');
  h+=metric(t('m_bmr'),Math.round(r.bmr),t('kcal'));
  h+=metric(t('m_tdee'),Math.round(r.tdee),t('kcal'));
@@ -399,115 +719,312 @@ function render(){
  if(r.wc)h+=metric(t('m_waist'),d.waist+' '+t('pg_cm'),t('wc_'+r.wc),r.wc);
  if(r.armSt)h+=metric(t('m_arm'),d.arm+' '+t('pg_cm'),t(r.armSt==='good'?'arm_ok':'arm_low'),r.armSt);
  if(r.thighSt)h+=metric(t('m_thigh'),d.thigh+' '+t('pg_cm'),t(r.thighSt==='good'?'thigh_ok':'thigh_low'),r.thighSt);
- if(r.tw){const x=r.tw;h+=metric(t('m_tw'),d.tw+' '+t('kg'),x.a===null?t('tw_near'):((x.df>0?'+':'')+r1(x.df)+' '+t('kg')+' · '+x.a+'-'+x.b+' '+t('wk')));}
+ if(r.tw&&!preg){const x=r.tw;h+=metric(t('m_tw'),d.tw+' '+t('kg'),x.a===null?t('tw_near'):((x.df>0?'+':'')+r1(x.df)+' '+t('kg')+' · '+x.a+'-'+x.b+' '+t('wk')))}
  h+=metric(t('m_steps'),r.steps[0]+' - '+r.steps[1],t('steps'));
  h+='</div>';
- if(r.bf===null)h+='<p class="hint">'+t('w_nobf')+'</p>';
+ if(r.bf===null&&!preg)h+='<p class="hint">'+t('w_nobf')+'</p>';
  const ms=[['height',d.height],['weight',d.weight],['neck',d.neck],['chest',d.chest],['waist',d.waist],['hip',d.hip],['thigh',d.thigh],['arm',d.arm]].filter(x=>x[1]);
  h+='<h3 style="margin:16px 0 6px;font-size:15px">'+t('m_meas')+'</h3><table><tbody>';
  ms.forEach(x=>{h+='<tr><td>'+t(x[0])+'</td><td><b>'+x[1]+'</b></td></tr>'});
- h+='</tbody></table></section>';
+ h+='</tbody></table>';
+ h+='<details class="noprint"><summary>'+t('method_title')+'</summary><ul>'+T[lang].method_body.map(x=>'<li>'+x+'</li>').join('')+'</ul></details></section>';
 
- // progress vs previous saved record
- {
-  const prev=getHist().find(x=>x.date<last.date);
-  if(prev){
-   const keys=[['weight','weight'],['waist','waist'],['hip','hip'],['neck','neck'],['chest','chest'],['thigh','thigh'],['arm','arm']];
-   const dl={};let rows='';
-   keys.forEach(k=>{const a=d[k[1]],b=prev.d[k[1]];if(a!=null&&b!=null){const df=r1(a-b);dl[k[0]]=df;rows+='<tr><td>'+t(k[1])+'</td><td>'+b+'</td><td>'+a+'</td><td><b>'+(df>0?'+':'')+df+'</b></td></tr>'}});
-   if(rows){
-    let msg='pg_stable';
-    const dw=dl.weight||0,dwa=dl.waist,da=dl.arm,dt=dl.thigh,dc=dl.chest;
-    if(dw<=-0.5&&dwa!==undefined&&dwa<=-1&&(da===undefined||da>=-0.5)&&(dt===undefined||dt>=-0.5))msg='pg_fat';
-    else if(dwa!==undefined&&dwa<=0.5&&((da!==undefined&&da>=0.5)||(dt!==undefined&&dt>=0.5)||(dc!==undefined&&dc>=0.5)))msg='pg_muscle';
-    else if(dwa!==undefined&&dwa>=1&&dw>=0.5)msg='pg_fatgain';
-    else if(dw<=-0.5&&((da!==undefined&&da<=-1)||(dt!==undefined&&dt<=-1)))msg='pg_lossmuscle';
-    h+='<section class="card"><h2>'+t('sec_prog')+'</h2><table><thead><tr><th></th><th>'+dateStr(prev.date)+'</th><th>'+dateStr(last.date)+'</th><th>'+t('pg_note')+'</th></tr></thead><tbody>'+rows+'</tbody></table><div class="warnbox">'+t(msg)+'</div></section>';
-   }
+ if(!pro){h+=lockCard();h+='<section class="card"><p class="disc" style="margin:0">'+t('disc')+'</p></section>';$('report').innerHTML=h;return}
+
+ // progress
+ const prev=getHist().find(x=>x.date<last.date&&(x.d.name||'')===(d.name||''));
+ if(prev){
+  const dl={};let rows='';
+  ['weight','waist','hip','neck','chest','thigh','arm'].forEach(k=>{const a=d[k],b=prev.d[k];if(a!=null&&b!=null){const df=r1(a-b);dl[k]=df;rows+='<tr><td>'+t(k)+'</td><td>'+b+'</td><td>'+a+'</td><td><b>'+(df>0?'+':'')+df+'</b></td></tr>'}});
+  if(rows){
+   let msg='pg_stable';const dw=dl.weight||0,dwa=dl.waist,da=dl.arm,dt=dl.thigh,dc=dl.chest;
+   if(dw<=-0.5&&dwa!==undefined&&dwa<=-1&&(da===undefined||da>=-0.5)&&(dt===undefined||dt>=-0.5))msg='pg_fat';
+   else if(dwa!==undefined&&dwa<=0.5&&((da!==undefined&&da>=0.5)||(dt!==undefined&&dt>=0.5)||(dc!==undefined&&dc>=0.5)))msg='pg_muscle';
+   else if(dwa!==undefined&&dwa>=1&&dw>=0.5)msg='pg_fatgain';
+   else if(dw<=-0.5&&((da!==undefined&&da<=-1)||(dt!==undefined&&dt<=-1)))msg='pg_lossmuscle';
+   h+='<section class="card"><h2>'+t('sec_prog')+'</h2><table><thead><tr><th></th><th>'+dateStr(prev.date)+'</th><th>'+dateStr(last.date)+'</th><th>'+t('pg_note')+'</th></tr></thead><tbody>'+rows+'</tbody></table><div class="infobox">'+t(msg)+'</div></section>';
   }
  }
-
  // diet
  const ramd=(d.fast==='ramadan');
  const meals=ramd?T[lang].ram:T[lang].meals[r.goal];
  const parts=ramd?[['r_i',0.40,'i'],['r_n',0.20,'n'],['r_s',0.40,'s']]:[['mb',0.25,'b'],['ml',0.35,'l'],['md',0.25,'d'],['ms',0.15,'s']];
  h+='<section class="card"><h2>'+t('sec_diet')+'</h2>';
- h+='<p><b>'+t('target')+':</b> <span class="tag">'+r.kcal+' '+t('kcal')+'</span> <span class="tag">'+t('protein')+' '+r.protein+t('g')+'</span> <span class="tag">'+t('carbs')+' '+r.carbs+t('g')+'</span> <span class="tag">'+t('fat')+' '+r.fat+t('g')+'</span></p>';
- parts.forEach(p=>{
-  h+='<div class="meal"><b>'+t(p[0])+'</b> <span class="tag">≈ '+Math.round(r.kcal*p[1]/10)*10+' '+t('kcal')+'</span><br>'+esc(meals[p[2]])+'</div>';
- });
- if(ramd){const c=r.cups,a=Math.max(1,Math.round(c*0.25)),cc=Math.max(1,Math.round(c*0.25)),b=Math.max(1,c-a-cc);h+='<div class="warnbox">💧 '+t('ram_water').replace('{l}',r1(r.water)).replace('{t}',c).replace('{a}',a).replace('{b}',b).replace('{c}',cc)+'</div>'}
- if(d.fast==='mt')h+='<div class="warnbox">🌙 '+t('mt_note')+'</div>';
+ h+='<p><b>'+t('target')+':</b> <span class="tag">'+r.kcal+' '+t('kcal')+'</span> <span class="tag">'+t('protein')+' '+r.protein+t('g')+'</span> <span class="tag">'+t('carbs')+' '+r.carbs+t('g')+'</span> <span class="tag">'+t('fat')+' '+r.fat+t('g')+'</span>';
+ if(Math.abs(r.rate)>=0.05)h+=' <span class="tag">'+t('m_rate')+': '+(r.rate>0?'+':'')+r.rate.toFixed(2)+' '+t('per_wk')+'</span>';
+ h+='</p>';
+ parts.forEach(p=>{h+='<div class="meal"><b>'+t(p[0])+'</b> <span class="tag">≈ '+Math.round(r.kcal*p[1]/10)*10+' '+t('kcal')+'</span><br>'+esc(meals[p[2]])+'</div>'});
+ if(ramd){const c=r.cups,a=Math.max(1,Math.round(c*0.25)),cc=Math.max(1,Math.round(c*0.25)),b=Math.max(1,c-a-cc);h+='<div class="infobox">💧 '+t('ram_water').replace('{l}',r1(r.water)).replace('{t}',c).replace('{a}',a).replace('{b}',b).replace('{c}',cc)+'</div>'}
+ if(d.fast==='mt')h+='<div class="infobox">🌙 '+t('mt_note')+'</div>';
  h+='</section>';
-
  // exercise
- const plan=ramd?T[lang].ramplan:T[lang].plans[r.goal];
+ const plan=preg?T[lang].pregplan:ramd?T[lang].ramplan:T[lang].plans[r.goal];
  h+='<section class="card"><h2>'+t('sec_ex')+'</h2>';
- if(ramd)h+='<div class="warnbox">'+t('ram_ex')+'</div>';
- if(r.lowMuscle)h+='<div class="warnbox">'+t('ex_muscle')+'</div>';
- if(r.bmi>=30)h+='<div class="warnbox">'+t('ex_low')+'</div>';
- if(d.age>=60)h+='<div class="warnbox">'+t('ex_old')+'</div>';
+ if(preg)h+='<div class="warnbox">🤰 '+t('ex_preg')+'</div>';
+ if(ramd&&!preg)h+='<div class="infobox">'+t('ram_ex')+'</div>';
+ if(r.lowMuscle&&!preg)h+='<div class="infobox">'+t('ex_muscle')+'</div>';
+ if(r.bmi>=30&&!preg)h+='<div class="infobox">'+t('ex_low')+'</div>';
+ if(d.age>=60)h+='<div class="infobox">'+t('ex_old')+'</div>';
  h+='<table><tbody>';
  plan.forEach((x,i)=>{h+='<tr><td style="white-space:nowrap"><b>'+T[lang].days[i]+'</b></td><td>'+esc(x)+'</td></tr>'});
  h+='</tbody></table></section>';
-
  // tips
  h+='<section class="card"><h2>'+t('sec_tips')+'</h2><ul>';
  for(let i=1;i<=7;i++)h+='<li>'+t('tip'+i)+'</li>';
- h+='</ul><p class="disc">'+t('disc')+'</p></section>';
+ h+='</ul><p class="disc">'+t('disc')+'</p><p class="disc">'+t('sh_from')+'</p></section>';
  $('report').innerHTML=h;
 }
 
-// history
-function getHist(){try{return JSON.parse(localStorage.getItem('bh_hist')||'[]')}catch(e){return[]}}
-function setHist(a){try{localStorage.setItem('bh_hist',JSON.stringify(a))}catch(e){}}
+/* ================= history ================= */
+function getHist(){const a=jget('bh_hist',[]);return Array.isArray(a)?a.filter(x=>x&&x.d&&x.date):[]}
+function setHist(a){a.sort((x,y)=>x.date<y.date?1:-1);jset('bh_hist',a)}
 function saveRec(){
- if(!last)return;
- const a=getHist();
- a.unshift({date:last.date,d:last.d,bmi:r1(last.r.bmi),score:last.r.score});
- setHist(a);renderHistory();
- alert(t('h_saved'));
+ if(!last)return;const a=getHist();
+ if(a.some(x=>x.date===last.date)){toast(t('h_dup'));return}
+ a.push({date:last.date,d:last.d,bmi:r1(last.r.bmi),score:last.r.score});setHist(a);
+ prof=names().length<2?'__all':(last.d.name||'');store.set('bh_prof',prof);
+ renderHistory();renderDaily();toast(t('h_saved'));
+}
+function names(){const s=[];getHist().forEach(x=>{const n=x.d.name||'';if(s.indexOf(n)<0)s.push(n)});return s}
+function filtered(){const a=getHist();return prof==='__all'?a:a.filter(x=>(x.d.name||'')===prof)}
+function setProf(v){prof=v;store.set('bh_prof',v);renderHistory()}
+function setChart(v){chartKey=v;store.set('bh_chart',v);renderHistory()}
+function chartVal(x,k){if(k==='weight')return x.d.weight;if(k==='waist')return x.d.waist||null;if(k==='bmi')return x.bmi;return x.score}
+function lineChart(pts,color){
+ const mn=Math.min.apply(null,pts),mx=Math.max.apply(null,pts),W=300,Hh=120,pd=16,rg=(mx-mn)||1;
+ const xy=pts.map((v,i)=>[r1(pd+i*(W-2*pd)/Math.max(1,pts.length-1)),r1(Hh-pd-(v-mn)/rg*(Hh-2*pd-8))]);
+ return '<svg viewBox="0 0 '+W+' '+Hh+'" style="width:100%;max-width:460px;direction:ltr;background:var(--chart);border-radius:12px;margin-bottom:10px"><polyline fill="none" stroke="'+(color||'#0a74c4')+'" stroke-width="2.5" points="'+xy.map(p=>p.join(',')).join(' ')+'"/>'
+  +xy.map((p,i)=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="'+(color||'#0a74c4')+'"/><text x="'+p[0]+'" y="'+(p[1]-7)+'" font-size="9" text-anchor="middle" style="fill:var(--ink)">'+pts[i]+'</text>').join('')+'</svg>';
 }
 function renderHistory(){
- const a=getHist(),box=$('history');
- if(!a.length){box.innerHTML='<p class="hint">'+t('h_empty')+'</p>';return}
+ const all=getHist(),box=$('history');
+ $('names').innerHTML=names().filter(n=>n).map(n=>'<option value="'+esc(n)+'">').join('');
+ if(!all.length){box.innerHTML='<p class="hint">'+t('h_empty')+'</p>';return}
+ const ns=names();if(prof!=='__all'&&ns.indexOf(prof)<0)prof='__all';
+ const a=filtered(),pro=isPro();
  let h='';
- if(a.length>=2){
-  const pts=a.slice(0,12).reverse().map(x=>x.d.weight);
-  const mn=Math.min.apply(null,pts),mx=Math.max.apply(null,pts),W=300,Hh=110,pd=14,rg=(mx-mn)||1;
-  const xy=pts.map((v,i)=>[pd+i*(W-2*pd)/(pts.length-1),Hh-pd-(v-mn)/rg*(Hh-2*pd)]);
-  h+='<h3 style="margin:0 0 6px;font-size:15px">'+t('h_chart')+'</h3><svg viewBox="0 0 '+W+' '+Hh+'" style="width:100%;max-width:420px;direction:ltr;background:#f6faf8;border-radius:12px"><polyline fill="none" stroke="#0f7b6c" stroke-width="2.5" points="'+xy.map(p=>p.join(',')).join(' ')+'"/>'
-   +xy.map((p,i)=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="#0f7b6c"/><text x="'+p[0]+'" y="'+(p[1]-7)+'" font-size="9" text-anchor="middle" fill="#1d2b27">'+pts[i]+'</text>').join('')+'</svg>';
+ if(ns.length>1){
+  h+='<div class="tools"><label style="margin:0">'+t('prof')+'</label><select onchange="setProf(this.value)"><option value="__all"'+(prof==='__all'?' selected':'')+'>'+t('prof_all')+'</option>';
+  ns.forEach(n=>{h+='<option value="'+esc(n)+'"'+(prof===n?' selected':'')+'>'+esc(n||t('prof_none'))+'</option>'});
+  h+='</select></div>';
  }
- h+='<table><thead><tr><th>'+t('h_date')+'</th><th>'+t('h_w')+'</th><th>BMI</th><th>'+t('h_s')+'</th><th></th></tr></thead><tbody>';
+ const days=Math.floor((Date.now()-new Date(a[0].date).getTime())/864e5);
+ if(days>=1)h+='<p class="hint" style="margin-top:0">'+t('last_ago').replace('{n}',days)+(days>=14?' <b>'+t('remeasure')+'</b>':'')+'</p>';
+ const one=prof!=='__all'||ns.length===1;
+ if(one&&a.length>=2&&pro){
+  const recs=a.slice(0,12).reverse().filter(x=>chartVal(x,chartKey)!=null);
+  h+='<div class="tools"><b style="font-size:15px">'+t('h_chart')+'</b><select onchange="setChart(this.value)">'+['weight','waist','bmi','score'].map(k=>'<option value="'+k+'"'+(k===chartKey?' selected':'')+'>'+t('ch_'+k)+'</option>').join('')+'</select></div>';
+  if(recs.length>=2)h+=lineChart(recs.map(x=>chartVal(x,chartKey)));
+ }
+ h+='<div style="overflow-x:auto"><table><thead><tr><th>'+t('h_date')+'</th><th>'+t('h_w')+'</th><th>BMI</th><th>'+t('h_s')+'</th><th></th></tr></thead><tbody>';
  a.forEach((x,i)=>{
-  const prev=a[i+1];
-  let chg='';
-  if(prev){const dw=r1(x.d.weight-prev.d.weight);chg=' <span class="tag" title="'+t('h_chg')+'">'+(dw>0?'+':'')+dw+'</span>'}
+  const prev=a.slice(i+1).find(y=>(y.d.name||'')===(x.d.name||''));
+  let chg='';if(prev){const dw=r1(x.d.weight-prev.d.weight);chg=' <span class="tag" title="'+esc(t('h_chg'))+'">'+(dw>0?'+':'')+dw+'</span>'}
+  const id=esc(x.date);
   h+='<tr><td>'+dateStr(x.date)+(x.d.name?'<br><small>'+esc(x.d.name)+'</small>':'')+'</td><td>'+x.d.weight+chg+'</td><td>'+x.bmi+'</td><td>'+x.score+'</td>'
-   +'<td style="white-space:nowrap"><button class="b sec small" onclick="viewRec('+i+')">'+t('h_view')+'</button> <button class="b red small" onclick="delRec('+i+')">'+t('h_del')+'</button></td></tr>';
+   +'<td style="white-space:nowrap"><button class="b sec small" onclick="viewRec(\''+id+'\')">'+t('h_view')+'</button> <button class="b red small" onclick="delRec(\''+id+'\')">'+t('h_del')+'</button></td></tr>';
  });
- h+='</tbody></table><div class="btns"><button class="b red small" onclick="clearHist()">'+t('h_clear')+'</button></div>';
+ h+='</tbody></table></div><div class="btns"><button class="b red small" onclick="clearHist()">'+t('h_clear')+'</button></div>';
  box.innerHTML=h;
 }
-function viewRec(i){
- const x=getHist()[i];if(!x)return;
- fillForm(x.d);
- last={d:x.d,r:calc(x.d),date:x.date};
- render();$('reportWrap').style.display='block';
- $('reportWrap').scrollIntoView({behavior:'smooth'});
-}
-function delRec(i){const a=getHist();a.splice(i,1);setHist(a);renderHistory()}
-function clearHist(){if(confirm(t('h_conf'))){setHist([]);renderHistory()}}
+function viewRec(id){const x=getHist().find(y=>y.date===id);if(!x)return;fillForm(x.d);last={d:x.d,r:calc(x.d),date:x.date};showTab('home');render();$('reportWrap').style.display='block';setTimeout(()=>$('reportWrap').scrollIntoView({behavior:'smooth'}),50)}
+function delRec(id){ask(t('h_delc'),()=>{setHist(getHist().filter(y=>y.date!==id));renderHistory()})}
+function clearHist(){ask(t('h_conf'),()=>{setHist(prof==='__all'?[]:getHist().filter(x=>(x.d.name||'')!==prof));setProf('__all')})}
+function userBody(){const h=getHist()[0];const d=(last&&last.d)||(h&&h.d)||{};return{w:d.weight||70,h:d.height||170,sex:d.sex||'m'}}
 
+/* ================= walk & run tracker ================= */
+let trk={st:'idle',type:store.get('bh_trktype','walk'),pts:[],dist:0,t0:0,paused:0,pauseAt:0,watch:null,timer:null,lock:null,last:null,acc:null,gerr:false,done:null};
+const getRuns=()=>jget('bh_runs',[]);
+function hav(a,b){const R=6371000,toR=Math.PI/180,dLa=(b[0]-a[0])*toR,dLo=(b[1]-a[1])*toR,x=Math.sin(dLa/2)**2+Math.cos(a[0]*toR)*Math.cos(b[0]*toR)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
+function elapsed(){if(trk.st==='idle')return 0;return Math.max(0,((trk.st==='pause'?trk.pauseAt:Date.now())-trk.t0-trk.paused)/1000)}
+function fmtDur(s){s=Math.round(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return(h?h+':'+pad(m):m)+':'+pad(x)}
+function fmtPace(sec,m){if(m<50)return '--';const p=sec/(m/1000);return Math.floor(p/60)+':'+pad(Math.round(p%60))}
+function kcalOf(type,m){return Math.round(userBody().w*(m/1000)*(type==='run'?1.0:0.6))}
+function stepsOf(type,m){const b=userBody();return Math.round(m/(b.h/100*(type==='run'?0.65:0.415)))}
+async function keepAwake(){try{if('wakeLock' in navigator&&!trk.lock){trk.lock=await navigator.wakeLock.request('screen');trk.lock.addEventListener('release',()=>{trk.lock=null})}}catch(e){}}
+function release(){try{if(trk.lock)trk.lock.release()}catch(e){}trk.lock=null}
+function onPos(p){
+ const c=p.coords;trk.acc=Math.round(c.accuracy);trk.gerr=false;
+ if(trk.st==='run'&&c.accuracy<=35){
+  const pt=[c.latitude,c.longitude,p.timestamp];
+  if(trk.last){const dd=hav(trk.last,pt),dt=(pt[2]-trk.last[2])/1000;if(dd<4){trkUi();return}if(dt>0&&dd/dt>12){trkUi();return}trk.dist+=dd}
+  trk.last=pt;trk.pts.push([Math.round(c.latitude*1e5)/1e5,Math.round(c.longitude*1e5)/1e5]);
+ }
+ trkUi();
+}
+function onPosErr(){trk.gerr=true;trkUi()}
+function trkStart(){
+ if(!navigator.geolocation){toast(t('tk_gps_no'));return}
+ trk.st='run';trk.pts=[];trk.dist=0;trk.t0=Date.now();trk.paused=0;trk.last=null;trk.done=null;
+ trk.watch=navigator.geolocation.watchPosition(onPos,onPosErr,{enableHighAccuracy:true,maximumAge:0,timeout:30000});
+ clearInterval(trk.timer);trk.timer=setInterval(trkUi,1000);keepAwake();renderTrack();
+}
+function trkPause(){if(trk.st==='run'){trk.st='pause';trk.pauseAt=Date.now()}else if(trk.st==='pause'){trk.paused+=Date.now()-trk.pauseAt;trk.st='run';trk.last=null;keepAwake()}renderTrack()}
+function trkStop(){
+ const dur=elapsed(),m=trk.dist;
+ if(trk.watch!=null)navigator.geolocation.clearWatch(trk.watch);
+ clearInterval(trk.timer);release();trk.st='idle';trk.watch=null;trk.dist=0;trk.acc=null;const allPts=trk.pts;trk.pts=[];
+ if(m<50||dur<60){toast(t('tk_short'));renderTrack();return}
+ let pts=allPts;if(pts.length>300){const s=Math.ceil(pts.length/300);pts=pts.filter((_,i)=>i%s===0||i===allPts.length-1)}
+ const rec={id:Date.now(),type:trk.type,dist:Math.round(m),dur:Math.round(dur),kcal:kcalOf(trk.type,m),steps:stepsOf(trk.type,m),pts:pts};
+ const a=getRuns();a.unshift(rec);jset('bh_runs',a.slice(0,500));
+ trk.done=rec;toast(t('tk_saved'));renderTrack();
+}
+function setType(v){if(trk.st!=='idle')return;trk.type=v;store.set('bh_trktype',v);renderTrack()}
+function routeSvg(pts){
+ if(!pts||pts.length<2)return '';
+ const la0=pts[0][0]*Math.PI/180,xs=pts.map(p=>p[1]*Math.cos(la0)),ys=pts.map(p=>-p[0]);
+ const mnx=Math.min.apply(null,xs),mxx=Math.max.apply(null,xs),mny=Math.min.apply(null,ys),mxy=Math.max.apply(null,ys);
+ const W=300,H=170,pd=14,sc=Math.min((W-2*pd)/((mxx-mnx)||1e-9),(H-2*pd)/((mxy-mny)||1e-9));
+ const ox=(W-(mxx-mnx)*sc)/2,oy=(H-(mxy-mny)*sc)/2;
+ const P=xs.map((x,i)=>[r1(ox+(x-mnx)*sc),r1(oy+(ys[i]-mny)*sc)]);
+ return '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:460px;display:block;margin:10px auto;background:var(--chart);border-radius:12px;direction:ltr"><polyline fill="none" stroke="#0a74c4" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="'+P.map(p=>p.join(',')).join(' ')+'"/><circle cx="'+P[0][0]+'" cy="'+P[0][1]+'" r="6" fill="#1e9e57"/><circle cx="'+P[P.length-1][0]+'" cy="'+P[P.length-1][1]+'" r="6" fill="#d64545"/></svg>';
+}
+function trkUi(){
+ if(tab!=='track'||!$('tkKm'))return;
+ const s=elapsed(),m=trk.dist;
+ $('tkKm').textContent=(m/1000).toFixed(2);
+ $('tkTime').textContent=fmtDur(s);
+ $('tkPace').textContent=fmtPace(s,m);
+ $('tkSpeed').textContent=s>0?r1(m/1000/(s/3600)):'0';
+ $('tkKcal').textContent=kcalOf(trk.type,m);
+ $('tkSteps').textContent=stepsOf(trk.type,m);
+ const g=$('tkGps');
+ if(trk.st==='idle')g.innerHTML='';
+ else if(trk.gerr)g.innerHTML='<span class="dot"></span>'+t('tk_gps_no');
+ else if(trk.acc==null)g.innerHTML='<span class="dot"></span>'+t('tk_gps_wait');
+ else g.innerHTML='<span class="dot'+(trk.acc<=35?' on':'')+'"></span>'+t(trk.acc<=35?'tk_gps_ok':'tk_gps_weak').replace('{a}',trk.acc);
+}
+function renderTrack(){
+ if(!isPro()){$('trackBox').innerHTML=lockCard();return}
+ const idle=trk.st==='idle';
+ let h='<section class="card"><h2>'+t('tk_title')+'</h2>';
+ h+='<div class="btns" style="margin-top:0"><button class="b '+(trk.type==='walk'?'':'sec')+'" style="flex:1" onclick="setType(\'walk\')" '+(idle?'':'disabled')+'>'+t('tk_walk')+'</button><button class="b '+(trk.type==='run'?'':'sec')+'" style="flex:1" onclick="setType(\'run\')" '+(idle?'':'disabled')+'>'+t('tk_run')+'</button></div>';
+ h+='<div class="hero"><div class="km" id="tkKm">0.00</div><div class="lbl">'+t('tk_km')+'</div></div>';
+ h+='<div class="big3"><div><b id="tkTime">0:00</b><small>'+t('tk_time')+'</small></div><div><b id="tkPace">--</b><small>'+t('tk_pace')+'</small></div><div><b id="tkSpeed">0</b><small>'+t('tk_speed')+'</small></div><div><b id="tkKcal">0</b><small>'+t('tk_kcal')+'</small></div><div><b id="tkSteps">0</b><small>'+t('tk_steps')+'</small></div><div><b>'+(trk.type==='run'?'🏃':'🚶')+'</b><small>'+t(trk.type==='run'?'tk_run':'tk_walk').replace(/^\S+\s/,'')+'</small></div></div>';
+ h+='<div class="gps" id="tkGps"></div><div class="btns">';
+ if(idle)h+='<button class="b big grn" onclick="trkStart()">'+t('tk_start')+'</button>';
+ else h+='<button class="b big sec" onclick="trkPause()">'+(trk.st==='pause'?t('tk_resume'):t('tk_pause'))+'</button><button class="b big red" onclick="trkStop()">'+t('tk_stop')+'</button>';
+ h+='</div><p class="hint">'+t('tk_note')+'</p></section>';
+ if(trk.done&&idle){const r=trk.done;h+='<section class="card"><h2>'+t('tk_last')+'</h2><div class="big3"><div><b>'+(r.dist/1000).toFixed(2)+'</b><small>'+t('tk_km')+'</small></div><div><b>'+fmtDur(r.dur)+'</b><small>'+t('tk_time')+'</small></div><div><b>'+r.kcal+'</b><small>'+t('tk_kcal')+'</small></div></div>'+routeSvg(r.pts)+'</section>'}
+ // week
+ const runs=getRuns(),wk=runs.filter(r=>r.id>Date.now()-7*864e5),wkm=wk.reduce((a,r)=>a+r.dist,0),wmin=Math.round(wk.reduce((a,r)=>a+r.dur,0)/60),pc=Math.min(100,Math.round(wmin/150*100));
+ h+='<section class="card"><h2>'+t('tk_week')+'</h2><div class="big3"><div><b>'+(wkm/1000).toFixed(1)+'</b><small>'+t('tk_km')+'</small></div><div><b>'+wmin+'</b><small>'+t('tk_min')+'</small></div><div><b>'+wk.length+'</b><small>'+t('tk_sess')+'</small></div></div>';
+ h+='<div class="brow"><span>'+t('tk_who')+'</span><b>'+pc+'%</b></div><div class="bar"><i style="width:'+pc+'%;background:linear-gradient(90deg,var(--acc),var(--main))"></i></div></section>';
+ h+='<section class="card"><h2>'+t('tk_hist')+'</h2>';
+ if(!runs.length)h+='<p class="hint">'+t('tk_empty')+'</p>';
+ else{h+='<div style="overflow-x:auto"><table><thead><tr><th>'+t('h_date')+'</th><th></th><th>'+t('tk_km')+'</th><th>'+t('tk_time')+'</th><th>'+t('tk_kcal')+'</th><th></th></tr></thead><tbody>';
+  runs.slice(0,30).forEach(r=>{h+='<tr><td>'+dtStr(r.id)+'</td><td>'+(r.type==='run'?'🏃':'🚶')+'</td><td><b>'+(r.dist/1000).toFixed(2)+'</b></td><td>'+fmtDur(r.dur)+'</td><td>'+r.kcal+'</td><td style="white-space:nowrap"><button class="b sec small" onclick="viewRun('+r.id+')">'+t('h_view')+'</button> <button class="b red small" onclick="delRun('+r.id+')">✕</button></td></tr>'});
+  h+='</tbody></table></div>'}
+ h+='</section>';
+ $('trackBox').innerHTML=h;trkUi();
+}
+function viewRun(id){const r=getRuns().find(x=>x.id===id);if(r){trk.done=r;renderTrack();window.scrollTo({top:0,behavior:'smooth'})}}
+function delRun(id){ask(t('tk_delc'),()=>{jset('bh_runs',getRuns().filter(x=>x.id!==id));if(trk.done&&trk.done.id===id)trk.done=null;renderTrack()})}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&trk.st==='run'){trk.lock=null;keepAwake()}});
+window.addEventListener('beforeunload',e=>{if(trk.st!=='idle'){e.preventDefault();e.returnValue=t('tk_leave')}});
+
+/* ================= daily: water, BP, sugar ================= */
+function waterGoal(){const h=getHist()[0];if(last)return last.r.cups;if(h)return calc(h.d).cups;return 8}
+function addWater(n){const w=jget('bh_water',{}),k=dayKey();w[k]=Math.max(0,(w[k]||0)+n);
+ const keys=Object.keys(w).sort();while(keys.length>60)delete w[keys.shift()];
+ jset('bh_water',w);renderDaily();if(n>0&&w[k]===waterGoal())toast(t('dw_done'))}
+function bpCat(s,d){if(s>180||d>120)return['bp_c','bad'];if(s<90||d<60)return['bp_l','warn'];if(s>=140||d>=90)return['bp_2','bad'];if(s>=130||d>=80)return['bp_1','warn'];if(s>=120)return['bp_e','warn'];return['bp_n','good']}
+function bsCat(v,ty){if(v<70)return['bs_low','bad'];if(ty==='f')return v<100?['bs_n','good']:v<126?['bs_pre','warn']:['bs_hi','bad'];if(ty==='pp')return v<140?['bs_n','good']:v<200?['bs_pre','warn']:['bs_hi','bad'];return v<140?['bs_n','good']:v<200?['bs_pre','warn']:['bs_hi','bad']}
+function addBp(){
+ const s=num('bpS'),d=num('bpD'),p=num('bpP');
+ if(!s||!d||s<60||s>260||d<30||d>160||s<=d||(p!=null&&(p<30||p>220))){toast(t('bp_err'));return}
+ const a=jget('bh_bp',[]);a.unshift({id:Date.now(),s:s,d:d,p:p});jset('bh_bp',a.slice(0,300));
+ const c=bpCat(s,d);toast(t('dl_saved')+' — '+(c[0]==='bp_c'?t('bp_2'):t(c[0])));renderDaily();
+}
+function addBs(){
+ const v=num('bsV'),ty=$('bsT').value;
+ if(!v||v<20||v>600){toast(t('bs_err'));return}
+ const a=jget('bh_bs',[]);a.unshift({id:Date.now(),v:v,ty:ty});jset('bh_bs',a.slice(0,300));
+ toast(t('dl_saved')+' — '+t(bsCat(v,ty)[0]).split(':')[0]);renderDaily();
+}
+function delLog(key,id){ask(t('dl_delc'),()=>{jset(key,jget(key,[]).filter(x=>x.id!==id));renderDaily()})}
+function renderDaily(){
+ if(!isPro()){$('dailyBox').innerHTML=lockCard();return}
+ const w=jget('bh_water',{}),today=w[dayKey()]||0,goal=waterGoal(),pc=Math.min(100,Math.round(today/goal*100));
+ let h='<section class="card"><h2>'+t('dw_title')+'</h2><div class="water"><button class="b sec" onclick="addWater(-1)" aria-label="-">−</button><div class="cnt">'+today+'<span style="font-size:18px;color:var(--mute)"> / '+goal+'</span></div><button class="b" onclick="addWater(1)" aria-label="+">+</button></div>';
+ h+='<div class="bar"><i style="width:'+pc+'%;background:linear-gradient(90deg,#4fc3f7,var(--main))"></i></div><p class="hint" style="text-align:center">'+t('dw_goal').replace('{g}',goal)+' · '+t('cups')+'</p>';
+ h+='<div class="hint" style="margin-top:6px">'+t('dw_week')+'</div><div class="wk">';
+ const mx=Math.max(goal,1);
+ for(let i=6;i>=0;i--){const d=new Date(Date.now()-i*864e5),v=w[dayKey(d)]||0;h+='<div><span>'+v+'</span><i style="height:'+Math.min(100,v/mx*100)+'%;'+(v>=goal?'':'opacity:.55')+'"></i><span>'+d.toLocaleDateString(lang==='ar'?'ar-JO':'en-GB',{weekday:'short'})+'</span></div>'}
+ h+='</div></section>';
+ // BP
+ const bp=jget('bh_bp',[]);
+ h+='<section class="card"><h2>'+t('bp_title')+'</h2><div class="grid"><div><label for="bpS">'+t('bp_sys')+'</label><input id="bpS" type="number" inputmode="numeric" placeholder="120"></div><div><label for="bpD">'+t('bp_dia')+'</label><input id="bpD" type="number" inputmode="numeric" placeholder="80"></div><div><label for="bpP">'+t('bp_pulse')+'</label><input id="bpP" type="number" inputmode="numeric" placeholder="72"></div></div>';
+ h+='<div class="btns"><button class="b" onclick="addBp()">+ '+t('add')+'</button></div><p class="hint">'+t('bp_tip')+'</p>';
+ if(bp[0]){const c=bpCat(bp[0].s,bp[0].d);if(c[0]==='bp_c')h+='<div class="warnbox">🚨 '+t('bp_c')+'</div>'}
+ if(bp.length>=2)h+=lineChart(bp.slice(0,10).reverse().map(x=>x.s),'#d64545');
+ h+=logTable(bp,'bh_bp',x=>'<b>'+x.s+'/'+x.d+'</b>'+(x.p?' <small>♥'+x.p+'</small>':''),x=>bpCat(x.s,x.d));
+ h+='</section>';
+ // sugar
+ const bs=jget('bh_bs',[]);
+ h+='<section class="card"><h2>'+t('bs_title')+'</h2><div class="grid"><div><label for="bsV">'+t('bs_val')+'</label><input id="bsV" type="number" inputmode="numeric" placeholder="95"></div><div><label for="bsT">'+t('bs_type')+'</label><select id="bsT"><option value="f">'+t('bs_f')+'</option><option value="pp">'+t('bs_pp')+'</option><option value="r">'+t('bs_r')+'</option></select></div></div>';
+ h+='<div class="btns"><button class="b" onclick="addBs()">+ '+t('add')+'</button></div>';
+ if(bs[0]&&bs[0].v<70)h+='<div class="warnbox">⚠️ '+t('bs_low')+'</div>';
+ h+=logTable(bs,'bh_bs',x=>'<b>'+x.v+'</b> <small>'+t('bs_'+x.ty)+'</small>',x=>bsCat(x.v,x.ty));
+ h+='<p class="disc">'+t('dl_note')+'</p></section>';
+ $('dailyBox').innerHTML=h;
+}
+function logTable(a,key,val,cat){
+ if(!a.length)return '<p class="hint">'+t('dl_none')+'</p>';
+ let h='<div class="hint">'+t('dl_last')+'</div><table><tbody>';
+ a.slice(0,10).forEach(x=>{const c=cat(x);h+='<tr><td>'+dtStr(x.id)+'</td><td>'+val(x)+'</td><td><span class="tag '+c[1]+'">'+t(c[0]).split(':')[0]+'</span></td><td><button class="b red small" onclick="delLog(\''+key+'\','+x.id+')">✕</button></td></tr>'});
+ return h+'</tbody></table>';
+}
+
+/* ================= backup / restore ================= */
+function exportData(){
+ if(!isPro()){showTab('sub');return}
+ const data=JSON.stringify({app:'sehati',ver:APP_VER,exported:new Date().toISOString(),hist:getHist(),runs:getRuns(),bp:jget('bh_bp',[]),bs:jget('bh_bs',[]),water:jget('bh_water',{})});
+ const blob=new Blob([data],{type:'application/json'}),a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);a.download='sehati-backup-'+dayKey()+'.json';
+ document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+function mergeById(key,arr,idk){if(!Array.isArray(arr))return 0;const cur=jget(key,[]),seen={};cur.forEach(x=>seen[x[idk]]=1);let n=0;arr.forEach(x=>{if(x&&x[idk]!=null&&!seen[x[idk]]){cur.push(x);n++}});cur.sort((a,b)=>a[idk]<b[idk]?1:-1);jset(key,cur);return n}
+function importData(inp){
+ const f=inp.files&&inp.files[0];if(!f)return;const rd=new FileReader();
+ rd.onload=()=>{
+  try{
+   const j=JSON.parse(rd.result);const hist=Array.isArray(j)?j:j.hist;let n=0;
+   if(Array.isArray(hist)){const cur=getHist(),seen={};cur.forEach(x=>seen[x.date]=1);
+    hist.filter(x=>x&&x.date&&x.d&&typeof x.d.weight==='number'&&typeof x.d.height==='number').forEach(x=>{if(!seen[x.date]){const r=calc(Object.assign({cond:'none',fast:'none',act:1.375,goal:'health',age:30,sex:'m'},x.d));cur.push({date:x.date,d:x.d,bmi:r1(r.bmi),score:r.score});n++}});setHist(cur)}
+   if(!Array.isArray(j)){n+=mergeById('bh_runs',j.runs,'id');n+=mergeById('bh_bp',j.bp,'id');n+=mergeById('bh_bs',j.bs,'id');
+    if(j.water&&typeof j.water==='object'){const w=jget('bh_water',{});for(const k in j.water)if(/^\d{4}-\d\d-\d\d$/.test(k))w[k]=Math.max(w[k]||0,+j.water[k]||0);jset('bh_water',w)}}
+   renderAll();toast(t('r_ok').replace('{n}',n));
+  }catch(e){toast(t('r_bad'))}
+  inp.value='';
+ };
+ rd.readAsText(f);
+}
+
+/* ================= export & share ================= */
 function doPdf(){
- const old=document.title;
- document.title=(last&&last.d.name?last.d.name+' - ':'')+t('rep_title');
- window.print();
- setTimeout(()=>{document.title=old},500);
+ if(!isPro()){showTab('sub');return}
+ const old=document.title;document.title=(last&&last.d.name?last.d.name+' - ':'')+t('rep_title');
+ window.print();setTimeout(()=>{document.title=old},500);
+}
+function shareRep(){
+ if(!last)return;const d=last.d,r=last.r;
+ let s=t('sh_head')+(d.name?' — '+d.name:'')+' ('+dateStr(last.date)+')\n';
+ s+=t('score')+': '+r.score+'/100 ('+scoreInfo(r.score).l+')\n'+t('m_bmi')+': '+r1(r.bmi)+' — '+t('bmi_'+r.bmiCat)+'\n';
+ if(r.bf!==null)s+=t('m_bf')+': '+r1(r.bf)+'%\n';
+ if(r.whtr!==null)s+=t('m_whtr')+': '+r.whtr.toFixed(2)+'\n';
+ s+=t('target')+': '+r.kcal+' '+t('kcal')+' · '+t('protein')+' '+r.protein+t('g')+'\n'+t('m_water')+': '+r1(r.water)+' '+t('l')+'\n\n'+t('sh_from');
+ if(navigator.share)navigator.share({title:t('sh_head'),text:s}).catch(()=>{});
+ else if(navigator.clipboard)navigator.clipboard.writeText(s).then(()=>toast(t('copied')),()=>{});
 }
 
-applyLang();
+/* ================= start ================= */
+applyTheme();trialStart();loadDraft();sexChanged();applyLang();showTab(tab);
+document.querySelectorAll('#formCard input,#formCard select').forEach(e=>{e.addEventListener('change',saveDraft);e.addEventListener('input',()=>e.classList.remove('bad'))});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName==='INPUT'&&e.target.closest('#formCard'))run()});
+showDisc(false);initBilling();
+setInterval(renderBanner,36e5);
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
 </script>
 </body>
