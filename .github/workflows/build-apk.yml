@@ -20,8 +20,6 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - uses: android-actions/setup-android@v3
-
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
@@ -30,6 +28,8 @@ jobs:
         run: |
           mkdir -p apk/app/src/main/java/com/dahshansoft/sehati apk/app/src/main/res/mipmap-xxxhdpi
           cp icon-512.png apk/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+          echo "sdk.dir=$ANDROID_HOME" > apk/local.properties
+          echo "Android SDK: $ANDROID_HOME" && ls "$ANDROID_HOME/platforms"
 
           cat > apk/settings.gradle <<'EOF'
           pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
