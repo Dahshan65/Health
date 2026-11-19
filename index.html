@@ -89,6 +89,11 @@ details p,details li{font-size:13px}
 .gps{font-size:12px;color:var(--mute);text-align:center;margin-top:8px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--mute);margin-inline-end:5px;vertical-align:middle}
 .dot.on{background:var(--good);box-shadow:0 0 0 4px rgba(30,158,87,.18)}
+.mapwrap{position:relative;margin:12px 0}
+.map{height:280px;border-radius:14px;overflow:hidden;direction:ltr;position:relative;z-index:0;background:var(--chart);border:1px solid var(--line)}
+.recenter{position:absolute;bottom:12px;right:12px;z-index:2;background:var(--card);color:var(--main2);border:1px solid var(--line);border-radius:50%;width:42px;height:42px;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+[data-theme=dark] .leaflet-tile{filter:invert(.92) hue-rotate(180deg) brightness(.95) contrast(.9)}
+.leaflet-container{font-family:inherit}
 .water{display:flex;align-items:center;justify-content:center;gap:16px;margin:8px 0}
 .water .cnt{font-size:40px;font-weight:800;color:var(--main2);min-width:110px;text-align:center}
 .water button.b{width:54px;height:54px;padding:0;font-size:26px;border-radius:50%}
@@ -336,7 +341,7 @@ tk_title:"متتبّع المشي والجري",tk_walk:"🚶 مشي",tk_run:"�
 tk_km:"كيلومتر",tk_time:"المدة",tk_pace:"الوتيرة (د/كم)",tk_speed:"السرعة (كم/س)",tk_kcal:"سعرات",tk_steps:"خطوات تقريبًا",
 tk_gps_wait:"جارٍ البحث عن إشارة GPS…",tk_gps_ok:"إشارة GPS جيدة (دقة {a} م)",tk_gps_weak:"إشارة GPS ضعيفة (دقة {a} م)، اخرج لمكان مفتوح",tk_gps_no:"لا يمكن الوصول إلى الموقع. فعّل GPS واسمح للتطبيق باستخدام الموقع.",
 tk_note:"أبقِ التطبيق مفتوحًا أثناء التمرين (الشاشة ستبقى مضاءة). يعمل الـ GPS بأفضل دقة في الأماكن المفتوحة.",
-tk_short:"التمرين قصير جدًا ولم يُحفظ",tk_saved:"تم حفظ التمرين ✓",tk_week:"هذا الأسبوع",tk_who:"هدف منظمة الصحة العالمية: 150 دقيقة نشاط معتدل أسبوعيًا",tk_min:"دقيقة",tk_sess:"تمارين",tk_hist:"تمارينك السابقة",tk_empty:"لا توجد تمارين محفوظة بعد.",tk_last:"آخر تمرين",tk_delc:"هل تريد حذف هذا التمرين؟",tk_leave:"التمرين ما زال جاريًا",
+tk_short:"التمرين قصير جدًا ولم يُحفظ",tk_saved:"تم حفظ التمرين ✓",tk_week:"هذا الأسبوع",tk_who:"هدف منظمة الصحة العالمية: 150 دقيقة نشاط معتدل أسبوعيًا",tk_min:"دقيقة",tk_sess:"تمارين",tk_hist:"تمارينك السابقة",tk_empty:"لا توجد تمارين محفوظة بعد.",tk_last:"آخر تمرين",tk_map:"مسار التمرين على الخريطة",tk_center:"توسيط الخريطة على موقعي",tk_delc:"هل تريد حذف هذا التمرين؟",tk_leave:"التمرين ما زال جاريًا",
 /* daily */
 dw_title:"💧 ماء اليوم",dw_goal:"الهدف: {g} أكواب",dw_done:"أحسنت! وصلت لهدف الماء اليوم 🎉",dw_week:"آخر 7 أيام",
 bp_title:"🩸 ضغط الدم والنبض",bp_sys:"الانقباضي (العلوي)",bp_dia:"الانبساطي (السفلي)",bp_pulse:"النبض (اختياري)",add:"إضافة",bp_err:"تحقق من قراءة الضغط (الانقباضي 60-260، الانبساطي 30-160، والانقباضي أكبر من الانبساطي).",
@@ -424,7 +429,7 @@ tk_title:"Walk & Run tracker",tk_walk:"🚶 Walk",tk_run:"🏃 Run",tk_start:"�
 tk_km:"kilometers",tk_time:"Time",tk_pace:"Pace (min/km)",tk_speed:"Speed (km/h)",tk_kcal:"kcal",tk_steps:"steps approx.",
 tk_gps_wait:"Searching for GPS signal…",tk_gps_ok:"Good GPS signal (±{a} m)",tk_gps_weak:"Weak GPS signal (±{a} m), move to an open area",tk_gps_no:"Location unavailable. Turn on GPS and allow the app to use your location.",
 tk_note:"Keep the app open during your workout (the screen stays on). GPS is most accurate in open areas.",
-tk_short:"Workout too short, not saved",tk_saved:"Workout saved ✓",tk_week:"This week",tk_who:"WHO goal: 150 minutes of moderate activity per week",tk_min:"min",tk_sess:"workouts",tk_hist:"Your past workouts",tk_empty:"No saved workouts yet.",tk_last:"Last workout",tk_delc:"Delete this workout?",tk_leave:"A workout is still running",
+tk_short:"Workout too short, not saved",tk_saved:"Workout saved ✓",tk_week:"This week",tk_who:"WHO goal: 150 minutes of moderate activity per week",tk_min:"min",tk_sess:"workouts",tk_hist:"Your past workouts",tk_empty:"No saved workouts yet.",tk_last:"Last workout",tk_map:"Workout route on the map",tk_center:"Center map on me",tk_delc:"Delete this workout?",tk_leave:"A workout is still running",
 dw_title:"💧 Today's water",dw_goal:"Goal: {g} cups",dw_done:"Well done! You reached today's water goal 🎉",dw_week:"Last 7 days",
 bp_title:"🩸 Blood pressure & pulse",bp_sys:"Systolic (upper)",bp_dia:"Diastolic (lower)",bp_pulse:"Pulse (optional)",add:"Add",bp_err:"Check the reading (systolic 60-260, diastolic 30-160, systolic above diastolic).",
 bp_n:"Normal",bp_e:"Elevated",bp_1:"High, stage 1",bp_2:"High, stage 2",bp_c:"Very high: re-measure in 5 minutes; if still high or you have symptoms (chest pain, shortness of breath, severe headache) seek medical help immediately",bp_l:"Low",
@@ -844,7 +849,7 @@ function stepsOf(type,m){const b=userBody();return Math.round(m/(b.h/100*(type==
 async function keepAwake(){try{if(window.AndroidApp)AndroidApp.keepScreen(true)}catch(e){}try{if('wakeLock' in navigator&&!trk.lock){trk.lock=await navigator.wakeLock.request('screen');trk.lock.addEventListener('release',()=>{trk.lock=null})}}catch(e){}}
 function release(){try{if(window.AndroidApp)AndroidApp.keepScreen(false)}catch(e){}try{if(trk.lock)trk.lock.release()}catch(e){}trk.lock=null}
 function onPos(p){
- const c=p.coords;trk.acc=Math.round(c.accuracy);trk.gerr=false;
+ const c=p.coords;trk.acc=Math.round(c.accuracy);trk.gerr=false;if(c.accuracy<=100)trk.cur=[c.latitude,c.longitude];
  if(trk.st==='run'&&c.accuracy<=35){
   const pt=[c.latitude,c.longitude,p.timestamp];
   if(trk.last){const dd=hav(trk.last,pt),dt=(pt[2]-trk.last[2])/1000;if(dd<4){trkUi();return}if(dt>0&&dd/dt>12){trkUi();return}trk.dist+=dd}
@@ -865,7 +870,7 @@ function trkStop(){
  if(trk.watch!=null)navigator.geolocation.clearWatch(trk.watch);
  clearInterval(trk.timer);release();trk.st='idle';trk.watch=null;trk.dist=0;trk.acc=null;const allPts=trk.pts;trk.pts=[];
  if(m<50||dur<60){toast(t('tk_short'));renderTrack();return}
- let pts=allPts;if(pts.length>300){const s=Math.ceil(pts.length/300);pts=pts.filter((_,i)=>i%s===0||i===allPts.length-1)}
+ let pts=allPts;if(pts.length>800){const s=Math.ceil(pts.length/800);pts=pts.filter((_,i)=>i%s===0||i===allPts.length-1)}
  const rec={id:Date.now(),type:trk.type,dist:Math.round(m),dur:Math.round(dur),kcal:kcalOf(trk.type,m),steps:stepsOf(trk.type,m),pts:pts};
  const a=getRuns();a.unshift(rec);jset('bh_runs',a.slice(0,500));
  trk.done=rec;toast(t('tk_saved'));renderTrack();
@@ -889,6 +894,7 @@ function trkUi(){
  $('tkSpeed').textContent=s>0?r1(m/1000/(s/3600)):'0';
  $('tkKcal').textContent=kcalOf(trk.type,m);
  $('tkSteps').textContent=stepsOf(trk.type,m);
+ if(liveMap&&trk.cur){livePoly.setLatLngs(trk.pts);liveDot.setLatLng(trk.cur);if(!startDot&&trk.pts[0])startDot=dot(trk.pts[0],'#1e9e57').addTo(liveMap);if(follow)liveMap.setView(trk.cur,Math.max(liveMap.getZoom(),16),{animate:true})}
  const g=$('tkGps');
  if(trk.st==='idle')g.innerHTML='';
  else if(trk.gerr)g.innerHTML='<span class="dot"></span>'+t('tk_gps_no');
@@ -902,11 +908,12 @@ function renderTrack(){
  h+='<div class="btns" style="margin-top:0"><button class="b '+(trk.type==='walk'?'':'sec')+'" style="flex:1" onclick="setType(\'walk\')" '+(idle?'':'disabled')+'>'+t('tk_walk')+'</button><button class="b '+(trk.type==='run'?'':'sec')+'" style="flex:1" onclick="setType(\'run\')" '+(idle?'':'disabled')+'>'+t('tk_run')+'</button></div>';
  h+='<div class="hero"><div class="km" id="tkKm">0.00</div><div class="lbl">'+t('tk_km')+'</div></div>';
  h+='<div class="big3"><div><b id="tkTime">0:00</b><small>'+t('tk_time')+'</small></div><div><b id="tkPace">--</b><small>'+t('tk_pace')+'</small></div><div><b id="tkSpeed">0</b><small>'+t('tk_speed')+'</small></div><div><b id="tkKcal">0</b><small>'+t('tk_kcal')+'</small></div><div><b id="tkSteps">0</b><small>'+t('tk_steps')+'</small></div><div><b>'+(trk.type==='run'?'🏃':'🚶')+'</b><small>'+t(trk.type==='run'?'tk_run':'tk_walk').replace(/^\S+\s/,'')+'</small></div></div>';
+ if(!idle)h+='<div class="mapwrap"><div id="liveMap" class="map"></div><button class="recenter" title="'+t('tk_center')+'" onclick="recenter()">📍</button></div>';
  h+='<div class="gps" id="tkGps"></div><div class="btns">';
  if(idle)h+='<button class="b big grn" onclick="trkStart()">'+t('tk_start')+'</button>';
  else h+='<button class="b big sec" onclick="trkPause()">'+(trk.st==='pause'?t('tk_resume'):t('tk_pause'))+'</button><button class="b big red" onclick="trkStop()">'+t('tk_stop')+'</button>';
  h+='</div><p class="hint">'+t('tk_note')+'</p></section>';
- if(trk.done&&idle){const r=trk.done;h+='<section class="card"><h2>'+t('tk_last')+'</h2><div class="big3"><div><b>'+(r.dist/1000).toFixed(2)+'</b><small>'+t('tk_km')+'</small></div><div><b>'+fmtDur(r.dur)+'</b><small>'+t('tk_time')+'</small></div><div><b>'+r.kcal+'</b><small>'+t('tk_kcal')+'</small></div></div>'+routeSvg(r.pts)+'</section>'}
+ if(trk.done&&idle){const r=trk.done;h+='<section class="card"><h2>'+t('tk_last')+'</h2><div class="big3"><div><b>'+(r.dist/1000).toFixed(2)+'</b><small>'+t('tk_km')+'</small></div><div><b>'+fmtDur(r.dur)+'</b><small>'+t('tk_time')+'</small></div><div><b>'+r.kcal+'</b><small>'+t('tk_kcal')+'</small></div></div><div class="hint" style="margin-top:10px">'+t('tk_map')+'</div><div class="mapwrap" style="margin-top:4px"><div id="doneMap" class="map">'+routeSvg(r.pts)+'</div></div></section>'}
  // week
  const runs=getRuns(),wk=runs.filter(r=>r.id>Date.now()-7*864e5),wkm=wk.reduce((a,r)=>a+r.dist,0),wmin=Math.round(wk.reduce((a,r)=>a+r.dur,0)/60),pc=Math.min(100,Math.round(wmin/150*100));
  h+='<section class="card"><h2>'+t('tk_week')+'</h2><div class="big3"><div><b>'+(wkm/1000).toFixed(1)+'</b><small>'+t('tk_km')+'</small></div><div><b>'+wmin+'</b><small>'+t('tk_min')+'</small></div><div><b>'+wk.length+'</b><small>'+t('tk_sess')+'</small></div></div>';
@@ -917,8 +924,44 @@ function renderTrack(){
   runs.slice(0,30).forEach(r=>{h+='<tr><td>'+dtStr(r.id)+'</td><td>'+(r.type==='run'?'🏃':'🚶')+'</td><td><b>'+(r.dist/1000).toFixed(2)+'</b></td><td>'+fmtDur(r.dur)+'</td><td>'+r.kcal+'</td><td style="white-space:nowrap"><button class="b sec small" onclick="viewRun('+r.id+')">'+t('h_view')+'</button> <button class="b red small" onclick="delRun('+r.id+')">✕</button></td></tr>'});
   h+='</tbody></table></div>'}
  h+='</section>';
- $('trackBox').innerHTML=h;trkUi();
+ $('trackBox').innerHTML=h;trkUi();initMaps();
 }
+/* ---- map (Leaflet + OpenStreetMap) ---- */
+let liveMap=null,livePoly=null,liveDot=null,startDot=null,follow=true;
+function loadLeaflet(){
+ if(window.L)return Promise.resolve(true);
+ if(loadLeaflet.p)return loadLeaflet.p;
+ loadLeaflet.p=new Promise(res=>{
+  const c=document.createElement('link');c.rel='stylesheet';c.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';document.head.appendChild(c);
+  const sc=document.createElement('script');sc.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  sc.onload=()=>res(!!window.L);sc.onerror=()=>{loadLeaflet.p=null;res(false)};document.head.appendChild(sc);
+ });
+ return loadLeaflet.p;
+}
+function tiles(m){L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m)}
+function dot(ll,col,r){return L.circleMarker(ll,{radius:r||7,color:'#fff',weight:3,fillColor:col,fillOpacity:1})}
+async function initMaps(){
+ liveMap=null;startDot=null;
+ const lm=$('liveMap'),dm=$('doneMap');if(!lm&&!dm)return;
+ if(!(await loadLeaflet()))return; // offline: keep the simple drawing
+ if(lm&&document.body.contains(lm)){
+  lm.innerHTML='';const c=trk.cur||[31.95,35.91];
+  liveMap=L.map(lm,{zoomControl:true});tiles(liveMap);liveMap.setView(c,trk.cur?17:12);
+  livePoly=L.polyline(trk.pts,{color:'#0a74c4',weight:6,opacity:.9}).addTo(liveMap);
+  if(trk.pts[0])startDot=dot(trk.pts[0],'#1e9e57').addTo(liveMap);
+  liveDot=dot(c,'#0a74c4',9).addTo(liveMap);
+  follow=true;liveMap.on('dragstart',()=>{follow=false});
+ }
+ const r=trk.done;
+ if(dm&&document.body.contains(dm)&&r&&r.pts&&r.pts.length>1){
+  dm.innerHTML='';const m=L.map(dm);tiles(m);
+  const pl=L.polyline(r.pts,{color:'#0a74c4',weight:6,opacity:.9}).addTo(m);
+  dot(r.pts[0],'#1e9e57').addTo(m).bindTooltip(lang==='ar'?'البداية':'Start');
+  dot(r.pts[r.pts.length-1],'#d64545').addTo(m).bindTooltip(lang==='ar'?'النهاية':'Finish');
+  m.fitBounds(pl.getBounds(),{padding:[24,24]});
+ }
+}
+function recenter(){follow=true;if(liveMap&&trk.cur)liveMap.setView(trk.cur,17,{animate:true})}
 function viewRun(id){const r=getRuns().find(x=>x.id===id);if(r){trk.done=r;renderTrack();window.scrollTo({top:0,behavior:'smooth'})}}
 function delRun(id){ask(t('tk_delc'),()=>{jset('bh_runs',getRuns().filter(x=>x.id!==id));if(trk.done&&trk.done.id===id)trk.done=null;renderTrack()})}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&trk.st==='run'){trk.lock=null;keepAwake()}});
