@@ -33,7 +33,13 @@ jobs:
         run: |
           mkdir -p twa/app
           echo "$KEYSTORE_BASE64" | base64 -d -i > twa/app/upload.keystore
-          keytool -list -v -keystore twa/app/upload.keystore -storepass "$KEYSTORE_PASSWORD" -alias "$KEY_ALIAS" | grep -E "Alias|SHA256"
+          echo "Keystore file size: $(stat -c%s twa/app/upload.keystore) bytes (expected about 2724)"
+          echo "KEYSTORE_PASSWORD length: ${#KEYSTORE_PASSWORD} | KEY_PASSWORD length: ${#KEY_PASSWORD} | KEY_ALIAS length: ${#KEY_ALIAS} (expected 12, 12, 12)"
+          echo "----- Aliases inside the keystore -----"
+          keytool -list -keystore twa/app/upload.keystore -storepass "$KEYSTORE_PASSWORD" 2>&1 | tail -n +1
+          echo "----- Checking the alias -----"
+          keytool -list -v -keystore twa/app/upload.keystore -storepass "$KEYSTORE_PASSWORD" -alias "$KEY_ALIAS" > /tmp/k.txt 2>&1 || { cat /tmp/k.txt; exit 1; }
+          grep -E "Alias name|SHA256" /tmp/k.txt
 
       - name: Create Android TWA project
         run: |
